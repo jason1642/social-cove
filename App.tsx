@@ -9,6 +9,8 @@
  */
 
 import React from 'react';
+import Landing from './screens/Landing'
+import Home from './screens/Home'
 import {
   SafeAreaView,
   ScrollView,
@@ -22,10 +24,14 @@ import {
 import {
   Colors,
   DebugInstructions,
-  Header,
+  Header, 
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 const Section: React.FC<{
   title: string;
@@ -42,6 +48,7 @@ const Section: React.FC<{
         ]}>
         {title}
       </Text>
+   
       <Text
         style={[
           styles.sectionDescription,
@@ -63,13 +70,14 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <NavigationContainer>
+    {/* <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
+        style={backgroundStyle}> */}
+        {/* <Header /> */}
+        {/* <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
@@ -87,9 +95,15 @@ const App = () => {
             Read the docs to discover what to do next:
           </Section>
           <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </View>  */}
+          
+        <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} options={{title: 'Overview'}} />
+        <Stack.Screen name="Landing" component={Landing} />
+        </Stack.Navigator>
+        {/* </ScrollView>
+    </SafeAreaView> */}
+    </NavigationContainer>
   );
 };
 
