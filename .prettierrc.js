@@ -5,3 +5,4 @@ module.exports = {
   singleQuote: true,
   trailingComma: 'all',
 };
+/Users/jasoncruz/Documents/2022-projects/socialcove/Info.plist

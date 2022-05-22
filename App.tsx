@@ -17,6 +17,7 @@ import { Alert, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Account from './screens/account/Account';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,51 +29,54 @@ const App = () => {
   // };
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#65badf',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: 'Overview' }}
-        />
-        <Stack.Screen name="Account" component={Account} />
-        <Stack.Screen
-          name="Feed"
-          component={Feed}
-          options={({ route }: any) => ({
-            title: route.params.name,
+    <SafeAreaProvider>
+
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
             headerStyle: {
-              backgroundColor: '#f4511e',
+              backgroundColor: '#65badf',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
-            headerRight: () => (
-              <Button
-                onPress={() => Alert.alert('This is a button!')}
-                title="Info"
-                color="#fff"
-              />
-            ),
-          })}
-        />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Landing"
-          component={Landing}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ title: 'Overview' }}
+          />
+          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen
+            name="Feed"
+            component={Feed}
+            options={({ route }: any) => ({
+              title: route.params.name,
+              headerStyle: {
+                backgroundColor: '#f4511e',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+              headerRight: () => (
+                <Button
+                  onPress={() => Alert.alert('This is a button!')}
+                  title="Info"
+                  color="#fff"
+                />
+              ),
+            })}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Landing"
+            component={Landing}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
