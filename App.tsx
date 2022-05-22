@@ -8,27 +8,35 @@
  * @format
  */
 
-import React from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Landing from './screens/Landing';
 import Feed from './screens/Feed';
 import Home from './screens/Home';
 import { Alert, Button } from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Account from './screens/account/Account';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { RootState } from './redux/store'
+import { useSelector, useDispatch } from 'react-redux';
+// import {setUsername } from './redux/features/user/userSlice'
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   // const isDarkMode = useColorScheme() === 'dark';
-
+  const user = useSelector((state: RootState) => state.user.username)
+  // const dispatch = useDispatch()
   // const backgroundStyle = {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
+  useEffect(() => {
+    console.log(user)
+  }, [user]);
 
   return (
+    
     <SafeAreaProvider>
 
       <NavigationContainer>
@@ -76,7 +84,8 @@ const App = () => {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </SafeAreaProvider>
+      </SafeAreaProvider>
+
   );
 };
 

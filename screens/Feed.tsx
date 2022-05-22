@@ -3,6 +3,8 @@ import { useState, useEffect, useLayoutEffect } from 'react';
 
 import { Text,View,Button } from 'react-native'
 interface IFeedProps {
+  route: any,
+  navigation: any,
 }
 
 const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {

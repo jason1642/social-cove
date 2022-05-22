@@ -10,7 +10,7 @@ interface IHomeProps {
 const Home: React.FunctionComponent<IHomeProps> = ({ navigation, route }) => {
   // const { someParam } = route.params
   useEffect(() => {
-    console.log(route.params);
+    console.log(route.params, 'this is route params from home.tsx');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
