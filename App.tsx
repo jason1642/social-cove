@@ -10,6 +10,7 @@
 
 import React from 'react';
 import Landing from './screens/Landing'
+import Feed from './screens/Feed'
 import Home from './screens/Home'
 import {
   SafeAreaView,
@@ -19,6 +20,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
 } from 'react-native';
 
 import {
@@ -97,9 +99,36 @@ const App = () => {
           <LearnMoreLinks />
         </View>  */}
           
-        <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={{title: 'Overview'}} />
-        <Stack.Screen name="Landing" component={Landing} />
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#65badf',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        >
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Overview' }} />
+        <Stack.Screen name="Feed" component={Feed} options={({ route }: any) => ({
+          title: route.params.name, headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }, headerRight: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#fff"
+            />
+          )
+          
+          ,
+        })} />
+        <Stack.Screen options={{headerShown: false}} name="Landing" component={Landing} />
         </Stack.Navigator>
         {/* </ScrollView>
     </SafeAreaView> */}
