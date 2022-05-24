@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-  def findOneById
+  def show
     user = User.find_by(id: params[:id])
     render json: user
   end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
     end
 
-  def delete
+  def destroy
     user = User.find_by(id: params[:id])
     User.destroy(params[:id])
     render json: user
