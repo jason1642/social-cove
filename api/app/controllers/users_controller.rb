@@ -27,6 +27,13 @@ class UsersController < ApplicationController
   end
 
 
+  def comments
+    @user = User.find_by(id: params[:id])
+    @comments = Comment.where(user_id: @user)
+    render json: @comments.as_json(include: {
+      user: {}
+    }), status: :ok
+  end
 
 
 

@@ -14,11 +14,14 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :posts
+      get :posts, :comments
     end
   end
 
-  resources :posts
+  resources :posts do
+    resources :comments
+    
+  end
   # Use this when creating the posts model/controllers
   # resources :users do
   #   resources :posts, shallow: true
