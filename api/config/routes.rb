@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # post '/create-user', to: 'users#create'
   # put 'user/:id/edit', to: 'users#update'
@@ -8,10 +10,15 @@ Rails.application.routes.draw do
 
   # To make sure a paramter matches a regular expression
   # resources :users, constraints: { id: /[A-Z]/}
-  # Look at member and collection block to add unique restful actions 
+  # Look into member and collection block to add unique restful actions 
 
-  resources :users
+  resources :users do
+    member do
+      get :posts
+    end
+  end
 
+  resources :posts
   # Use this when creating the posts model/controllers
   # resources :users do
   #   resources :posts, shallow: true

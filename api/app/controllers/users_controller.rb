@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  before_action :set_user, only: [:show, :update]
 
   def index
     @users = User.all
@@ -14,6 +14,25 @@ class UsersController < ApplicationController
     render json: user
   end
 
+
+
+  def posts
+    @user = User.find_by(id: params[:id])
+    @posts = Post.where(user_id: @user)
+    render json: @posts.as_json(include: {
+      user: {},
+      # comments: {}
+    }), status: :ok
+
+  end
+
+
+
+
+
+
+
+
   def create
     newUser = User.new
     newUser.username = params[:username]
@@ -24,6 +43,11 @@ class UsersController < ApplicationController
     render json: newUser
     return params
   end
+
+
+
+
+
 
   def update
     # Should update logged in user
@@ -39,9 +63,34 @@ class UsersController < ApplicationController
 
     end
 
+
+
+
+
+
+
+
   def destroy
     user = User.find_by(id: params[:id])
     User.destroy(params[:id])
     render json: user
   end
+
+
+
+
+
+
+
+
+
+
+  private
+
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+
 end
