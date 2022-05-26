@@ -1,13 +1,15 @@
 import * as React from 'react';
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import Posts from './Posts';
 import Saved from './Saved';
 import { Icon } from "@rneui/themed";
+import { Button } from "@rneui/base";
 import { AntDesign } from '@expo/vector-icons';
 import { IconFill } from '@ant-design/icons-react-native'
 // import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {useTheme} from '@react-navigation/native'
 interface IAccountProps { }
 
 const myIcon = <Icon
@@ -21,6 +23,7 @@ const myIcon = <Icon
 const Tab = createBottomTabNavigator();
 
 const FillerComponent = () => {
+
   return (
     <View>
       <Text>This is a filler tab</Text>
@@ -28,33 +31,44 @@ const FillerComponent = () => {
   );
 };
 
-const Account: React.FunctionComponent<IAccountProps> = ({}) => {
+const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
+  
+  const { colors } = useTheme()
+  
+  useEffect(() => {
+    console.log(colors)
+  }, [colors]);
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Posts"
-        component={Posts}
-        options={{
-          tabBarLabel: 'Posts',
-          tabBarIcon: () =>  <Icon
-          name='rowing' />,
-        }}
-      />
-      <Tab.Screen
-        name="Saved"
-        component={Saved}
-        options={{
-          tabBarIcon: () => <IconFill name="android" />
-        }}
-      />
-      <Tab.Screen
-        name="Filler"
-        component={FillerComponent}
-        options={{
-          tabBarIcon: () => myIcon
-        }}
-      />
-    </Tab.Navigator>
+    // <Tab.Navigator>
+    //   <Tab.Screen
+    //     name="Posts"
+    //     component={Posts}
+    //     options={{
+    //       tabBarLabel: 'Posts',
+    //       tabBarIcon: () =>  <Icon
+    //       name='rowing' />,
+    //     }}
+    //   />
+    //   <Tab.Screen
+    //     name="Saved"
+    //     component={Saved}
+    //     options={{
+    //       tabBarIcon: () => <IconFill name="android" />
+    //     }}
+    //   />
+    //   <Tab.Screen
+    //     name="Filler"
+    //     component={FillerComponent}
+    //     options={{
+    //       tabBarIcon: () => myIcon
+    //     }}
+    //   />
+    // </Tab.Navigator>
+
+    <View>
+      <Button title='My button' onPress={()=> console.log('Account button press')} />
+      <Text style={{ color: colors.text}}>This is my account information</Text>
+    </View>
   );
 };
 

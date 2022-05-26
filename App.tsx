@@ -13,19 +13,31 @@ import { useState, useEffect } from 'react';
 import Landing from './screens/Landing';
 import Feed from './screens/Feed';
 import Home from './screens/Home';
-import { Alert, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Alert, Button, useColorScheme } from 'react-native';
+import {
+  NavigationContainer,
+  // DarkTheme,
+  DefaultTheme} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Account from './screens/account/Account';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
 // import {setUsername } from './redux/features/user/userSlice'
+// import { ThemeProvider, useThemeMode } from '@rneui/themed';
+import { DarkTheme } from './resources/themes'
+
+
+
 
 const Stack = createNativeStackNavigator();
 
+
+
+
 const App = () => {
-  // const isDarkMode = useColorScheme() === 'dark';
+  const scheme = useColorScheme()
+  // const { mode, setMode } = useThemeMode()
   const user = useSelector((state: RootState) => state.user.username)
   // const dispatch = useDispatch()
   // const backgroundStyle = {
@@ -36,10 +48,11 @@ const App = () => {
   }, [user]);
 
   return (
-    
+    // <ThemeProvider theme={theme}>
+
     <SafeAreaProvider>
 
-      <NavigationContainer>
+      <NavigationContainer theme={DarkTheme}>
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
@@ -82,10 +95,12 @@ const App = () => {
             name="Landing"
             component={Landing}
           />
-        </Stack.Navigator>
+          </Stack.Navigator>
+          
+          {/* <Button title={mode} onPress={()=>setMode('dark')} /> */}
       </NavigationContainer>
       </SafeAreaProvider>
-
+      // </ThemeProvider>
   );
 };
 
