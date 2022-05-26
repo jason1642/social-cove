@@ -25,7 +25,7 @@ import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
 // import {setUsername } from './redux/features/user/userSlice'
 // import { ThemeProvider, useThemeMode } from '@rneui/themed';
-import { DarkTheme } from './resources/themes'
+import { DarkTheme, LightTheme } from './resources/themes'
 
 
 
@@ -36,23 +36,22 @@ const Stack = createNativeStackNavigator();
 
 
 const App = () => {
-  const scheme = useColorScheme()
-  // const { mode, setMode } = useThemeMode()
   const user = useSelector((state: RootState) => state.user.username)
-  // const dispatch = useDispatch()
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
+  // Use setColorTheme dispatch to set the theme based on users preference, or system theme
+  const colorTheme = useSelector((state: RootState) => state.colorTheme.theme)
+
+
   useEffect(() => {
     console.log(user)
-  }, [user]);
+    console.log(colorTheme)
+  }, [user, colorTheme]);
 
   return (
     // <ThemeProvider theme={theme}>
 
     <SafeAreaProvider>
 
-      <NavigationContainer theme={DarkTheme}>
+      <NavigationContainer theme={colorTheme === 'dark' ? DarkTheme : LightTheme}>
         <Stack.Navigator
           screenOptions={{
             headerStyle: {

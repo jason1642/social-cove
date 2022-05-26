@@ -1,35 +1,35 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import Posts from './Posts';
-import Saved from './Saved';
-import { Icon } from "@rneui/themed";
+// import Posts from './Posts';
+// import Saved from './Saved';
+// import { Icon } from "@rneui/themed";
 import { Button } from "@rneui/base";
-import { AntDesign } from '@expo/vector-icons';
-import { IconFill } from '@ant-design/icons-react-native'
+// import { AntDesign } from '@expo/vector-icons';
+// import { IconFill } from '@ant-design/icons-react-native'
 // import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {useTheme} from '@react-navigation/native'
 interface IAccountProps { }
 
-const myIcon = <Icon
-  name="heartbeat"
-  type="font-awesome"
-  size={30}
-  color="blue"
-  onPress={()=>console.log('This is from the account bottom nav icon')}
-/>;
+// const myIcon = <Icon
+//   name="heartbeat"
+//   type="font-awesome"
+//   size={30}
+//   color="blue"
+//   onPress={()=>console.log('This is from the account bottom nav icon')}
+// />;
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
-const FillerComponent = () => {
+// const FillerComponent = () => {
 
-  return (
-    <View>
-      <Text>This is a filler tab</Text>
-    </View>
-  );
-};
+//   return (
+//     <View>
+//       <Text>This is a filler tab</Text>
+//     </View>
+//   );
+// };
 
 const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
   

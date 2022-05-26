@@ -3,12 +3,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 // import reducers from './reducers/index';
 import userReducer from './features/user/userSlice'
-
+import colorThemeReducer from './features/colorTheme/colorThemeSlice'
 
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    colorTheme: colorThemeReducer
   }
 })
 
