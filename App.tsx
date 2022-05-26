@@ -11,7 +11,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Landing from './screens/Landing';
-import Feed from './screens/Feed';
+import Feed from './screens/feed/Feed';
 import Home from './screens/Home';
 import { Alert, Button, useColorScheme } from 'react-native';
 import {
@@ -24,7 +24,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
 // import {setUsername } from './redux/features/user/userSlice'
-// import { ThemeProvider, useThemeMode } from '@rneui/themed';
+import { ThemeProvider, useThemeMode } from '@rneui/themed';
 import { DarkTheme, LightTheme } from './resources/themes'
 
 
@@ -61,45 +61,34 @@ const App = () => {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerShown: false,
           }}>
           <Stack.Screen
             name="Home"
             component={Home}
-            options={{ title: 'Overview' }}
+            options={{ title: 'Overview', headerShown: false }}
           />
-          <Stack.Screen name="Account" component={Account} />
+          {/* <Stack.Screen name="Account" component={Account} /> */}
           <Stack.Screen
             name="Feed"
             component={Feed}
             options={({ route }: any) => ({
-              title: route.params.name,
-              headerStyle: {
-                backgroundColor: '#f4511e',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-              headerRight: () => (
-                <Button
-                  onPress={() => Alert.alert('This is a button!')}
-                  title="Info"
-                  color="#fff"
-                />
-              ),
+              headerShown: false,
+              // title: route.params.name,r
+             
             })}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             options={{ headerShown: false }}
             name="Landing"
             component={Landing}
-          />
+          /> */}
           </Stack.Navigator>
           
           {/* <Button title={mode} onPress={()=>setMode('dark')} /> */}
       </NavigationContainer>
       </SafeAreaProvider>
-      // </ThemeProvider>
+  //  </ThemeProvider>
   );
 };
 

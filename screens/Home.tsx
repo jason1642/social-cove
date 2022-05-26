@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Feed from './Feed'
+import Feed from './feed/Feed'
 import Account from './account/Account'
 import {Icon} from '@rneui/themed'
 interface IHomeProps {
@@ -55,7 +55,8 @@ const Home: React.FunctionComponent<IHomeProps> = ({ navigation, route }) => {
         <Tab.Screen
           name="Feed"
           component={Feed}
-          options={{
+        options={{
+          headerShown:false,
             tabBarLabel: 'Feed',
             tabBarIcon: () => 
               <Icon name='rowing' /> 

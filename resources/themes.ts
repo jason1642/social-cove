@@ -3,9 +3,14 @@ import { DefaultTheme } from "@react-navigation/native"
 export const DarkTheme = {
   ...DefaultTheme,
   colors: {
-    ...DefaultTheme.colors, 
+    // ...DefaultTheme.colors, 
     primary: 'purple',
-    text: 'green'
+    text: 'green',
+    border: 'blue',
+    background: 'lightblue',
+    card: 'orange',
+    oopla: 'black',
+    notification: 'grey',
   }
 }
 
@@ -13,8 +18,10 @@ export const LightTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
+    background: "purple",
     primary: 'purple', 
-    text: 'red'
+    text: 'red',
+    border: 'black',
   }
 }
 
@@ -27,6 +34,7 @@ export const LightTheme = {
 //  background: 'blue',
 //  card: 'purple',
 //  border: 'grey',
+//  text: 'orange',
 //  notification: 'teal',
 // },
 // 
