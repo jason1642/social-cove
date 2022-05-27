@@ -8,7 +8,7 @@ import { useTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Register from '../Register'
 import Main from './Main'
-
+import Login from '../Login'
 
 interface IAccountProps { }
 
@@ -48,7 +48,8 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
       <Text style={{ color: colors.text}}>This is my account information</Text>
             </View> */}
       <AccountStack.Group screenOptions={{ presentation: 'modal' }}>
-        <AccountStack.Screen options={{headerTitle: 'Register'}} name="MyModal" component={Register} />
+        <AccountStack.Screen options={{headerTitle: 'Register'}} name="RegisterModal" component={Register} />
+        <AccountStack.Screen options={{headerTitle: 'Login'}} name="LoginModal" component={Login} />
       </AccountStack.Group>
 
 
