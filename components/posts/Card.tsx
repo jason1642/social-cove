@@ -12,13 +12,14 @@ const Card: React.FunctionComponent<ICardProps> = ({ postData }) => {
   const {colors } = useTheme()
   const { title, content } = postData
   const styles = useStyles(colors)
-
+  console.log(colors.border)
   return (
     <Container
+      wrapperStyle={styles.wrapper}
       containerStyle={styles.container}
     >
-      <Container.Title style={{ color: colors.text }}>{title}</Container.Title>
-      <Text>{content}</Text>
+      <Container.Title style={styles.title} >{title}</Container.Title>
+      <Text style={styles.textStyle}>{content}</Text>
     </Container>
   );
 };
@@ -28,9 +29,23 @@ export default Card;
 
 
 
-const useStyles = makeStyles(( props: any ) => ({
+const useStyles = makeStyles(( theme, props: any ) => ({
   container: {
     backgroundColor: props.card,
+    color: props.text,
+    flex:1,
+    // borderColor: props.border
+  },
+  wrapper: {
     borderColor: props.border
+  },
+  textStyle: {
+    color: props.text
+  },
+  title: {
+    color: props.text,
+    fontSize: 23,
+    textAlign: 'left',
+    
   }
 }))

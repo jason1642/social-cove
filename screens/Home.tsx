@@ -52,11 +52,11 @@ const Home: React.FunctionComponent<IHomeProps> = ({ navigation, route }) => {
 
 
       <Tab.Navigator>
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Feed"
           component={Feed}
         options={{
-          headerShown:false,
+          // headerShown:false,
             tabBarLabel: 'Feed',
             tabBarIcon: () => 
               <Icon name='rowing' /> 
@@ -70,7 +70,7 @@ const Home: React.FunctionComponent<IHomeProps> = ({ navigation, route }) => {
           tabBarIcon: () => 
             <Icon type='material-icons' name='open-in-new' />
         }}
-        />
+        /> */}
       </Tab.Navigator>
     // </View>
   );

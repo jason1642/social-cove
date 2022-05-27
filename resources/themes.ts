@@ -4,11 +4,11 @@ export const DarkTheme = {
   ...DefaultTheme,
   colors: {
     // ...DefaultTheme.colors, 
-    primary: 'purple',
-    text: 'green',
-    border: 'blue',
-    background: 'lightblue',
-    card: 'orange',
+    primary: 'lightgrey',
+    text: 'white',
+    border: 'lightgrey',
+    background: '#303030',
+    card: '#4a4a4a',
     oopla: 'black',
     notification: 'grey',
   }

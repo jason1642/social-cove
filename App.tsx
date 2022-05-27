@@ -24,14 +24,14 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
 // import {setUsername } from './redux/features/user/userSlice'
-import { ThemeProvider, useThemeMode } from '@rneui/themed';
+import { ThemeProvider, useThemeMode, Icon } from '@rneui/themed';
 import { DarkTheme, LightTheme } from './resources/themes'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 
-
-const Stack = createNativeStackNavigator();
-
+// const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator()
 
 
 
@@ -47,48 +47,53 @@ const App = () => {
   }, [user, colorTheme]);
 
   return (
-    // <ThemeProvider theme={theme}>
 
     <SafeAreaProvider>
 
       <NavigationContainer theme={colorTheme === 'dark' ? DarkTheme : LightTheme}>
-        <Stack.Navigator
+
+        <Tab.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: '#65badf',
+              backgroundColor: '#414040',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
-            headerShown: false,
+            // headerShown: false,
           }}>
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Home"
             component={Home}
             options={{ title: 'Overview', headerShown: false }}
-          />
-          {/* <Stack.Screen name="Account" component={Account} /> */}
-          <Stack.Screen
+          /> */}
+          <Tab.Screen
             name="Feed"
             component={Feed}
             options={({ route }: any) => ({
-              headerShown: false,
+              // headerShown: false,
               // title: route.params.name,r
-             
+              tabBarIcon: () => <Icon name='home' type='material-icons' />
             })}
+          />
+          <Tab.Screen
+            name='Account'
+            component={Account}
+            options={{
+              tabBarIcon: () => <Icon name='account-circle' type='material-icons'/>
+            }}
+
           />
           {/* <Stack.Screen
             options={{ headerShown: false }}
             name="Landing"
             component={Landing}
           /> */}
-          </Stack.Navigator>
+          </Tab.Navigator>
           
-          {/* <Button title={mode} onPress={()=>setMode('dark')} /> */}
       </NavigationContainer>
       </SafeAreaProvider>
-  //  </ThemeProvider>
   );
 };
 

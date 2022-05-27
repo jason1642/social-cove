@@ -44,10 +44,16 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
       // screenOptions={{headerShown: false}}
     >
 
-
+    
       {/* <Text>This is the FEED</Text> */}
-      <Tab.Screen name='SubscribedPosts' component={SubscribedPosts} />
-    <Tab.Screen name='Popular' component={Popular} />
+      <Tab.Screen
+        name='Subscribed Posts'
+        component={SubscribedPosts} 
+        />
+      <Tab.Screen
+        name='Popular'
+        component={Popular}
+      />
  
 
 {/* 

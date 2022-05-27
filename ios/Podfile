@@ -20,9 +20,7 @@ target 'socialcove' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
-  pod 'react-native-pager-view', :path => '../node_modules/react-native-pager-view'
 
   target 'socialcoveTests' do
     inherit! :complete
