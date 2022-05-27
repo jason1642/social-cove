@@ -4,13 +4,15 @@ import { View, Text } from 'react-native';
 // import Posts from './Posts';
 // import Saved from './Saved';
 // import { Icon } from "@rneui/themed";
-import { Button } from "@rneui/base";
-// import { AntDesign } from '@expo/vector-icons';
-// import { IconFill } from '@ant-design/icons-react-native'
-// import { FontAwesome } from '@expo/vector-icons';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {useTheme} from '@react-navigation/native'
+import { useTheme } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Register from '../Register'
+import Main from './Main'
+
+
 interface IAccountProps { }
+
+
 
 // const myIcon = <Icon
 //   name="heartbeat"
@@ -19,36 +21,15 @@ interface IAccountProps { }
 //   color="blue"
 //   onPress={()=>console.log('This is from the account bottom nav icon')}
 // />;
-
-// const Tab = createBottomTabNavigator();
-
-// const FillerComponent = () => {
-
-//   return (
-//     <View>
-//       <Text>This is a filler tab</Text>
-//     </View>
-//   );
-// };
-
+const AccountStack = createNativeStackNavigator()
 const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
-  
-  const { colors } = useTheme()
+   const { colors } = useTheme()
   
   useEffect(() => {
     console.log(colors)
   }, [colors]);
   return (
-    // <Tab.Navigator>
-    //   <Tab.Screen
-    //     name="Posts"
-    //     component={Posts}
-    //     options={{
-    //       tabBarLabel: 'Posts',
-    //       tabBarIcon: () =>  <Icon
-    //       name='rowing' />,
-    //     }}
-    //   />
+
     //   <Tab.Screen
     //     name="Saved"
     //     component={Saved}
@@ -56,30 +37,24 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
     //       tabBarIcon: () => <IconFill name="android" />
     //     }}
     //   />
-    //   <Tab.Screen
-    //     name="Filler"
-    //     component={FillerComponent}
-    //     options={{
-    //       tabBarIcon: () => myIcon
-    //     }}
-    //   />
-    // </Tab.Navigator>
+  
+    <AccountStack.Navigator>
+      <AccountStack.Group>
+        <AccountStack.Screen name='Main' component={Main} />
+      </AccountStack.Group>
 
-    <View>
+    {/* <View>
       <Button title='My button' onPress={()=> console.log('Account button press')} />
       <Text style={{ color: colors.text}}>This is my account information</Text>
-    </View>
+            </View> */}
+      <AccountStack.Group screenOptions={{ presentation: 'modal' }}>
+        <AccountStack.Screen options={{headerTitle: 'Register'}} name="MyModal" component={Register} />
+      </AccountStack.Group>
+
+
+        </AccountStack.Navigator>
   );
 };
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-// function TabBarIcon(props: {
-//   name: React.ComponentProps<typeof FontAwesome>['name'];
-//   color: string;
-// }) {
-//   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
-// }
 
 export default Account;
