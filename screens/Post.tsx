@@ -13,7 +13,7 @@ interface IPostProps {
 const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
   const { postId } = route.params
   const { colors } = useTheme()
-  const [postData, setPostData] = useState()
+  const [postData, setPostData] = useState<any>()
   const styles = useStyles(colors)
   const fetchPostData = async () => {
     await axios.get(`http://localhost:3000/posts/${postId}`).then(res => {
@@ -31,7 +31,16 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
   }, [postId]);
   return (
     <ScrollView>
-      <Text style={styles.title}>This is the post info page that you clicked on</Text>
+      { postData ?<>
+        <Text style={styles.title}>TITLE: {postData.title}</Text>
+        <Text style={styles.title}>CONTENT: {postData.content}</Text>
+      
+      </>
+        :
+        <View>
+          <Text>Can't load post data</Text>
+        </View>
+    }
     </ScrollView>
   );
 };

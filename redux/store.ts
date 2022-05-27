@@ -2,8 +2,8 @@ import { applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 // import reducers from './reducers/index';
-import userReducer from './features/user/userSlice'
-import colorThemeReducer from './features/colorTheme/colorThemeSlice'
+import userReducer from './features/userSlice'
+import colorThemeReducer from './features/colorThemeSlice'
 
 
 export const store = configureStore({

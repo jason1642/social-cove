@@ -27,7 +27,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider, useThemeMode, Icon } from '@rneui/themed';
 import { DarkTheme, LightTheme } from './resources/themes'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import CreatePost from './screens/CreatePost'
 
 
 // const Stack = createNativeStackNavigator();
@@ -36,7 +36,7 @@ const Tab = createBottomTabNavigator()
 
 
 const App = () => {
-  const user = useSelector((state: RootState) => state.user.username)
+  const user = useSelector((state: RootState) => state.user)
   // Use setColorTheme dispatch to set the theme based on users preference, or system theme
   const colorTheme = useSelector((state: RootState) => state.colorTheme.theme)
 
@@ -76,6 +76,13 @@ const App = () => {
               // title: route.params.name,r
               tabBarIcon: () => <Icon name='home' type='material-icons' />
             })}
+          />
+          <Tab.Screen
+            name='Create Post'
+            component={CreatePost}
+            options={{
+              tabBarIcon: () => <Icon  name='add-circle' type='material-icons' />
+            }}
           />
           <Tab.Screen
             name='Account'

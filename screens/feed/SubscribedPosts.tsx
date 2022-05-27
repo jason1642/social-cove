@@ -7,13 +7,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import create from '@ant-design/icons/lib/components/IconFont';
 import List from '../../components/posts/List'
 import Post from '../Post'
+import {useDispatch, useSelector} from 'react-redux'
+
 interface ISubscribedPostsProps {
 }
 const Stack = createNativeStackNavigator()
 const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = (props) => {
   const [posts, setPosts ] = useState([])
-
-
+  const { data, authenticated, token } = useSelector((state: any) => state.user)
+  const dispatch = useDispatch()
   const fetchPosts = async () => {
     await axios.get('http://localhost:3000/posts').then(res => {
        // console.log(res)
@@ -21,10 +23,24 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = (props) 
     },
       err => console.log(err)
     )
-   }
+  }
+  
+
+  const testDispatch = async (userData: any) => {
+    try {
+      const user = await axios.post('http://localhost:3000/auth/login', { username: 'testuser12', password: 'pass123' })
+      console.log(user.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+
   useEffect(() => {
     fetchPosts()
-
+    console.log(data, authenticated)
+    testDispatch('string')
   }, []);
   return (
     <Stack.Navigator>

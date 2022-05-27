@@ -30,12 +30,12 @@ const List: React.FunctionComponent<IListProps> = ({ navigation }) => {
     <ScrollView>
       {
         posts && posts.map((ele: any) =>
-          <Button onPress={() =>
+          <Button key={ele.id} onPress={() =>
             navigation.navigate('Post Info',
               {
                 postId: ele.id
               })}>
-            <Card key={ele.id} postData={ele} />
+            <Card postData={ele} />
             </Button>
             )
       }

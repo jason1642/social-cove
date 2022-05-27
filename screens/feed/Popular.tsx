@@ -13,7 +13,10 @@ const Popular: React.FunctionComponent<IPopularProps> = (props) => {
 
   
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+      // headerShown: false,
+    }}>
       
       <Stack.Screen
         name='List'

@@ -41,14 +41,19 @@ class UsersController < ApplicationController
 
 
   def create
-    newUser = User.new
-    newUser.username = params[:username]
-    newUser.password = params[:password]
-    newUser.bio = params[:bio]
-    newUser.email = params[:email]
-    newUser.save
-    render json: newUser
-    return params
+    @user = User.new
+    @user.username = params[:username]
+    @user.password = params[:password]
+    @user.bio = params[:bio]
+    @user.email = params[:email]
+
+    if @user.save
+    render json: @user
+    else 
+      render json: {message: 'There was an error'}
+    end
+    
+    # return @user
   end
 
 
@@ -99,5 +104,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-
+  def user_params
+    params.require(:user).permit(:username, :email, :bio, :password)
+  end
 end

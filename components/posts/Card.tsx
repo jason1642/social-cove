@@ -12,7 +12,7 @@ const Card: React.FunctionComponent<ICardProps> = ({ postData }) => {
   const {colors } = useTheme()
   const { title, content } = postData
   const styles = useStyles(colors)
-  console.log(colors.border)
+  // console.log(colors.border)
   return (
     <Container
       wrapperStyle={styles.wrapper}
@@ -23,7 +23,7 @@ const Card: React.FunctionComponent<ICardProps> = ({ postData }) => {
     </Container>
   );
 };
-
+ 
 export default Card;
 
 
