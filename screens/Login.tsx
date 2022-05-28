@@ -14,7 +14,7 @@ interface ILoginProps {
 const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const { control, handleSubmit, watch, formState: { errors } } = useForm({
+  const { control, getValues, handleSubmit, setError, formState: { errors } } = useForm({
     defaultValues: {
       username: '',
       password: ''
@@ -22,19 +22,38 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
   })
   
   const onSubmit = async (data: any) => {
-    await loginUser(data).then(res => {
-      console.log(res.data) 
-    }, err => {
-      console.log(err)
-    })
-  }
 
+    
+    return await loginUser(data).then(res => {
+          const {username, password} = getValues()
+      console.log(data)
+        console.log(res)
+        if (res.error) {
+          res.error === 'Username not found' ?
+          setError('username', { type: 'required', message: 'Username not found' }, { shouldFocus: true })
+          :
+          setError('password', { type: 'required', message: 'Incorrect Password' }, { shouldFocus: true })
+        }
+      })
+  }
+  
+  const onError = (errors, e) => {
+    if (errors.username) {
+      setError('username', {type: 'required', message: 'Username is required'}, {shouldFocus: true})
+    }
+    if (errors.password) {
+      setError('password', {type: 'required', message: 'Password is required'}, {shouldFocus: true})
+    }
+  }
+  useEffect(() => {
+    console.log(errors)
+  }, [errors]);
 
   return (<View style={styles.container}>
     <Controller
       control={control}
       name='username'
-      rules={{ required: true }}
+      rules={{ required: true, min: 4 }}
       render={({ field: { onChange, onBlur, value } }) => (
         <TextInput
           style={styles.input}
@@ -45,7 +64,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
         />
       )}
     />
-      {errors.username && <Text style={styles.errorText}>Username is required.</Text>}
+      {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
 
     <Controller
       control={control}
@@ -60,7 +79,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
           placeholder='Password'
       />)} 
         />
-      {errors.password && <Text style={styles.errorText}>Password is required.</Text>}
+      {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
 
 
 
@@ -69,7 +88,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
     <Button 
       style={styles.button}
       title='Submit'
-      onPress={handleSubmit(onSubmit)}
+      onPress={handleSubmit(onSubmit, onError)}
         />
 
     <Button

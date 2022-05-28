@@ -7,21 +7,30 @@ class AuthenticationController < ApplicationController
 
 
     begin
-      
+      # This does not throw an error if user is not found, it just sets @user to nil
       @user = User.find_by_username(params[:username])
+      # Manually raise the error here so it can be rescued in the later rescue blocks
+      if @user == nil
+        raise ActiveRecord::RecordNotFound
+      end
+      # print json: @user
       if @user.authenticate(params[:password])
+        print 'SUCCESS'
         token = encode(user_id: @user.id, username: @user.username)
-        render json: { user: @user, token: token}, status: :ok
+        return render json: { user: @user, token: token}, status: :ok
         else
-          render json: { errors: 'unauthorized'}, status: :unauthorized
+          print 'Wrong password'
+          print @user
+          return render json: { error: 'Wrong password'}, status: :unauthorized
         end
 
-      rescue ActiveRecord::RecordNotFound
-        print 'ERROR'
-        return render json: {errors: 'unauthorized'}, status: :unauthorized
-      rescue JWT::DecodeError
-        print "DECODE ERROR"
-        return render json: {erros: 'Decode Error'}, status: :unauthorized
+      rescue ActiveRecord::RecordNotFound => e
+        print e
+        print 'USER NOT FOUND ERROR'
+        return render json: {error: 'Username not found'}, status: :not_found
+      # rescue JWT::DecodeError
+      #   print "DECODE ERROR"
+      #   return render json: {erros: 'Decode Error'}, status: :unauthorized
       rescue ::NoMethodError => x
         print x
         return render json: {error: 'This is my no method error exception handler'}
