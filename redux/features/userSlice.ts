@@ -1,4 +1,5 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
+import { act } from 'react-test-renderer'
 import { loginUser as loginUserAction } from '../actions/userActions'
 import { verifyUser } from '../actions/userActions'
 export interface UserState {
@@ -33,6 +34,7 @@ export const userSlice = createSlice({
     builder.addCase(verifyUser.fulfilled, (state: any, action) => {
       console.log(action.payload)
       state = action.payload
+      return action.payload
     })
   }
 })

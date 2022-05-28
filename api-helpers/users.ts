@@ -1,5 +1,6 @@
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import RNRestart from 'react-native-restart'; 
 
 
 const api = axios.create({
@@ -28,8 +29,10 @@ export const loginUser = async (data: any) =>
 //   return undefined
 // }
 
-export const removeToken = async (user_id: string) => {
+export const removeToken = async (user_id?: string) => {
 
   api.defaults.headers.common.authorization = false;
   await AsyncStorage.setItem('authToken', '')
+  RNRestart.Restart();
+
 }

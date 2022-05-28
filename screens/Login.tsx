@@ -8,7 +8,9 @@ import {useForm, Controller } from "react-hook-form"
 import { loginUser } from '../api-helpers/users'
 import { useDispatch } from 'react-redux'
 import userSlice from '../redux/features/userSlice';
-import {loginUser as loginUserAction} from '../redux/features/userSlice'
+import { loginUser as loginUserAction } from '../redux/features/userSlice'
+import RNRestart from 'react-native-restart'; 
+
 interface ILoginProps {
   navigation: any,
 }
@@ -35,6 +37,8 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
         } else {
           console.log(res.data)
           dispatch(loginUserAction(res.data))
+          RNRestart.Restart();
+
         }
         
       })

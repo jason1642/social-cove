@@ -25,9 +25,7 @@ const AccountStack = createNativeStackNavigator()
 const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
    const { colors } = useTheme()
   
-  useEffect(() => {
-    console.log(colors)
-  }, [colors]);
+
   return (
 
     //   <Tab.Screen

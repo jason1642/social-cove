@@ -6,6 +6,7 @@ import { makeStyles } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { useSelector} from 'react-redux'
 import Guest from '../../components/account/Guest'
+import {removeToken} from '../../api-helpers/users'
 interface IMainProps {
   navigation: any,
 }
@@ -16,18 +17,23 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { data, authenticated, token } = useSelector((state: any) => state.user)
 
 
-  // useEffect(() => {
-  //   if (!authenticated) {
-  //     navigation.navigate('RegisterModal')
-  //   }
-  //   console.log("Rendering account screen")
+  useEffect(() => {
+  
+    console.log(authenticated)
 
-  // }, [navigation]);
+  }, [authenticated]);
 
 
 
 
-  return authenticated ? (<Text style={styles.title}>Logged in!!</Text>) :(
+  return authenticated ? (
+    <View>
+      <Text style={styles.title}>Logged in as {data.username}</Text>
+      <Button title='Log out' onPress={() => {
+        console.log(data)
+        removeToken()
+      }} />
+      </View>) : (
     <Guest navigation={navigation}/>
   );
 };
