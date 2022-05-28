@@ -1,5 +1,5 @@
 class AuthenticationController < ApplicationController
-  before_action :authorize_request, except: [:register, :login]
+  before_action :authorize_request, except: [ :login]
   
   
   
@@ -44,7 +44,8 @@ class AuthenticationController < ApplicationController
 
   end
 
-
+  # Runs the authorize_request function from application_controller, which gets the token from the header that -
+  # was set upon login. It has rescue blocks so if it can't find the user with the token it won't run this verify function
   def verify
     render json: @current_user, status: :ok
   end

@@ -28,24 +28,33 @@ import { ThemeProvider, useThemeMode, Icon } from '@rneui/themed';
 import { DarkTheme, LightTheme } from './resources/themes'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CreatePost from './screens/CreatePost'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {verifyUser} from './redux/actions/userActions'
+// import { verifyUser } from './api-helpers/users';
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
 
-
+const retrieveToken = async () => {
+  const myToken = await AsyncStorage.getItem('authToken')
+  console.log(myToken)
+}
 
 const App = () => {
   const user = useSelector((state: RootState) => state.user)
   // Use setColorTheme dispatch to set the theme based on users preference, or system theme
   const colorTheme = useSelector((state: RootState) => state.colorTheme.theme)
-
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(user)
-    console.log(colorTheme)
+    // console.log(user)
+    // console.log(colorTheme)
+    // retrieveToken()
   }, [user, colorTheme]);
 
+  useEffect(() => {
+    dispatch(verifyUser())
+  }, []);
   return (
 
     <SafeAreaProvider>

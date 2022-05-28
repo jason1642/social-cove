@@ -1,6 +1,6 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 import { loginUser as loginUserAction } from '../actions/userActions'
-
+import { verifyUser } from '../actions/userActions'
 export interface UserState {
   data: any,
   authenticated: boolean,
@@ -30,9 +30,13 @@ export const userSlice = createSlice({
     builder.addCase(loginUserAction.fulfilled, (state, action) => {
       // state = action.payload
     })
+    builder.addCase(verifyUser.fulfilled, (state: any, action) => {
+      console.log(action.payload)
+      state = action.payload
+    })
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setUsername, loginUser } = userSlice.actions
+export const { setUsername, loginUser,  } = userSlice.actions
 export default userSlice.reducer
