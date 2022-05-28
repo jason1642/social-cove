@@ -8,9 +8,9 @@ const api = axios.create({
 
 export const loginUser = async (data: any) =>
   await api.post('/auth/login', data).then(res => {
-    console.log(res)
+    // console.log(res.data)
     return res
   }, ({response}) => {
-    console.log(response.data)
+    // console.log(response.data)
     return response.data
   }) 

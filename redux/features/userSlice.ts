@@ -1,5 +1,5 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
-import { loginUser } from '../actions/userActions'
+import { loginUser as loginUserAction } from '../actions/userActions'
 
 export interface UserState {
   data: any,
@@ -21,15 +21,18 @@ export const userSlice = createSlice({
       state.data = action.payload
     }, 
     loginUser: (state, action: PayloadAction<string>) => {
+      state.data = action.payload
+      state.authenticated = true
+      state.token = action.payload
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state = action.payload
+    builder.addCase(loginUserAction.fulfilled, (state, action) => {
+      // state = action.payload
     })
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setUsername } = userSlice.actions
+export const { setUsername, loginUser } = userSlice.actions
 export default userSlice.reducer

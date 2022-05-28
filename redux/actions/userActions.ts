@@ -3,13 +3,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const loginUser = createAsyncThunk('user/login',
   async (data: any, thunkAPI) => {
-  const requestData: any = await axios.post('http://localhost:3000/auth/login', data)
-  console.log(requestData)
-  if (requestData) {
+    await axios.post('http://localhost:3000/auth/login', data).then(res => {
+      // console.log(res.data)
+    if (res) {
     return {
-        data: requestData.data,
+        data: res.data,
         authenticated: true,
-        token: requestData.token
+        token: res.token
     }
   } else {
     return {
@@ -18,6 +18,9 @@ export const loginUser = createAsyncThunk('user/login',
         data: undefined,
       }
   } 
+  })
+
+  
 })
 
 

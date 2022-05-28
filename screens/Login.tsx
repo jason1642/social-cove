@@ -6,6 +6,9 @@ import { makeStyles } from '@rneui/themed'
 import {useTheme} from '@react-navigation/native'
 import {useForm, Controller } from "react-hook-form"
 import { loginUser } from '../api-helpers/users'
+import { useDispatch } from 'react-redux'
+import userSlice from '../redux/features/userSlice';
+import {loginUser as loginUserAction} from '../redux/features/userSlice'
 interface ILoginProps {
   navigation: any,
 }
@@ -14,30 +17,30 @@ interface ILoginProps {
 const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const { control, getValues, handleSubmit, setError, formState: { errors } } = useForm({
+  const dispatch = useDispatch()
+  const { control, handleSubmit, setError, formState: { errors } } = useForm({
     defaultValues: {
       username: '',
       password: ''
     }
   })
   
-  const onSubmit = async (data: any) => {
-
-    
-    return await loginUser(data).then(res => {
-          const {username, password} = getValues()
-      console.log(data)
-        console.log(res)
+  const onSubmit = async (data: any) => 
+    await loginUser(data).then(res => {
         if (res.error) {
           res.error === 'Username not found' ?
           setError('username', { type: 'required', message: 'Username not found' }, { shouldFocus: true })
           :
           setError('password', { type: 'required', message: 'Incorrect Password' }, { shouldFocus: true })
+        } else {
+          console.log(res.data)
+          dispatch(loginUserAction(res.data))
         }
+        
       })
-  }
   
-  const onError = (errors, e) => {
+  
+  const onError = (errors: any) => {
     if (errors.username) {
       setError('username', {type: 'required', message: 'Username is required'}, {shouldFocus: true})
     }
@@ -45,9 +48,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
       setError('password', {type: 'required', message: 'Password is required'}, {shouldFocus: true})
     }
   }
-  useEffect(() => {
-    console.log(errors)
-  }, [errors]);
+
 
   return (<View style={styles.container}>
     <Controller
@@ -59,7 +60,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
           style={styles.input}
           onBlur={onBlur}
           onChangeText={onChange}
-          value={value}
+          value={value.toLowerCase()}
           placeholder='Username'
         />
       )}
@@ -75,7 +76,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
           style={styles.input}
           onBlur={onBlur}
           onChangeText={onChange}
-          value={value}
+          value={value.toLowerCase()}
           placeholder='Password'
       />)} 
         />
