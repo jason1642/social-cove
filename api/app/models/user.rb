@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, through: :posts
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, allow_nil: false, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: false }
   validates :email, allow_nil: false, format: { with: URI::MailTo::EMAIL_REGEXP }
 

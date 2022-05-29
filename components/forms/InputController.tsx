@@ -8,7 +8,7 @@ interface IAppProps {
   name: string,
   control: any,
   inputStyle: any,
-  type: any
+  type?: any
 }
 
 

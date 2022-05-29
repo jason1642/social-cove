@@ -11,6 +11,8 @@ import userSlice from '../redux/features/userSlice';
 import { loginUser as loginUserAction } from '../redux/features/userSlice'
 import RNRestart from 'react-native-restart'; 
 import InputController from '../components/forms/InputController'
+import LogInOutButton from '../components/buttons/LogInOut'
+
 interface ILoginProps {
   navigation: any,
 }
@@ -38,11 +40,8 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
           console.log(res.data)
           dispatch(loginUserAction(res.data))
           RNRestart.Restart();
-
         }
-        
       })
-  
   
   const onError = (errors: any) => {
     if (errors.username) {
@@ -93,7 +92,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
     <Button 
       style={styles.button}
       title='Submit'
-      onPress={handleSubmit(onSubmit, onError)}
+      onPress={()=>handleSubmit(onSubmit, onError)}
         />
 
     <Button
@@ -112,7 +111,6 @@ const useStyles = makeStyles((theme, props: any) => ({
     flex: 3,
     padding: 24,
     alignItems: 'stretch',
-    
     
   },
   button: {

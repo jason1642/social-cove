@@ -1,6 +1,7 @@
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import RNRestart from 'react-native-restart'; 
+import { ApiOutlined } from '@ant-design/icons';
 
 
 const api = axios.create({
@@ -19,15 +20,14 @@ export const loginUser = async (data: any) =>
   }) 
 
 
-// export const verifyUser = async () => {
-//   const token = await AsyncStorage.getItem('authToken')
-//   if (token) {
-//     api.defaults.headers.common.authorization = `Bearer ${token}`
-//     const response = await api.get('/auth/verify')
-//     return response.data
-//   }
-//   return undefined
-// }
+export const registerUser = async (data: any) => 
+  await api.post('/users', data).then(res => {
+    console.log(res)
+    return res
+  }, err => {
+    console.log(err) 
+    return err
+  })
 
 export const removeToken = async (user_id?: string) => {
 

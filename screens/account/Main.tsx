@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { useSelector} from 'react-redux'
-import Guest from '../../components/account/Guest'
+import Guest from './Guest'
 import { removeToken } from '../../api-helpers/users'
 import LogInOutButton from '../../components/buttons/LogInOut'
 
