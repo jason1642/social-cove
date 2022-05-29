@@ -26,21 +26,12 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = (props) 
   }
   
 
-  const testDispatch = async (userData: any) => {
-    try {
-      const user = await axios.post('http://localhost:3000/auth/login', { username: 'testuser12', password: 'pass123' })
-      console.log(user.data)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
 
 
   useEffect(() => {
     fetchPosts()
     console.log(data, authenticated)
-    testDispatch('string')
+  
   }, []);
   return (
     <Stack.Navigator>

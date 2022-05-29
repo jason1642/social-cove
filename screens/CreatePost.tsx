@@ -2,7 +2,14 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Text, View, ScrollView } from 'react-native'
 import {makeStyles} from '@rneui/themed'
-import {useTheme} from '@react-navigation/native'
+import { useTheme } from '@react-navigation/native'
+import RNRestart from 'react-native-restart'
+import { useForm, useController } from 'react-hook-form'
+// import 
+
+
+
+
 interface ICreatePostProps {
 }
 

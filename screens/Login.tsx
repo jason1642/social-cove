@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import userSlice from '../redux/features/userSlice';
 import { loginUser as loginUserAction } from '../redux/features/userSlice'
 import RNRestart from 'react-native-restart'; 
-
+import InputController from '../components/forms/InputController'
 interface ILoginProps {
   navigation: any,
 }
@@ -55,23 +55,16 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
 
 
   return (<View style={styles.container}>
-    <Controller
+
+    <InputController
+      name='Username'
       control={control}
-      name='username'
-      rules={{ required: true, min: 4 }}
-      render={({ field: { onChange, onBlur, value } }) => (
-        <TextInput
-          style={styles.input}
-          onBlur={onBlur}
-          onChangeText={onChange}
-          value={value.toLowerCase()}
-          placeholder='Username'
-        />
-      )}
+      inputStyle={styles.input}
+      type='username'
     />
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
 
-    <Controller
+    {/* <Controller
       control={control}
       name='password'
       rules={{ required: true }}
@@ -83,7 +76,14 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
           value={value.toLowerCase()}
           placeholder='Password'
       />)} 
-        />
+    /> */}
+    
+    <InputController
+      name='Password'
+      control={control} 
+      inputStyle={styles.input} 
+      type='password'
+    />
       {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
 
 

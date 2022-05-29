@@ -37,19 +37,24 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
     //   />
   
     <AccountStack.Navigator>
+
       <AccountStack.Group>
-        <AccountStack.Screen name='Main' component={Main} />
+        <AccountStack.Screen
+          name='Main'
+          component={Main}
+          options={
+            {
+              headerShown: false,
+            }
+          }
+        />
       </AccountStack.Group>
 
-    {/* <View>
-      <Button title='My button' onPress={()=> console.log('Account button press')} />
-      <Text style={{ color: colors.text}}>This is my account information</Text>
-            </View> */}
+  
       <AccountStack.Group screenOptions={{ presentation: 'modal' }}>
         <AccountStack.Screen options={{headerTitle: 'Register'}} name="RegisterModal" component={Register} />
         <AccountStack.Screen options={{headerTitle: 'Login'}} name="LoginModal" component={Login} />
       </AccountStack.Group>
-
 
         </AccountStack.Navigator>
   );
