@@ -16,36 +16,18 @@ interface IFeedProps {
 const Tab = createMaterialTopTabNavigator();
 
 const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
-  const [posts, setPosts ] = useState([])
 
   useEffect(() => {
     if (route.params) {
       // Post updated, do something with `route.params.post 
       // For example, send the post to the server
       // console.log(route) 
-
     }
-
-    
   }, [route.params]);
 
-  useEffect(() => {
-    // console.log(posts)
-  }, [posts]);
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <Button onPress={()=> setCount(c=>c + 1)} title="Update count" />
-  //     )
-  //   })
-  // },[])
   return (
-    <Tab.Navigator
-      // screenOptions={{headerShown: false}}
-    >
+    <Tab.Navigator>
 
-    
-      {/* <Text>This is the FEED</Text> */}
       <Tab.Screen
         name='Subscribed Posts'
         component={SubscribedPosts} 
@@ -55,22 +37,6 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
         component={Popular}
       />
  
-
-{/* 
-      {posts && posts.map((ele:any) =>
-        <Card key={ele.id} postData={ele} />)}
-       */}
-
-
-
-      {/* <Button 
-        title="Back Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-      <Button 
-        title="Update the title"
-        onPress={() => navigation.setOptions({ title: 'Updated' })}
-      /> */}
     </Tab.Navigator>
   );
 };

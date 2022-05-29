@@ -14,13 +14,15 @@ export const loginUser = createAsyncThunk('user/login',
     return {
         data: res.data,
         authenticated: true,
-        token: res.token
+      token: res.token,
+        isLoading: false,
     }
   } else {
     return {
         authenticated: false,
         token: undefined,
-        data: undefined,
+      data: undefined,
+        isLoading: false,
       }
   } 
   })

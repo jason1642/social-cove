@@ -5,13 +5,15 @@ import { verifyUser } from '../actions/userActions'
 export interface UserState {
   data: any,
   authenticated: boolean,
-  token: string | undefined
+  token: string | undefined,
+  isLoading?: boolean,
 }
 
 const initialState: UserState = {
   data: undefined,
   authenticated: false,
-  token: undefined
+  token: undefined,
+  isLoading: false,
 }
 
 export const userSlice = createSlice({
@@ -34,7 +36,11 @@ export const userSlice = createSlice({
     builder.addCase(verifyUser.fulfilled, (state: any, action) => {
       console.log(action.payload)
       state = action.payload
-      return action.payload
+      return ({...state, isLoading: false,})
+    })
+    builder.addCase(verifyUser.pending, (state: any, action) => {
+      console.log('Pending...')
+      state.isLoading = true
     })
   }
 })

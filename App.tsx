@@ -46,10 +46,8 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // console.log(user)
-    // console.log(colorTheme)
-    // retrieveToken()
-  }, [user, colorTheme]);
+   console.log(user.isLoading)
+  }, [user.isLoading]);
 
   useEffect(() => {
     dispatch(verifyUser())
@@ -66,10 +64,10 @@ const App = () => {
         >
 
        
-        <Stack.Screen
+        { !user.isLoading && !user.authenticated && <Stack.Screen
               name='Landing'
               component={Landing}
-            />
+            />}
               <Stack.Screen
                 name='Home'
           >
@@ -92,9 +90,7 @@ const App = () => {
                     <Tab.Screen
                       name="Feed"
                       component={Feed}
-                      options={({ route }: any) => ({
-                        // headerShown: false,
-                        // title: route.params.name,r
+                      options={() => ({
                         tabBarIcon: () => <Icon name='home' type='material-icons' />
                       })}
                     />

@@ -12,8 +12,6 @@ import Login from '../Login'
 
 interface IAccountProps { }
 
-
-
 // const myIcon = <Icon
 //   name="heartbeat"
 //   type="font-awesome"
@@ -23,19 +21,9 @@ interface IAccountProps { }
 // />;
 const AccountStack = createNativeStackNavigator()
 const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
-   const { colors } = useTheme()
   
 
   return (
-
-    //   <Tab.Screen
-    //     name="Saved"
-    //     component={Saved}
-    //     options={{
-    //       tabBarIcon: () => <IconFill name="android" />
-    //     }}
-    //   />
-  
     <AccountStack.Navigator>
 
       <AccountStack.Group>

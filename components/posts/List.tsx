@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, Text, View,  } from 'react-native'
 import { Button } from '@rneui/base';
 import Card from './Card'
 import axios from 'axios'
@@ -26,10 +26,10 @@ const List: React.FunctionComponent<IListProps> = ({ navigation }) => {
 
   }, []);
 
-  return (
-    <ScrollView>
+  return posts ? (
+    <ScrollView >
       {
-        posts && posts.map((ele: any) =>
+         posts.map((ele: any) =>
           <Button key={ele.id} onPress={() =>
             navigation.navigate('Post Info',
               {
@@ -40,7 +40,10 @@ const List: React.FunctionComponent<IListProps> = ({ navigation }) => {
             )
       }
     </ScrollView>
-  );
+  ) :
+    <View>
+      <Text>Pending</Text>
+    </View>
 };
 
 export default List;
