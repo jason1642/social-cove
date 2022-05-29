@@ -22,7 +22,7 @@ export const loginUser = async (data: any) =>
 
 export const registerUser = async (data: any) => 
   await api.post('/users', data).then(res => {
-    console.log(res)
+    console.log(res.data)
     return res
   }, err => {
     console.log(err) 

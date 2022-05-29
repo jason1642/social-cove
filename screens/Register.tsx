@@ -8,6 +8,9 @@ import { makeStyles } from '@rneui/themed'
 import LogInOutButton from '../components/buttons/LogInOut'
 import InputController from '../components/forms/InputController'
 import { registerUser } from '../api-helpers/users'
+import RNRestart from 'react-native-restart' 
+import LottieView from 'lottie-react-native'
+
 interface IRegisterProps {
   navigation: any,
 }
@@ -25,37 +28,28 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
   })
 
   const onSubmit = async (data: any) => {
-    console.log(errors)
-    console.log('errors')
+
     await registerUser(data).then(res => {
       if (res.error) {
-        
+        console.log(res.error)
       } else {
         console.log('Account successfully created')
-        console.log(data)
         console.log(res.data)
-        console.log(res.data)
+        RNRestart.Restart()
 
       }
-    })
+    }) 
   }
 // Change to something more eloquent 
   const onError = (errors: any) => {
     console.log(errors)
-    // if (errors.username) {
-    //   setError('username', {type: 'required', message: 'Username is required'}, {shouldFocus: true})
-    // }
-    // if (errors.password) {
-    //   setError('password', {type: 'required', message: 'Password is required'}, {shouldFocus: true})
-    // }
-    // if (errors.email) {
-    //   setError('email', { type: 'required', message: 'A valid email address is required' }, {shouldFocus: true})
-    // }
+   
   }
 
 
   return (
     <View style={styles.container}>
+     
 
       <View style={styles.form}>
       <InputController

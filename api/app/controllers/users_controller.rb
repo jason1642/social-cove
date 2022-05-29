@@ -47,15 +47,13 @@ class UsersController < ApplicationController
     @user.bio = params[:bio]
     @user.email = params[:email]
     @user.bio = ''
-    begin
-      if @user.save
-    render json: @user
+
+    if @user.save
+      render json: @user.as_json(only: [:id, :username, :email, :bio, :created_at])
     else 
       render json: {message: 'There was an error'}, status: :bad_request
     end 
-    rescue ActiveRecord::StandardError => x
-      print x
-    end
+  
     
     
     # return @user

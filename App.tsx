@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 import Landing from './screens/Landing';
 import Feed from './screens/feed/Feed';
 import Home from './screens/Home';
-import { Alert, Button, useColorScheme } from 'react-native';
+import { Alert, Button, useColorScheme, View } from 'react-native';
 import {
   NavigationContainer,
   // DarkTheme,
@@ -31,8 +31,7 @@ import CreatePost from './screens/CreatePost'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {verifyUser} from './redux/actions/userActions'
 // import { verifyUser } from './api-helpers/users';
-
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
 
 const retrieveToken = async () => {
@@ -60,54 +59,74 @@ const App = () => {
     <SafeAreaProvider>
 
       <NavigationContainer theme={colorTheme === 'dark' ? DarkTheme : LightTheme}>
-
-        <Tab.Navigator
+        <Stack.Navigator
           screenOptions={{
-            headerStyle: {
-              backgroundColor: '#414040',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            // headerShown: false,
-          }}>
-          {/* <Stack.Screen
+            headerShown: false,
+          }}
+        >
+
+       
+        <Stack.Screen
+              name='Landing'
+              component={Landing}
+            />
+              <Stack.Screen
+                name='Home'
+          >
+            {props=> <Tab.Navigator
+                    screenOptions={{
+                      headerStyle: {
+                        backgroundColor: '#414040',
+                      },
+                      headerTintColor: '#fff',
+                      headerTitleStyle: {
+                        fontWeight: 'bold',
+                      },
+                      // headerShown: false,
+                    }}>
+                    {/* <Stack.Screen
             name="Home"
             component={Home}
             options={{ title: 'Overview', headerShown: false }}
           /> */}
-          <Tab.Screen
-            name="Feed"
-            component={Feed}
-            options={({ route }: any) => ({
-              // headerShown: false,
-              // title: route.params.name,r
-              tabBarIcon: () => <Icon name='home' type='material-icons' />
-            })}
-          />
-          <Tab.Screen
-            name='Create Post'
-            component={CreatePost}
-            options={{
-              tabBarIcon: () => <Icon  name='add-circle' type='material-icons' />
-            }}
-          />
-          <Tab.Screen
-            name='Account'
-            component={Account}
-            options={{
-              tabBarIcon: () => <Icon name='account-circle' type='material-icons'/>
-            }}
+                    <Tab.Screen
+                      name="Feed"
+                      component={Feed}
+                      options={({ route }: any) => ({
+                        // headerShown: false,
+                        // title: route.params.name,r
+                        tabBarIcon: () => <Icon name='home' type='material-icons' />
+                      })}
+                    />
+                    <Tab.Screen
+                      name='Create Post'
+                      component={CreatePost}
+                      options={{
+                        tabBarIcon: () => <Icon name='add-circle' type='material-icons' />
+                      }}
+                    />
+                    <Tab.Screen
+                      name='Account'
+                      component={Account}
+                      options={{
+                        tabBarIcon: () => <Icon name='account-circle' type='material-icons' />
+                      }}
 
-          />
-          {/* <Stack.Screen
+                    />
+                    {/* <Stack.Screen
             options={{ headerShown: false }}
             name="Landing"
             component={Landing}
           /> */}
-          </Tab.Navigator>
-          
+                  </Tab.Navigator>}
+            
+                </Stack.Screen>
+                  
+                
+           
+            
+       
+           </Stack.Navigator>
       </NavigationContainer>
       </SafeAreaProvider>
   );
