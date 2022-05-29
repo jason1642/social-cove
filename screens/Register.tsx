@@ -73,6 +73,11 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
         control={control}
         inputStyle={styles.input}
         minLength={5}
+        extraRules={{
+            pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "invalid email address"
+          }}}
       />
         {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
 

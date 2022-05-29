@@ -12,10 +12,11 @@ interface IAppProps {
   type?: any,
   controllerProps?: any,
   minLength?: number,
+  extraRules?: any,
 }
 
 
-const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, controllerProps, minLength = 0 }) => {
+const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, controllerProps, extraRules, minLength = 0 }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
@@ -35,7 +36,8 @@ const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, ty
           minLength: {
             value: minLength,
             message: `${name} must be atleast ${minLength} characters long`
-         }
+          },
+         ...extraRules
           
           
         }}

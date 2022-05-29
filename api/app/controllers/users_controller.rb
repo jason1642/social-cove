@@ -46,6 +46,7 @@ class UsersController < ApplicationController
     @user.password = params[:password]
     @user.bio = params[:bio]
     @user.email = params[:email]
+    @user.bio = ''
     begin
       if @user.save
     render json: @user
