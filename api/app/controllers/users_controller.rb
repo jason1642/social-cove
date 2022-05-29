@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :set_user, only: [:show, :update]
 
   def index
@@ -46,12 +46,16 @@ class UsersController < ApplicationController
     @user.password = params[:password]
     @user.bio = params[:bio]
     @user.email = params[:email]
-
-    if @user.save
+    begin
+      if @user.save
     render json: @user
     else 
-      render json: {message: 'There was an error'}
+      render json: {message: 'There was an error'}, status: :bad_request
+    end 
+    rescue ActiveRecord::StandardError => x
+      print x
     end
+    
     
     # return @user
   end

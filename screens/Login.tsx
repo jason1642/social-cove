@@ -89,15 +89,15 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
 
 
 
-    <Button 
-      style={styles.button}
-      title='Submit'
-      onPress={()=>handleSubmit(onSubmit, onError)}
+    <LogInOutButton
+      name='Submit'
+      buttonFunction={handleSubmit(onSubmit, onError)}
         />
 
-    <Button
-      style={styles.button}
-      onPress={() => navigation.goBack()} title="Back" />
+    <LogInOutButton
+      name='Back'
+      buttonFunction={() => navigation.goBack()}
+    />
 
 
   </View>);

@@ -8,9 +8,10 @@ interface ILogInOutProps {
   name: string,
   color?: string,
   buttonFunction: Function,
+  buttonProps?: any,
 }
 
-const LogInOut: React.FunctionComponent<ILogInOutProps> = ({ name, color, buttonFunction}) => {
+const LogInOut: React.FunctionComponent<ILogInOutProps> = ({ name, color, buttonFunction, buttonProps}) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
@@ -21,7 +22,8 @@ const LogInOut: React.FunctionComponent<ILogInOutProps> = ({ name, color, button
       onPress={() => buttonFunction()}
       radius='md'
       loading={false}
-      // type='outline'
+      size='lg'
+      {...buttonProps}
     />
   );
 };

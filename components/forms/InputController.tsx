@@ -1,38 +1,70 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {useForm, Controller } from "react-hook-form"
-import { Text, View, TextInput } from 'react-native'
-
+import { useForm, Controller } from "react-hook-form"
+import { Text, View, TextInput, StyleSheet } from 'react-native'
+import { useTheme } from '@react-navigation/native'
+import { makeStyles, } from '@rneui/themed'
 
 interface IAppProps {
   name: string,
   control: any,
   inputStyle: any,
-  type?: any
+  type?: any,
+  controllerProps?: any,
+  minLength?: number,
 }
 
 
-const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type }) => {
+const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, controllerProps, minLength = 0 }) => {
+  const { colors } = useTheme()
+  const styles = useStyles(colors)
   return (
-    <Controller
-      name={name.toLowerCase()}
-      control={control}
-      rules={{
-        required: true, 
-        min: 4,
-      }}
-      render={({ field: { onChange, onBlur, value } }) =>
-      (<TextInput
-        style={inputStyle}
-        onBlur={onBlur}
-        onChangeText={onChange}
-        value={value.toLowerCase()}
-        placeholder={name}
-        textContentType={type}
-        secureTextEntry={type === 'password' ? true : false}
-      />)}
-    />
+    <View style={styles.container}>
+
+      <Text style={styles.label}>{name}:</Text>
+      <Controller
+
+        name={name.toLowerCase()}
+        control={control}
+
+        rules={{
+          required: {
+            value: true,
+            message: `${name} is required`
+          },
+          minLength: {
+            value: minLength,
+            message: `${name} must be atleast ${minLength} characters long`
+         }
+          
+          
+        }}
+        render={({ field: { onChange, onBlur, value } }) =>
+        (<TextInput
+          style={inputStyle}
+          onBlur={onBlur}
+          onChangeText={onChange}
+          value={value.toLowerCase()}
+          placeholder={name}
+          textContentType={type}
+          secureTextEntry={type === 'password' ? true : false}
+        />)}
+        {...controllerProps}
+      />
+
+    </View>
   );
 };
 
 export default App;
+
+const useStyles = makeStyles((theme, props: any) => ({
+  container: {
+    marginVertical: 5,
+  },
+  label: {
+    color: props.text
+  }
+}))
+
+// '#44c77a',

@@ -7,7 +7,7 @@ import {useTheme} from '@react-navigation/native'
 import { makeStyles } from '@rneui/themed'
 import LogInOutButton from '../components/buttons/LogInOut'
 import InputController from '../components/forms/InputController'
-
+import { registerUser } from '../api-helpers/users'
 interface IRegisterProps {
   navigation: any,
 }
@@ -16,7 +16,7 @@ interface IRegisterProps {
 const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const { control, handleSubmit, setError, formState: { errors } } = useForm({
+  const { control, handleSubmit, getValues, setError, formState: { errors } } = useForm({
     defaultValues: {
       username: '',
       password: '',
@@ -24,33 +24,47 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
     }
   })
 
-  const onSubmit = (data: any) => {
-    
-  }
+  const onSubmit = async (data: any) => {
+    console.log(errors)
+    console.log('errors')
+    await registerUser(data).then(res => {
+      if (res.error) {
+        
+      } else {
+        console.log('Account successfully created')
+        console.log(data)
+        console.log(res.data)
+        console.log(res.data)
 
-  const onError = (errors:any) => {
-    if (errors.username) {
-      setError('username', {type: 'required', message: 'Username is required'}, {shouldFocus: true})
-    }
-    if (errors.password) {
-      setError('password', {type: 'required', message: 'Password is required'}, {shouldFocus: true})
-    }
-    if (errors.email) {
-      setError('email', { type: 'required', message: 'Email is required' }, {shouldFocus: true})
-    }
+      }
+    })
+  }
+// Change to something more eloquent 
+  const onError = (errors: any) => {
+    console.log(errors)
+    // if (errors.username) {
+    //   setError('username', {type: 'required', message: 'Username is required'}, {shouldFocus: true})
+    // }
+    // if (errors.password) {
+    //   setError('password', {type: 'required', message: 'Password is required'}, {shouldFocus: true})
+    // }
+    // if (errors.email) {
+    //   setError('email', { type: 'required', message: 'A valid email address is required' }, {shouldFocus: true})
+    // }
   }
 
 
   return (
     <View style={styles.container}>
-      <Text>Register an account here</Text>
 
-
+      <View style={styles.form}>
       <InputController
         name='Username'
         control={control}
         inputStyle={styles.input}
         type='username'
+        minLength={3}
+          // controllerProps={}
       />
         {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
 
@@ -58,26 +72,45 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
         name='Email'
         control={control}
         inputStyle={styles.input}
-        // type='username'
+        minLength={5}
       />
+        {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
 
       <InputController
         name='Password'
         control={control}
         inputStyle={styles.input}
         type='password'
+        minLength={6}
+          
+          // controllerProps={}
+
         />
       {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
+      </View>
+      
 
-      <LogInOutButton
-        name='Submit'
-        buttonFunction={()=>handleSubmit(onSubmit, onError)}
-      />
-      <LogInOutButton
-        name='Back'
-        buttonFunction={() => navigation.goBack()}
-        
+
+      <View style={styles.buttonContainer}>
+
+
+        <LogInOutButton
+          name='Submit'
+          buttonFunction={handleSubmit(onSubmit, onError)}
+          buttonProps={{
+            
+
+          }}
         />
+        <LogInOutButton
+          name='Back'
+          buttonFunction={() => navigation.goBack()}
+          buttonProps={{
+            
+
+          }}
+          />
+        </View>
     </View>
   );
 };
@@ -90,6 +123,7 @@ const useStyles = makeStyles((theme, props: any) => ({
     flex: 3,
     padding: 24,
     alignItems: 'stretch',
+    // justifyContent: 'center',
   },
   input: {
     color: props.text,
@@ -103,5 +137,12 @@ const useStyles = makeStyles((theme, props: any) => ({
   },
   errorText: {
     color: 'orange'
+  },
+  form: {
+    
+  },
+  buttonContainer: {
+    // alignSelf: 'flex-end'
+    paddingVertical: 10,
   },
 }))
