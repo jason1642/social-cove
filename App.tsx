@@ -10,7 +10,7 @@
 
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import Landing from './screens/Landing';
+import Landing from './screens/landing/Landing';
 import Feed from './screens/feed/Feed';
 import Home from './screens/Home';
 import { Alert, Button, useColorScheme, View } from 'react-native';
@@ -33,7 +33,6 @@ import {verifyUser} from './redux/actions/userActions'
 // import { verifyUser } from './api-helpers/users';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
-
 const retrieveToken = async () => {
   const myToken = await AsyncStorage.getItem('authToken')
   console.log(myToken)
@@ -60,17 +59,20 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-          }}
-        >
-
-       
-        { !user.isLoading && !user.authenticated && <Stack.Screen
+          }}>
+          {!user.isLoading && !user.authenticated &&
+            <Stack.Screen
               name='Landing'
               component={Landing}
-            />}
-              <Stack.Screen
-                name='Home'
-          >
+          />}
+          
+          
+
+
+
+
+
+              <Stack.Screen name='Home'>
             {props=> <Tab.Navigator
                     screenOptions={{
                       headerStyle: {
@@ -82,11 +84,6 @@ const App = () => {
                       },
                       // headerShown: false,
                     }}>
-                    {/* <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ title: 'Overview', headerShown: false }}
-          /> */}
                     <Tab.Screen
                       name="Feed"
                       component={Feed}
