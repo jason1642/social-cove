@@ -19,7 +19,7 @@ import {
   // DarkTheme,
   DefaultTheme} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Account from './screens/account/Account';
+import Account from './screens/current-user-account/Account';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
@@ -102,7 +102,10 @@ const App = () => {
                       name='Account'
                       component={Account}
                       options={{
-                        tabBarIcon: () => <Icon name='account-circle' type='material-icons' />
+                        tabBarIcon: () => <Icon name='account-circle' type='material-icons' />,
+                        title: user.data ? user.data.username : 'Account',
+                        headerTitleAlign: 'left',
+                        headerTitleStyle: {paddingLeft: 15,fontWeight: 'bold', fontSize: 22}
                       }}
 
                     />

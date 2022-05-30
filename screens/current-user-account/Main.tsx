@@ -7,7 +7,8 @@ import { useSelector} from 'react-redux'
 import Guest from './Guest'
 import { removeToken } from '../../api-helpers/users'
 import LogInOutButton from '../../components/buttons/LogInOut'
-
+import Header from '../../components/account/Header'
+import {showVerboseUserInfo} from '../../api-helpers/users'
 interface IMainProps {
   navigation: any,
 }
@@ -16,10 +17,15 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   const { data, authenticated, token } = useSelector((state: any) => state.user)
-
+  const [userData, setUserData ] = useState()
 
   useEffect(() => {
   
+    showVerboseUserInfo(data.id).then(res => {
+      setUserData(res.data)
+      // console.log(res.data)
+    }, err=> console.log(err))
+
     console.log(authenticated)
 
   }, [authenticated]);
@@ -31,24 +37,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
     <View
       style={styles.container}
     >
-
-      <View
-        style={styles.header}
-      >
-        <Avatar
-        size={64}
-        rounded
-        title={'T'}
-        containerStyle={{ backgroundColor: 'blue', }}
-        iconStyle={{}}
-      />
-
-        <Text style={styles.title}>Logged in as {data.username}</Text>
-        <Text style={styles.bioLabel}>Bio:</Text>
-        <Text style={styles.bio}>{data.bio}</Text>
-      </View>
-      
-
+      {userData && <Header userData={userData} colors={colors}/>}
 
       <View
         style={{

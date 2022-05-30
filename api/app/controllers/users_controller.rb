@@ -11,10 +11,21 @@ class UsersController < ApplicationController
 
   def show
     user = User.find_by(id: params[:id])
-    print json: @user.followings
-    render json: user
+    # print json: @user.followings
+    render json: user.as_json(include: {
+      followings:{}
+    })
   end
 
+  def show_verbose
+    user = User.find_by(id: params[:id])
+    render json: user.as_json(include: {
+      following:{},
+      followers: {},
+      posts:{},
+    })
+  
+  end
 
 
   def posts

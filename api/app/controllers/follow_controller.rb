@@ -1,6 +1,6 @@
 class FollowController < ApplicationController
   # skip_before_action :verify_authenticity_token
-  before_action :set_follow_list, only: %i[ show index edit update destroy ]
+  # before_action :set_follow_list, only: %i[ show index edit update destroy ]
 
   # GET /posts or /posts.json
  def following_list
@@ -22,14 +22,6 @@ class FollowController < ApplicationController
     @follow = Follow.new
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
-  # def update
-  #   if @post.update(post_params)
-  #     render json: @post
-  #   else
-  #     render json: @post.errors, status: :unprocessable_entity
-  #   end
-  # end
 
   # POST /posts or /posts.json
   def create
@@ -46,22 +38,10 @@ class FollowController < ApplicationController
     # end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @post.update(post_params)
-  #       format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
-  #       format.json { render :show, status: :ok, location: @post }
-  #     else
-  #       format.html { render :edit, status: :unprocessable_entity }
-  #       format.json { render json: @post.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 
 
   def follow_user
-    @follow = Follow.new(follow_params)
+    @follow = Follow.new(params[:follow].permit(:followed_id, :follower_id))
     if @follow.save
       render json: {data: @follow, status: :created}
     else
@@ -79,11 +59,6 @@ class FollowController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_follow_list
-      @follow_list = Follow.find(params[:id])
-    end
-
     def set_user
       @current_user = User.find(params[:id])
     end

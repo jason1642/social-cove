@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Feed from './feed/Feed'
-import Account from './account/Account'
+import Account from './current-user-account/Account'
 import {Icon} from '@rneui/themed'
 interface IHomeProps {
   navigation: any;
