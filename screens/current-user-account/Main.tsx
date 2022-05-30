@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Text, View } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { useSelector} from 'react-redux'
@@ -8,10 +8,17 @@ import Guest from './Guest'
 import { removeToken } from '../../api-helpers/users'
 import LogInOutButton from '../../components/buttons/LogInOut'
 import Header from '../../components/account/Header'
-import {showVerboseUserInfo} from '../../api-helpers/users'
+import { showVerboseUserInfo } from '../../api-helpers/users'
+import AccountOptionButton from '../../components/buttons/AccountOptions'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Posts from './Posts';
+import Saved from './Saved';
+
+
 interface IMainProps {
   navigation: any,
 }
+const Tab = createMaterialTopTabNavigator();
 
 const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { colors } = useTheme()
@@ -34,35 +41,51 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
 
 
   return authenticated ? (
-    <View
+    <ScrollView
       style={styles.container}
     >
       {userData && <Header userData={userData} colors={colors}/>}
 
-      <View
-        style={{
+      
+      <View style={styles.buttonOptions}>
+        <AccountOptionButton
+          name='Edit Profile'
+          color='grey'
+          buttonFunction={() => navigation.navigate('Settings')}
+          buttonProps={{size: 'sm'}}
+        />
+        <AccountOptionButton
+          name='Insights'
+          color=''
+          buttonFunction={() => navigation.navigate('Settings')}
+          buttonProps={{size: 'sm'}}
+        />
+        <AccountOptionButton
+          name='Log Out'
+          color='darkgrey'
+          buttonFunction={() => {
+            console.log(data)
+            removeToken()
+          }}
           
-        }}
-      >
-
-        <LogInOutButton
-        name='Settings'
-        color='grey'
-        buttonFunction={() => {
-          navigation.navigate('Settings')
-        }}
-      /> 
-      <LogInOutButton
-        name='Log Out'
-        buttonFunction={() => {
-        console.log(data)
-        removeToken()
-      }}
-      />
+        />
       </View>
+
+        {/* <Tab.Navigator>
+        <Tab.Screen
+          name='Posts'
+          component={Posts}
+        />
+        <Tab.Screen
+          name='Saved'
+          component={Saved}
+        />
+          </Tab.Navigator> */}
+
+      
       
 
-    </View>)
+    </ScrollView>)
     : (
       <Guest
         navigation={navigation}
@@ -80,14 +103,12 @@ const useStyles = makeStyles((theme, props:any) => ({
     paddingVertical: 10,
     fontSize: 18,
   },
-  header: {
-    // flex: 1,
-    // height: 50,
-    alignItems: 'center',
-    
-    paddingVertical: 15,
-    width: '100%',
-    // backgroundColor: 'green' 
+  buttonOptions: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 10,
+      // backgroundColor: 'red'
   },
   bioLabel: {
     alignSelf: 'flex-start',
@@ -105,6 +126,7 @@ const useStyles = makeStyles((theme, props:any) => ({
   container: {
     flex: 1,
     paddingVertical: 15,
-    justifyContent: 'space-between'
+    // backgroundColor: 'red'
+    // justifyContent: 'flex-start'
   }
 }))

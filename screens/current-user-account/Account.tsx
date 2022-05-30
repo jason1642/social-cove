@@ -11,7 +11,9 @@ import Main from './Main'
 import Login from '../Login'
 import Settings from './Settings'
 interface IAccountProps { }
-
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Posts from './Posts';
+import Saved from './Saved';
 // const myIcon = <Icon
 //   name="heartbeat"
 //   type="font-awesome"
@@ -20,6 +22,9 @@ interface IAccountProps { }
 //   onPress={()=>console.log('This is from the account bottom nav icon')}
 // />;
 const AccountStack = createNativeStackNavigator()
+const Tab = createMaterialTopTabNavigator();
+
+
 const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
   
 
@@ -29,9 +34,25 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
       <AccountStack.Group>
         <AccountStack.Screen
           name='Main'
-          component={Main}
+          // component={Main}
           options={{ headerShown: false, }}
+        >
+
+    {(navigation) =><>
+            <Main navigation={navigation}/>
+            <Tab.Navigator>
+        <Tab.Screen
+          name='Posts'
+          component={Posts}
         />
+        <Tab.Screen
+          name='Saved'
+          component={Saved}
+        />
+          </Tab.Navigator>
+          </>
+          }
+        </AccountStack.Screen>
         <AccountStack.Screen
           name='Settings'
           component={Settings}
