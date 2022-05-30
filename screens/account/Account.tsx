@@ -9,7 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Register from '../Register'
 import Main from './Main'
 import Login from '../Login'
-
+import Settings from './Settings'
 interface IAccountProps { }
 
 // const myIcon = <Icon
@@ -30,11 +30,11 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
         <AccountStack.Screen
           name='Main'
           component={Main}
-          options={
-            {
-              headerShown: false,
-            }
-          }
+          options={{ headerShown: false, }}
+        />
+        <AccountStack.Screen
+          name='Settings'
+          component={Settings}
         />
       </AccountStack.Group>
 

@@ -60,7 +60,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
         name='Settings'
         color='grey'
         buttonFunction={() => {
-          console.log("this is the settings button being pressed")
+          navigation.navigate('Settings')
         }}
       /> 
       <LogInOutButton
@@ -98,14 +98,15 @@ const useStyles = makeStyles((theme, props:any) => ({
     
     paddingVertical: 15,
     width: '100%',
-    backgroundColor: 'green'
+    // backgroundColor: 'green' 
   },
   bioLabel: {
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
+    color: props.text,
   },
   bio: {
-    // color: 'red',
+    color: props.text,
     fontSize: 16,
     paddingHorizontal: 20,
     paddingVertical: 2,
