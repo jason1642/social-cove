@@ -4,6 +4,9 @@ import { Text, View, ScrollView } from 'react-native'
 import axios from 'axios'
 import { makeStyles } from '@rneui/themed';
 import { useTheme } from '@react-navigation/native'
+import Header from '../components/posts/info-page/Header';
+import MainImage from '../components/posts/info-page/MainImage'
+
 
 interface IPostProps {
   postData: any,
@@ -26,14 +29,14 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
     console.log(postId)
 
     fetchPostData()
+ 
 
-
-  }, [postId]);
+  }, [postId]); 
   return (
     <ScrollView>
       { postData ?<>
-        <Text style={styles.title}>TITLE: {postData.title}</Text>
-        <Text style={styles.title}>CONTENT: {postData.content}</Text>
+        <Header />
+        <MainImage />
       
       </>
         :
