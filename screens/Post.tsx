@@ -6,7 +6,8 @@ import { makeStyles } from '@rneui/themed';
 import { useTheme } from '@react-navigation/native'
 import Header from '../components/posts/info-page/Header';
 import MainImage from '../components/posts/info-page/MainImage'
-
+import Body from '../components/posts/info-page/Body';
+import CommentSection from '../components/comment/Section'
 
 interface IPostProps {
   postData: any,
@@ -35,9 +36,19 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
   return (
     <ScrollView>
       { postData ?<>
-        <Header />
+        <Header
+          colors={colors}
+          postData={postData}
+        />
         <MainImage />
-      
+        <Body
+          colors={colors}
+          postData={postData}
+        />
+        <CommentSection
+          colors={colors}
+          commentArray={postData.comments}
+          />
       </>
         :
         <View>

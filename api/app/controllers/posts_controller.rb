@@ -10,7 +10,10 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    render json: @post
+    render json: @post.as_json(include: {
+      user: {},
+      comments: {},
+    })
   end
 
   # GET /posts/new
