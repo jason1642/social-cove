@@ -11,12 +11,13 @@ interface IAppProps {
   inputStyle: any,
   type?: any,
   controllerProps?: any,
+  inputProps?: any,
   minLength?: number,
   extraRules?: any,
 }
 
 
-const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, controllerProps, extraRules, minLength = 0 }) => {
+const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
@@ -50,6 +51,7 @@ const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, ty
           placeholder={name}
           textContentType={type}
           secureTextEntry={type === 'password' ? true : false}
+          {...inputProps}
         />)}
         {...controllerProps}
       />

@@ -11,9 +11,9 @@ interface IBodyProps {
 const Body: React.FunctionComponent<IBodyProps> = ({postData, colors}) => {
   const styles = useStyles(colors)
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.description}>{postData.content}</Text>
-      <Text style={styles.description}>This is post ID {postData.id}</Text>
+      {/* <Text style={styles.description}>This is post ID {postData.id}</Text> */}
     </View>
   );
 };
@@ -22,10 +22,14 @@ export default Body
 
 
 
-const useStyles = makeStyles((theme, props:any) => ({
+const useStyles = makeStyles((theme, props: any) => ({
+  container: {
+    marginVertical: 5
+  },
   description: {
     color: props.text,
     padding: 10,
     fontSize: 14,
+    
   }
 }))

@@ -11,13 +11,13 @@ interface ISectionProps {
 
 const Section: React.FunctionComponent<ISectionProps> = ({ colors, commentArray }) => {
   const styles = useStyles(colors)
-  console.log(commentArray)
+  // console.log(commentArray)
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{commentArray.length} Comments</Text>
       <View>
         {
-          commentArray.map((ele: any) => <Card colors={colors} commentData={ele} />)
+          commentArray.map((ele: any) => <Card key={ele.id} colors={colors} commentData={ele} />)
         }
       </View>
     </View>

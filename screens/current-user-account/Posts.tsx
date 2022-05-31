@@ -14,7 +14,7 @@ const Posts: React.FunctionComponent<IPostsProps> = ({userPosts, navigation }) =
 
 
 
-  console.log(userPosts)
+  // console.log(userPosts)
   return (
     <FlatList
       contentContainerStyle={styles.container}

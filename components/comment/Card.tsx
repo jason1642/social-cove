@@ -10,10 +10,11 @@ interface ICardProps {
 }
 
 const Card: React.FunctionComponent<ICardProps> = ({colors, commentData}) => {
-
+  
   const styles = useStyles(colors)
   return (
     <View style={styles.container}>
+      <Text>{commentData.user.username}</Text>
       <Text style={styles.title}>
       {commentData.content}
       </Text>
@@ -26,8 +27,10 @@ export default Card;
 
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
-    padding: 10,
+    padding: 5,
+    borderRadius: 5,
     backgroundColor: 'grey',
+    marginVertical: 5,
   },
   title: {
     color: props.text,

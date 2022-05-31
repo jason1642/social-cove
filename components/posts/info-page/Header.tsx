@@ -10,13 +10,13 @@ interface IHeaderProps {
  }
 //  Avatar + name
 const Header: React.FunctionComponent<IHeaderProps> = ({ postData, colors }) => {
-  console.log(postData)
+  // console.log(postData)
   const styles = useStyles(colors)
    return (
      <View style={styles.container}>
        <Avatar
          title='A'
-         size={64}
+         size={45}
          rounded
          containerStyle={{ backgroundColor: "#3d4db7"}}
        />
@@ -30,7 +30,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ postData, colors }) => 
  const useStyles = makeStyles((theme, props:any) => ({
   title: {
      color: props.text,
-      overflow: 'hidden',
+     overflow: 'hidden',
+      fontSize: 16,
    },
    container: {
      flexDirection: 'row',
