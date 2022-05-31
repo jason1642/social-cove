@@ -6,20 +6,21 @@ import { makeStyles, Avatar, } from '@rneui/themed'
 import Thumbnail from '../../components/posts/Thumbnail'
 interface IPostsProps {
   userPosts: any,
+  navigation: any,
 }
 
-const Posts: React.FunctionComponent<IPostsProps> = ({userPosts }) => {
+const Posts: React.FunctionComponent<IPostsProps> = ({userPosts, navigation }) => {
 
 
 
 
-  console.log('THIS IS THE POSTS TAB')
+  console.log(userPosts)
   return (
     <FlatList
       contentContainerStyle={styles.container}
       columnWrapperStyle={styles.columnWrapper}
-      data={[1,2,455,5,5,6,4,4,2,22, 'x','x',]}
-      renderItem={({item}) => <Thumbnail data={item}/>}
+      data={[...userPosts, 'x', 'x']}
+      renderItem={({item}) => <Thumbnail navigation={navigation} data={item}/>}
       numColumns={3}
     />
     

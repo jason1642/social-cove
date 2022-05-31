@@ -14,6 +14,7 @@ interface IAccountProps { }
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Posts from './Posts';
 import Saved from './Saved';
+import Post from '../Post';
 // const myIcon = <Icon
 //   name="heartbeat"
 //   type="font-awesome"
@@ -38,7 +39,10 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
           options={{ headerShown: false, }}
        />
 
-    
+        <AccountStack.Screen
+          name='Post'
+          component={Post}
+        />
         <AccountStack.Screen
           name='Settings'
           component={Settings}

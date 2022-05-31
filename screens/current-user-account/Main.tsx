@@ -26,7 +26,8 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   const { data, authenticated, token } = useSelector((state: any) => state.user)
-  const [userData, setUserData ] = useState()
+  const [userData, setUserData] = useState<any>()
+  const [requestFulfilled, setRequestFulfilled] = useState<boolean>(false)
   const [routes] = React.useState([
     { key: 'posts', title: 'Posts' },
     { key: 'saved', title: 'Saved' },
@@ -38,14 +39,17 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
     data && showVerboseUserInfo(data.id).then(res => {
       setUserData(res.data)
       // console.log(res.data)
+      setRequestFulfilled(true)
     }, err=> console.log(err))
 
     console.log(authenticated)
-
+    return setRequestFulfilled(false)
   }, [authenticated, data]);
 
 
-
+  useEffect(() => {
+    console.log(data.posts)
+  }, [data]);
 
   return authenticated ? (
     <View style={{flex: 1}}>
@@ -88,7 +92,10 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
 
       <View style={{flex: 6}}>
 
-          <Posts userPosts={data.posts}/>
+        {
+        requestFulfilled && userData && <Posts navigation={navigation} userPosts={userData.posts} />
+        }
+        
           {/* <Tab.Navigator
             
           >

@@ -1,19 +1,24 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-
+import { StyleSheet, View, Text, Pressable } from 'react-native';
+import {Button} from '@rneui/base'
 interface IThumbnailProps {
   data: any,
-}
+  navigation: any,
+  }
 
-const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data}) => {
-  console.log(data)
+const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data, navigation}) => {
+
   return data !== 'x' ? (
-    <View style={styles.container}>
+
+
+    <Pressable style={styles.container} onPress={()=>navigation.navigate('Post', {postId: data.id})}>
+      {/* <View style={styles.container}> */}
+   
       <Text>This is a thumbnail</Text>
-    </View>
+    {/* </View> */}
+        </Pressable>
   ) : 
     (<View style={{height: 10, width: '32%'}}>
-        {/* <Text>rpqwomr</Text> */}
     </View>)
 };
 
@@ -29,7 +34,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     width: '32%',
-    height: 150,
+    height: 135,
     padding: 4,
   }
 })
