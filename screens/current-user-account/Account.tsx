@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 // import Posts from './Posts';
 // import Saved from './Saved';
 // import { Icon } from "@rneui/themed";
@@ -29,30 +29,16 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
   
 
   return (
-    <AccountStack.Navigator>
 
+    <AccountStack.Navigator>
       <AccountStack.Group>
         <AccountStack.Screen
           name='Main'
-          // component={Main}
+          component={Main}
           options={{ headerShown: false, }}
-        >
+       />
 
-    {(navigation) =><>
-            <Main navigation={navigation}/>
-            <Tab.Navigator>
-        <Tab.Screen
-          name='Posts'
-          component={Posts}
-        />
-        <Tab.Screen
-          name='Saved'
-          component={Saved}
-        />
-          </Tab.Navigator>
-          </>
-          }
-        </AccountStack.Screen>
+    
         <AccountStack.Screen
           name='Settings'
           component={Settings}

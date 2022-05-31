@@ -11,6 +11,7 @@ import Header from '../../components/account/Header'
 import { showVerboseUserInfo } from '../../api-helpers/users'
 import AccountOptionButton from '../../components/buttons/AccountOptions'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { TabView, SceneMap } from 'react-native-tab-view';
 import Posts from './Posts';
 import Saved from './Saved';
 
@@ -20,11 +21,21 @@ interface IMainProps {
 }
 const Tab = createMaterialTopTabNavigator();
 
+const renderScene = SceneMap({
+  posts: Posts,
+  saved: Saved
+})
+
 const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   const { data, authenticated, token } = useSelector((state: any) => state.user)
   const [userData, setUserData ] = useState()
+  const [routes] = React.useState([
+    { key: 'posts', title: 'Posts' },
+    { key: 'saved', title: 'Saved' },
+  ]);
+  const [index, setIndex] = React.useState(0);
 
   useEffect(() => {
   
@@ -41,6 +52,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
 
 
   return authenticated ? (
+    <View style={{flex: 1}}>
     <ScrollView
       style={styles.container}
     >
@@ -52,13 +64,13 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
           name='Edit Profile'
           color='grey'
           buttonFunction={() => navigation.navigate('Settings')}
-          buttonProps={{size: 'sm'}}
+
         />
         <AccountOptionButton
           name='Insights'
           color=''
           buttonFunction={() => navigation.navigate('Settings')}
-          buttonProps={{size: 'sm'}}
+       
         />
         <AccountOptionButton
           name='Log Out'
@@ -71,8 +83,14 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
         />
       </View>
 
-        {/* <Tab.Navigator>
+      <View style={{flex: 1}}>
+          
+          <Posts />
+          {/* <Tab.Navigator
+            
+          >
         <Tab.Screen
+          
           name='Posts'
           component={Posts}
         />
@@ -81,11 +99,14 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
           component={Saved}
         />
           </Tab.Navigator> */}
-
+      
+       </View>
       
       
 
-    </ScrollView>)
+      </ScrollView>
+      </View>
+      )
     : (
       <Guest
         navigation={navigation}
@@ -124,7 +145,7 @@ const useStyles = makeStyles((theme, props:any) => ({
     alignSelf: 'flex-start',
   },
   container: {
-    flex: 1,
+    // flex: 1,
     paddingVertical: 15,
     // backgroundColor: 'red'
     // justifyContent: 'flex-start'

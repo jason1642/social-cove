@@ -16,7 +16,8 @@ const AccountOptions: React.FunctionComponent<IAccountOptionsProps> = ({name, co
       color={color}
       onPress={buttonFunction}
       {...buttonProps}
-      size='md'
+      size='sm'
+      radius={6}
       containerStyle={styles.button}
     />);
 };

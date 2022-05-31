@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme, props:any) => ({
     alignSelf: 'flex-start',
   },
   container: {
-    // flex: 1,
+    flex: 1,
     // flexDirection: 'row',
     paddingVertical: 10,
     // justifyContent: 'space-between'

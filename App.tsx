@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 import Landing from './screens/landing/Landing';
 import Feed from './screens/feed/Feed';
 import Home from './screens/Home';
-import { Alert, Button, useColorScheme, View } from 'react-native';
+import { Alert, Button, useColorScheme, View, ScrollView } from 'react-native';
 import {
   NavigationContainer,
   // DarkTheme,
@@ -97,7 +97,9 @@ const App = () => {
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />
                       }}
-                    />
+              />
+
+     
                     <Tab.Screen
                       name='Account'
                       component={Account}
