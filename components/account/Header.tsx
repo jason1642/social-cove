@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native'
 import { makeStyles, Avatar, } from '@rneui/themed'
 import StatColumn from './StatColumn';
-
-
 
 
 
@@ -34,23 +32,33 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
           title={'T'}
           containerStyle={{ backgroundColor: 'blue', }}
           iconStyle={{}}
-         />
+        />
+      
       <View style={styles.columnWrapper}>
-        {
-      values.map(ele =>
-        <StatColumn key={ele.name} colors={colors} title={ele.name} amount={ele.amount} />)
-      }
+
+        {values.map(ele =>
+        <StatColumn
+          key={ele.name}
+          colors={colors}
+          title={ele.name}
+          amount={ele.amount}
+        />)}
+
     </View>
     
       
         </View>
         
 
-
-
-        <Text style={styles.title}>Logged in as {userData.username}</Text>
+    <View style={{flex: 1}}>
+      
+             <Text style={styles.title}>Logged in as {userData.username}</Text>
         <Text style={styles.bioLabel}>Bio:</Text>
-        <Text style={styles.bio}>{userData.bio}</Text>
+    <Text style={styles.bio}>{userData.bio}</Text>
+        </View>
+
+ 
+    
   </View>);
 };
 
@@ -69,7 +77,7 @@ const useStyles = makeStyles((theme, props:any) => ({
 
   },
   topRow: {
-    // flex: 1,
+    flex: 0,
     // backgroundColor: 'green',
     flexDirection: 'row',
     paddingHorizontal: 10,

@@ -11,7 +11,6 @@ import Header from '../../components/account/Header'
 import { showVerboseUserInfo } from '../../api-helpers/users'
 import AccountOptionButton from '../../components/buttons/AccountOptions'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { TabView, SceneMap } from 'react-native-tab-view';
 import Posts from './Posts';
 import Saved from './Saved';
 
@@ -21,10 +20,7 @@ interface IMainProps {
 }
 const Tab = createMaterialTopTabNavigator();
 
-const renderScene = SceneMap({
-  posts: Posts,
-  saved: Saved
-})
+
 
 const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { colors } = useTheme()
@@ -39,27 +35,28 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
 
   useEffect(() => {
   
-    showVerboseUserInfo(data.id).then(res => {
+    data && showVerboseUserInfo(data.id).then(res => {
       setUserData(res.data)
       // console.log(res.data)
     }, err=> console.log(err))
 
     console.log(authenticated)
 
-  }, [authenticated]);
+  }, [authenticated, data]);
 
 
 
 
   return authenticated ? (
     <View style={{flex: 1}}>
-    <ScrollView
+    {/* <ScrollView
       style={styles.container}
-    >
-      {userData && <Header userData={userData} colors={colors}/>}
-
-      
-      <View style={styles.buttonOptions}>
+    > */}
+      {userData &&
+        <View style={{flex:3,}}>
+       
+        <Header userData={userData} colors={colors} />
+            <View style={styles.buttonOptions}>
         <AccountOptionButton
           name='Edit Profile'
           color='grey'
@@ -82,10 +79,16 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
           
         />
       </View>
+           </View>
+      }
 
-      <View style={{flex: 1}}>
-          
-          <Posts />
+      
+
+      
+
+      <View style={{flex: 6}}>
+
+          <Posts userPosts={data.posts}/>
           {/* <Tab.Navigator
             
           >
@@ -104,7 +107,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
       
       
 
-      </ScrollView>
+      {/* </ScrollView> */}
       </View>
       )
     : (
@@ -125,7 +128,7 @@ const useStyles = makeStyles((theme, props:any) => ({
     fontSize: 18,
   },
   buttonOptions: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginBottom: 10,
