@@ -17,7 +17,7 @@ const Section: React.FunctionComponent<ISectionProps> = ({ colors, commentArray 
       <Text style={styles.title}>{commentArray.length} Comments</Text>
       <View>
         {
-          commentArray.map((ele: any) => <Card commentData={ele} />)
+          commentArray.map((ele: any) => <Card colors={colors} commentData={ele} />)
         }
       </View>
     </View>

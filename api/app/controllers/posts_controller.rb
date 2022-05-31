@@ -12,7 +12,9 @@ class PostsController < ApplicationController
   def show
     render json: @post.as_json(include: {
       user: {},
-      comments: {},
+      comments: {
+        :include => {:user => {}}
+      },
     })
   end
 

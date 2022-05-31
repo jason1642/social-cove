@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :set_post, only: %i[index create]
+  before_action :set_user, only: %i[create]
   # GET /comments or /comments.json
   def index
     render json: @post.as_json(include: {
@@ -12,7 +13,9 @@ class CommentsController < ApplicationController
   # GET /comments/1 or /comments/1.json
   def show
     @comment = Comment.find_by(id: params[:id])
-    render json: @comment
+    render json: @comment.as_json(include: {
+      user: {},
+    })
   end
 
   # GET /comments/new
@@ -28,13 +31,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
+    @comment.user = @user
     if @comment.save
       render json: {
         data: @comment,
         status: :created
       } 
     else
-      render json: { errors: @post.errors, status: :unprocessable_entity}
+      render json: { errors: @comment.errors, status: :unprocessable_entity}
     end
   end
 
@@ -67,6 +71,9 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
 
+    def set_user
+      @user = User.find(params[:user_id])
+    end
     def set_post
       @post = Post.find(params[:post_id])
     end

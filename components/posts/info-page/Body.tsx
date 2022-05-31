@@ -13,6 +13,7 @@ const Body: React.FunctionComponent<IBodyProps> = ({postData, colors}) => {
   return (
     <View>
       <Text style={styles.description}>{postData.content}</Text>
+      <Text style={styles.description}>This is post ID {postData.id}</Text>
     </View>
   );
 };
