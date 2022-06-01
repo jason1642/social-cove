@@ -17,7 +17,7 @@ const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data, navigation})
       {/* <Text>This is a thumbnail</Text> */}
       <Image
         style={styles.image}
-        source={{ uri: 'https://media.istockphoto.com/photos/glass-of-water-lemon-and-ice-picture-id1293618957?b=1&k=20&m=1293618957&s=170667a&w=0&h=8efhFKE5jdGxHvsyd9Ytr3sDU0_kE0VRzA6nx41tqCs=', }}
+        source={{ uri: data.image_url, }}
       />
     {/* </View> */}
         </Pressable>

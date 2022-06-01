@@ -12,18 +12,12 @@ class UsersController < ApplicationController
   def show
     user = User.find_by(id: params[:id])
     # print json: @user.followings
-    render json: user.as_json(include: {
-      followings:{}
-    })
+    render json: UserSerializer.new(user).serializable_hash[:data][:attributes]
   end
 
   def show_verbose
     user = User.find_by(id: params[:id])
-    render json: user.as_json(include: {
-      following:{},
-      followers: {},
-      posts:{},
-    })
+    render json: UserSerializer.new(user).serializable_hash[:data][:attributes]
   
   end
 
@@ -31,10 +25,7 @@ class UsersController < ApplicationController
   def posts
     @user = User.find_by(id: params[:id])
     @posts = Post.where(user_id: @user)
-    render json: @posts.as_json(include: {
-      user: {},
-      # comments: {}
-    }), status: :ok
+    render json: PostSerializer.new(@post).serializable_hash[:data][:attributes], status: :ok
 
   end
 

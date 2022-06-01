@@ -42,7 +42,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
           colors={colors}
           postData={postData}
         />
-        <MainImage />
+        <MainImage imageUrl={postData.image_url}/>
         <Body
           colors={colors}
           postData={postData}
