@@ -30,23 +30,33 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
     await launchImageLibrary({ mediaType: 'photo', presentationStyle: 'formSheet' },
       (res:any) => {
         const { fileName, type, uri } = res.assets[0]
-       
+        console.log(res.assets[0])
         setValue('image',
           {
-          uri: uri,
-          name: fileName,
-          type: type
+          uri: '/Users/jasoncruz/Library/Developer/CoreSimulator/Devices/C7DF6C08-D213-417F-A618-ACA4183A5D9E/data/Containers/Data/Application/6815AF66-298A-4A92-B73C-902DB1C6E4E1/tmp/83D69345-93F9-499A-9D54-E2BAA021DD30.jpg',
+          filename: fileName,
+          content_type: type
         })
     
         setPickedImage(res.assets[0].uri)
     })
   }
 
-  const onSubmit = async (data:any) => {
-    
+  const onSubmit = async (data: any) => {
+    // console.log(data.image)
+    const formData = new FormData()
+    formData.append('image', {
+      uri: data.image,
+      name: data.image.filename,
+      type: data.image.content_type
+    })
     console.log(data.image)
     await createPost({
-      image: data.image,
+      image: {
+        uri: data.image.uri,
+        filename: data.image.filename,
+        content_type: data.image.content_type
+      },
       title: 'random title',
       content: 'This is my first image upload ever',
       user_id: 1

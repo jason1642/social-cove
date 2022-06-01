@@ -35,9 +35,19 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    print params[:title]
+    # puts Dir.pwd
+    print params[:image]
+   
+      doc = ActiveStorage::Blob.create_and_upload!(
+        io: File.open(params[:image][:uri]),
+        filename: params[:image][:filename],
+        content_type: params[:image][:content_type]
+      )
+   
+    # @user = User.find_by(id: params[:user_id])
+    # print @user[:username]
     @post = Post.new(post_params)
-    print @post
+    @post.image.attach(doc)
     # respond_to do |format|
       if @post.save
         # format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
@@ -80,5 +90,10 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :user_id, :content, :image)
+      # if params[:post][:image].present?
+      #   params[:post][:image].each do |image|
+      #     @post.image.attach(image)
+      #   end
+      # end
     end
 end

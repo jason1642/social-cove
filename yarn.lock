@@ -1906,6 +1906,13 @@
     "schema-utils" "^3.0.0"
     "source-map" "^0.7.3"
 
+"@rails/activestorage@^6.0.5":
+  "integrity" "sha512-jp2UKh1QChjOGsApYO3HHuBH1yfv4mqOcKuB70fsT79O/CJWEACVnjKIdaqO+B9BJTKihaxyyepvL7kLfUFiDw=="
+  "resolved" "https://registry.npmjs.org/@rails/activestorage/-/activestorage-6.0.5.tgz"
+  "version" "6.0.5"
+  dependencies:
+    "spark-md5" "^3.0.0"
+
 "@react-native-async-storage/async-storage@^1.17.5":
   "integrity" "sha512-0XT5zZa3mh8XfAFYytq9hPyI6w0FJEBED4pjeLc17pkNF9tND86fsTX2pQFr15uV0nvfYeHisbd/mM7bpGrWKA=="
   "resolved" "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.17.5.tgz"
@@ -12315,6 +12322,11 @@
   "integrity" "sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA=="
   "resolved" "https://registry.npmjs.org/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz"
   "version" "1.4.8"
+
+"spark-md5@^3.0.0":
+  "integrity" "sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw=="
+  "resolved" "https://registry.npmjs.org/spark-md5/-/spark-md5-3.0.2.tgz"
+  "version" "3.0.2"
 
 "spdx-correct@^3.0.0":
   "integrity" "sha512-cOYcUWwhCuHCXi49RhFRCyJEK3iPj1Ziz9DpViV3tbZOwXD49QzIN3MpOLJNxh2qwq2lJJZaKMVw9qNi4jTC0w=="
