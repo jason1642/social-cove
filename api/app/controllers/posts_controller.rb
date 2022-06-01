@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def show
     render json: @post.as_json(include: {
       user: {},
+      image: {},
       comments: {
         :include => {:user => {}}
       },
@@ -34,8 +35,9 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
+    print params[:title]
     @post = Post.new(post_params)
-
+    print @post
     # respond_to do |format|
       if @post.save
         # format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
@@ -77,6 +79,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :user_id, :content)
+      params.require(:post).permit(:title, :user_id, :content, :image)
     end
 end

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   # has_secure_password :recovery_password, validations: false
 
+  has_one_attached :profile_picture
 
   has_many :posts, dependent: :destroy
   has_many :comments, through: :posts

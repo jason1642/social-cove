@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
 
 
-
+ 
 
 
   def create
@@ -58,6 +58,7 @@ class UsersController < ApplicationController
     @user.password = params[:password]
     @user.bio = params[:bio]
     @user.email = params[:email]
+    @user.profile_picture.attach(params[:profile_picture])
     @user.bio = ''
 
     if @user.save
@@ -120,6 +121,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :bio, :password)
+    params.require(:user).permit(:username, :email, :bio, :password, :profile_picture)
   end
 end
