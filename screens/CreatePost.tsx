@@ -59,7 +59,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
       },
       title: 'random title',
       content: 'This is my first image upload ever',
-      user_id: 1
+      user_id: 2
     }).then(res => {
       console.log(res)
     }, err=>console.log(err))

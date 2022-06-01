@@ -17,7 +17,10 @@ class UsersController < ApplicationController
 
   def show_verbose
     user = User.find_by(id: params[:id])
-    render json: UserSerializer.new(user).serializable_hash[:data][:attributes]
+    render json: user.as_json(include: {
+      posts: {},
+      :posts[user]
+    })
   
   end
 
