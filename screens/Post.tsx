@@ -19,10 +19,12 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
   const { colors } = useTheme()
   const [postData, setPostData] = useState<any>()
   const styles = useStyles(colors)
+
+
   const fetchPostData = async () => {
     await axios.get(`http://localhost:3000/posts/${postId}`).then(res => {
       setPostData(res.data)
-      // console.log(res.data)
+      console.log(res.data.image)
     }, err=> console.log(err))
   } 
   

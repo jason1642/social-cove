@@ -48,7 +48,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
 
 
   useEffect(() => {
-    console.log(data.posts)
+    data && console.log(data.posts)
   }, [data]);
 
   return authenticated ? (

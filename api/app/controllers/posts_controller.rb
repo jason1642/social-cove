@@ -10,13 +10,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    render json: @post.as_json(include: {
-      user: {},
-      image: {},
-      comments: {
-        :include => {:user => {}}
-      },
-    })
+    render json: PostSerializer.new(@post).serializable_hash[:data][:attributes]
   end
 
   # GET /posts/new
