@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # skip_before_action :verify_authenticity_token
   before_action :set_user, only: [:show, :update]
+  
 
   def index
     @users = User.all
@@ -18,8 +19,9 @@ class UsersController < ApplicationController
   def show_verbose
     user = User.find_by(id: params[:id])
     render json: user.as_json(include: {
-      posts: {},
-      :posts[user]
+      posts: {
+        include: :user
+      }
     })
   
   end
