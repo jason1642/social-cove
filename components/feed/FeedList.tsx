@@ -12,10 +12,10 @@ interface IListProps {
 
 const FeedList: React.FunctionComponent<IListProps> = ({ route }) => {
   // const { query } = route.params
-  const [postsArray, setpostsArray] = useState();
+  const [postsArray, setpostsArray] = useState<Array<any>>();
   useEffect(() => {
     getPopularPosts().then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setpostsArray(res.data)
     }, err => {
       console.log(err)
@@ -25,8 +25,8 @@ const FeedList: React.FunctionComponent<IListProps> = ({ route }) => {
   return postsArray ?  (
     <FlatList
       contentContainerStyle={styles.container}
-      data={postsArray}
-      renderItem={(item) => <FeedCard postData={item} />}
+      data={postsArray.reverse()}
+      renderItem={(item) => <FeedCard postData={item.item} />}
     />
   ) : <View>
       <Text>We had trouble loading posts</Text>
@@ -38,22 +38,10 @@ export default FeedList;
 
 
 const styles = StyleSheet.create({
-
-  columnWrapper: {
-    justifyContent: 'space-evenly',
-    // alignContent: 'space-around',
-    // flexWrap: 'wrap',
-  },
   container: {
-    flex: 1,
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // justifyContent: 'space-evenly',
-
     paddingVertical: 5,
-    width: '100%',
-    backgroundColor: 'grey'
-    // justifyContent: 'flex-start'
+    backgroundColor: 'grey',
+
   }
 }
 )
