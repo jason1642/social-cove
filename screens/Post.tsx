@@ -24,7 +24,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
   const fetchPostData = async () => {
     await axios.get(`http://localhost:3000/posts/${postId}`).then(res => {
       setPostData(res.data)
-      console.log(res.data.image)
+      // console.log(res.data.image)
     }, err=> console.log(err))
   } 
   

@@ -30,18 +30,23 @@ export const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(loginUserAction.fulfilled, (state, action) => {
-      // state = action.payload
+    builder.addCase(loginUserAction.fulfilled, (state: any, action) => {
+      state = action.payload
+
+      return ({...state, isLoading: false})
     })
+    // builder.addCase(verifyUser.pending, (state: any, action) => {
+    //   console.log('Pending...')
+    //   state.isLoading = true
+    //   return ({...state, isLoading: true})
+    // })
     builder.addCase(verifyUser.fulfilled, (state: any, action) => {
-      console.log(action.payload)
+      // console.log(action.payload)
+      // console.log('No longer pendings...')
       state = action.payload
       return ({...state, isLoading: false,})
     })
-    builder.addCase(verifyUser.pending, (state: any, action) => {
-      console.log('Pending...')
-      state.isLoading = true
-    })
+    
   }
 })
 

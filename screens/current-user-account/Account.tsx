@@ -10,7 +10,7 @@ import Register from '../Register'
 import Main from './Main'
 import Login from '../Login'
 import Settings from './Settings'
-interface IAccountProps { }
+
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Posts from './Posts';
 import Saved from './Saved';
@@ -22,6 +22,7 @@ import Post from '../Post';
 //   color="blue"
 //   onPress={()=>console.log('This is from the account bottom nav icon')}
 // />;
+interface IAccountProps { }
 const AccountStack = createNativeStackNavigator()
 const Tab = createMaterialTopTabNavigator();
 

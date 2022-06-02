@@ -1,7 +1,6 @@
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import RNRestart from 'react-native-restart'; 
-import { ApiOutlined } from '@ant-design/icons';
+import RNRestart from 'react-native-restart'
 
 
 const api = axios.create({
@@ -10,7 +9,7 @@ const api = axios.create({
 
 export const loginUser = async (data: any) =>
   await api.post('/auth/login', data).then(async res => {
-    console.log(res.data)
+    // console.log(res.data)
     await AsyncStorage.setItem('authToken', res.data.token).then(r=>console.log(r))
     // console.log(AsyncStorage.getItem('authToken'))
     return res

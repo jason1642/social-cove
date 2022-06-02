@@ -28,14 +28,10 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
   const { data, authenticated, token } = useSelector((state: any) => state.user)
   const [userData, setUserData] = useState<any>()
   const [requestFulfilled, setRequestFulfilled] = useState<boolean>(false)
-  const [routes] = React.useState([
-    { key: 'posts', title: 'Posts' },
-    { key: 'saved', title: 'Saved' },
-  ]);
-  const [index, setIndex] = React.useState(0);
+  
 
   useEffect(() => {
-  
+    
     data && showVerboseUserInfo(data.id).then(res => {
       setUserData(res.data)
       // console.log(res.data)
@@ -48,14 +44,12 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
 
 
   useEffect(() => {
-    data && console.log(data.posts)
+    // data && console.log(data.posts)
   }, [data]);
 
   return authenticated ? (
     <View style={{flex: 1}}>
-    {/* <ScrollView
-      style={styles.container}
-    > */}
+
       {userData &&
         <View style={{flex:3,}}>
        
@@ -114,7 +108,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
       
       
 
-      {/* </ScrollView> */}
+
       </View>
       )
     : (

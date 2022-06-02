@@ -5,12 +5,19 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = Post.all
-    render json: @posts
+    render json: @posts.as_json(include: {
+      user: {}
+    })
   end
 
   # GET /posts/1 or /posts/1.json
   def show
-    render json: PostSerializer.new(@post).serializable_hash[:data][:attributes]
+    render json: @post.as_json(include: {
+      user: {},
+      comments:{},
+      image:{},
+      
+    }, methods: :image_url)
   end
 
   # GET /posts/new

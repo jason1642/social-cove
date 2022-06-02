@@ -45,11 +45,13 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-   console.log(user.isLoading)
+    // console.log('Loading status - ', user.isLoading)
+    // console.log(user)
   }, [user.isLoading]);
 
   useEffect(() => {
     dispatch(verifyUser())
+    
   }, []);
   return (
 
@@ -66,24 +68,16 @@ const App = () => {
               component={Landing}
           />}
           
-          
-
-
-
-
-
               <Stack.Screen name='Home'>
-            {props=> <Tab.Navigator
+            { props=> <Tab.Navigator
                     screenOptions={{
                       headerStyle: {
-                        backgroundColor: '#414040',
+                      backgroundColor: '#414040',
                       },
                       headerTintColor: '#fff',
                       headerTitleStyle: {
                         fontWeight: 'bold',
-                      },
-                      // headerShown: false,
-                    }}>
+                      },}}>
                     <Tab.Screen
                       name="Feed"
                       component={Feed}
@@ -96,8 +90,7 @@ const App = () => {
                       component={CreatePost}
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />
-                      }}
-              />
+                      }}/>
 
      
                     <Tab.Screen

@@ -1,4 +1,4 @@
-class UserSerializer < ActiveModel::Serializer
+class UserSerializer
   include JSONAPI::Serializer
 
  
@@ -12,6 +12,6 @@ class UserSerializer < ActiveModel::Serializer
         :profile_picture,
          :followers,
           :following,
-          :posts,
+          :posts
 
 end

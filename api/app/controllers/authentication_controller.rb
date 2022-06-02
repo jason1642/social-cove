@@ -34,10 +34,10 @@ class AuthenticationController < ApplicationController
       rescue ::NoMethodError => x
         print x
         return render json: {error: 'This is my no method error exception handler'}
-      else
+      # else
         
         
-      ensure
+      # ensure
         # print 'LOGIN ACTION!!!!!!!#!#3213123123123'
     end
     
