@@ -12,3 +12,6 @@ export const createPost = async (data: any) =>
     console.log(data)
     console.log(err)
   })
+
+export const getPopularPosts = async () => 
+  await api.get('/posts').then(res=>res,err=>err)

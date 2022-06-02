@@ -2,12 +2,15 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { View, Text, ScrollView } from 'react-native'
 import Card from '../../components/posts/Card'
-import List from '../../components/posts/List'
+import FeedList from '../../components/feed/FeedList'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import Post from '../Post'
+
+
 interface IPopularProps {
 }
 const Stack = createNativeStackNavigator()
+
 const Popular: React.FunctionComponent<IPopularProps> = (props) => {
 
 
@@ -20,10 +23,11 @@ const Popular: React.FunctionComponent<IPopularProps> = (props) => {
       
       <Stack.Screen
         name='List'
-        component={List}
+        component={FeedList}
         options={{
           headerShown: false,
         }}
+        // initialParams={{query: '/'}}
       />
       <Stack.Screen 
         name='Post Info'

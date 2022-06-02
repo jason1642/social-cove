@@ -11,6 +11,7 @@ import { createPost } from '../api-helpers/posts'
 import InputController from '../components/inputs/InputController'
 import CreatePostButtons from '../components/create-post/CreatePostButtons'
 import { onSubmit, onError } from '../components/create-post/Methods'
+import ImageContainer from '../components/create-post/ImageContainer';
 
 
 interface ICreatePostProps {
@@ -59,12 +60,9 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
   return (
     <ScrollView style={styles.container}>
 
-      <View style={styles.imageContainer}>
-        {pickedImage && <Image
-        style={styles.image}
-        source={{uri: pickedImage}}
-      />}
-      </View>
+      <ImageContainer
+        pickedImage={pickedImage}
+      />
       
       <ImageInputController
         

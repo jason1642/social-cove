@@ -42,7 +42,7 @@ const List: React.FunctionComponent<IListProps> = ({ navigation }) => {
     </ScrollView>
   ) :
     <View>
-      <Text>Pending</Text>
+      <Text>Still waiting to load posts</Text>
     </View>
 };
 

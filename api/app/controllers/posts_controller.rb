@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @posts = Post.all
     render json: @posts.as_json(include: {
       user: {}
-    })
+    }, methods: :image_url)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     render json: @post.as_json(include: {
       user: {},
       comments:{},
-      image:{},
+      image:{}
       
     }, methods: :image_url)
   end
