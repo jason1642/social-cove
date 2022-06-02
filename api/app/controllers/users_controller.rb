@@ -17,7 +17,8 @@ class UsersController < ApplicationController
       posts: {
         include: :user
       }
-    })
+    },
+    methods: :profile_picture_url)
   end
 
   def show_verbose

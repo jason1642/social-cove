@@ -6,7 +6,9 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     render json: @posts.as_json(include: {
-      user: {}
+      user: {
+        methods: :profile_picture_url
+      }
     }, methods: :image_url)
   end
 

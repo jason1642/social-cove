@@ -37,4 +37,8 @@ has_many :followers, through: :received_follows, source: :follower
 
 
 
+  def profile_picture_url
+    Rails.application.routes.url_helpers.url_for(profile_picture) if profile_picture.attached?
+  end
+
 end

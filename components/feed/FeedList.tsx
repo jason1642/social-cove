@@ -8,9 +8,10 @@ import {getPopularPosts} from '../../api-helpers/posts'
 
 interface IListProps {
   route: any,
+  navigation: any,
 }
 
-const FeedList: React.FunctionComponent<IListProps> = ({ route }) => {
+const FeedList: React.FunctionComponent<IListProps> = ({ route, navigation }) => {
   // const { query } = route.params
   const [postsArray, setpostsArray] = useState<Array<any>>();
   useEffect(() => {
@@ -26,7 +27,7 @@ const FeedList: React.FunctionComponent<IListProps> = ({ route }) => {
     <FlatList
       contentContainerStyle={styles.container}
       data={postsArray.reverse()}
-      renderItem={(item) => <FeedCard postData={item.item} />}
+      renderItem={(item) => <FeedCard navigation={navigation} postData={item.item} />}
     />
   ) : <View>
       <Text>We had trouble loading posts</Text>

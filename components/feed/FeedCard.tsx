@@ -1,21 +1,28 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, Pressable } from 'react-native'
 import ImageContainer from './ImageContainer'
+import CardHeader from './CardHeader'
+import Footer from './Footer'
 
 interface IFeedCardProps {
   postData: any,
+  navigation: any,
 }
 
-const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData }) => {
+const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigation }) => {
   // console.log(postData)
 
 
   return (
     <View style={styles.container}>
-      <Text>{postData.title}</Text>
-      <ImageContainer
+      <CardHeader postData={postData} />
+      
+      <Pressable onPress={()=>navigation.navigate('Post Info', {postId: postData.id})}>
+        <ImageContainer
         imageUrl={postData.image_url}
       />
+      </Pressable>
+      <Footer postInfo={postData}/>
     </View>
   );
 };
@@ -26,6 +33,7 @@ export default FeedCard;
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
+    marginVertical: 8,
     minHeight: 450,
   }
 })
