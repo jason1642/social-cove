@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     render json: user.as_json(include: {
       posts: {
-        include: :user
+        include: :user, include: :comments, methods: :image_url
       },
       following:{},
       followers:{},

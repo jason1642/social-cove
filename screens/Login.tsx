@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import userSlice from '../redux/features/userSlice';
 import { loginUser as loginUserAction } from '../redux/features/userSlice'
 import RNRestart from 'react-native-restart'; 
-import InputController from '../components/forms/InputController'
+import InputController from '../components/inputs/InputController'
 import LogInOutButton from '../components/buttons/LogInOut'
 
 interface ILoginProps {

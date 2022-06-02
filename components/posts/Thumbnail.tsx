@@ -7,7 +7,7 @@ interface IThumbnailProps {
   }
 
 const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data, navigation}) => {
-
+  
   return data !== 'x' ? (
 
 

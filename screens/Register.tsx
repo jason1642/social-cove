@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form'
 import {useTheme} from '@react-navigation/native'
 import { makeStyles } from '@rneui/themed'
 import LogInOutButton from '../components/buttons/LogInOut'
-import InputController from '../components/forms/InputController'
+import InputController from '../components/inputs/InputController'
 import { registerUser } from '../api-helpers/users'
 import RNRestart from 'react-native-restart' 
 

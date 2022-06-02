@@ -5,17 +5,23 @@ import {makeStyles} from '@rneui/themed'
 import { useTheme } from '@react-navigation/native'
 import RNRestart from 'react-native-restart'
 import { useForm, useController } from 'react-hook-form'
-import InputController from '../components/inputs/ImageInput'
+import ImageInputController from '../components/inputs/ImageInput'
 import { launchImageLibrary } from 'react-native-image-picker'
-import { Button } from '@rneui/base';
 import { createPost } from '../api-helpers/posts'
+import InputController from '../components/inputs/InputController'
+import Button from '../components/buttons/CreatePost'
+import { Icon } from '@rneui/themed';
 
 
 interface ICreatePostProps {
+  route: any,
 }
 
-const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
-  const [pickedImage, setPickedImage ] = useState(undefined)
+const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
+    const { user_id} = route.params
+
+  const [pickedImage, setPickedImage] = useState(undefined)
+  console.log(user_id)
   const { colors } = useTheme()
   const styles = useStyles(colors)
   const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
@@ -28,17 +34,26 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
 
   const handleChoosePhoto = async () => {
     await launchImageLibrary({ mediaType: 'photo', presentationStyle: 'formSheet' },
-      (res:any) => {
-        const { fileName, type, uri } = res.assets[0]
+      (res: any) => {
+        const {didCancel, errorMessage, errorCode} = res
+        // .didCancel, .error, .errorCode
+        if (!didCancel && !errorMessage) {
+           const { fileName, type, uri } = res.assets[0]
         console.log(res.assets[0])
         setValue('image',
           {
-          uri: '/Users/jasoncruz/Library/Developer/CoreSimulator/Devices/C7DF6C08-D213-417F-A618-ACA4183A5D9E/data/Containers/Data/Application/6815AF66-298A-4A92-B73C-902DB1C6E4E1/tmp/83D69345-93F9-499A-9D54-E2BAA021DD30.jpg',
+          uri: uri.replace('file://', ''),
           filename: fileName,
           content_type: type
         })
-    
         setPickedImage(res.assets[0].uri)
+
+        } else if (didCancel) {
+          console.log(didCancel)
+        } else if (errorMessage) {
+          console.log(errorMessage)
+        }
+       
     })
   }
 
@@ -57,9 +72,9 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
         filename: data.image.filename,
         content_type: data.image.content_type
       },
-      title: 'random title',
-      content: 'This is my first image upload ever',
-      user_id: 2
+      title: data.title,
+      content: data.content,
+      user_id: user_id
     }).then(res => {
       console.log(res)
     }, err=>console.log(err))
@@ -69,8 +84,6 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
   }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Create A Post</Text>
-      <Text style={styles.title}>Create a post with this form</Text>
 
       <View style={styles.imageContainer}>
         {pickedImage && <Image
@@ -79,7 +92,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
       />}
       </View>
       
-      <InputController
+      <ImageInputController
         name='image'
         control={control}
         type='URL'
@@ -89,15 +102,33 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = (props) => {
           placeholderTextColor: 'black',
         }}
       />
-      <Button
-        title='Choose Image'
-        onPress={handleChoosePhoto}
+      <InputController
+        name='title'
+        control={control}
+        inputStyle={styles.input}
       />
 
-      <Button
-        title='Submit'
-        onPress={handleSubmit(onSubmit, onError)}
+      <InputController
+        name='content'
+        control={control}
+        inputStyle={styles.input}
       />
+      <View style={styles.buttonWrapper}>
+         <Button
+        title='Choose Image'
+          buttonFunction={handleChoosePhoto}
+          buttonProps={{
+            icon: <Icon color='white' name='image' type='material-icons' />,
+            iconPosition: 'right'
+          }}
+      />
+      <Button
+        title='Post'
+        buttonFunction={handleSubmit(onSubmit, onError)}
+      />
+      </View>
+     
+
     </View>
   );
 };
@@ -111,15 +142,19 @@ const useStyles = makeStyles((theme, props: any) => ({
   title: {
     color: props.text,
     fontSize: 24,
+    textAlign: 'center',
   },
   image: {
-    height: 250,
-    width: 300,
+    height: '100%',
+    width: '100%',
   },
   imageContainer: {
     // justifyContent: 'center',
+    height: 250,
+    // width: 300,
     marginVertical: 15,
     alignItems: 'center',
+
   },
   input: {
     color: 'black',
@@ -131,4 +166,11 @@ const useStyles = makeStyles((theme, props: any) => ({
     borderRadius: 4,
     marginVertical: 10,
   },
+  buttonWrapper: {
+    alignItems: 'center',
+  },
+  icon: {
+    color: 'white',
+
+  }
 }))

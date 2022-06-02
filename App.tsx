@@ -46,7 +46,7 @@ const App = () => {
 
   useEffect(() => {
     // console.log('Loading status - ', user.isLoading)
-    // console.log(user)
+    console.log(user)
   }, [user.isLoading]);
 
   useEffect(() => {
@@ -85,12 +85,14 @@ const App = () => {
                         tabBarIcon: () => <Icon name='home' type='material-icons' />
                       })}
                     />
-                    <Tab.Screen
+                    { user.data.id && <Tab.Screen
                       name='Create Post'
                       component={CreatePost}
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />
-                      }}/>
+                      }}
+                      initialParams={{user_id: user.data.id}}
+                      />}
 
      
                     <Tab.Screen
