@@ -14,16 +14,17 @@ interface IAppProps {
   inputProps?: any,
   minLength?: number,
   extraRules?: any,
+  label?: string,
 }
 
 
-const App: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
+const App: React.FunctionComponent<IAppProps> = ({ name, label, control, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
     <View style={styles.container}>
 
-      <Text style={styles.label}>{name}:</Text>
+      <Text style={styles.label}>{label}:</Text>
       <Controller
 
         name={name.toLowerCase()}

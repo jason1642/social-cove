@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { Text, View, Image, } from 'react-native'
+import { useState } from 'react';
+import { ScrollView, Text, View, Image, } from 'react-native'
 import {makeStyles} from '@rneui/themed'
 import { useTheme } from '@react-navigation/native'
-import RNRestart from 'react-native-restart'
-import { useForm, useController } from 'react-hook-form'
+// import RNRestart from 'react-native-restart'
+import { useForm } from 'react-hook-form'
 import ImageInputController from '../components/inputs/ImageInput'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { createPost } from '../api-helpers/posts'
 import InputController from '../components/inputs/InputController'
-import Button from '../components/buttons/CreatePost'
-import { Icon } from '@rneui/themed';
+import CreatePostButtons from '../components/create-post/CreatePostButtons'
+import { onSubmit, onError } from '../components/create-post/Methods'
 
 
 interface ICreatePostProps {
@@ -18,13 +18,13 @@ interface ICreatePostProps {
 }
 
 const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
-    const { user_id} = route.params
+  const { user_id} = route.params
 
   const [pickedImage, setPickedImage] = useState(undefined)
   console.log(user_id)
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm<any>({
     defaultValues: {
       image: {},
       content: '',
@@ -46,44 +46,18 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
           filename: fileName,
           content_type: type
         })
-        setPickedImage(res.assets[0].uri)
+        setPickedImage(uri)
 
         } else if (didCancel) {
           console.log(didCancel)
         } else if (errorMessage) {
           console.log(errorMessage)
         }
-       
     })
   }
-
-  const onSubmit = async (data: any) => {
-    // console.log(data.image)
-    const formData = new FormData()
-    formData.append('image', {
-      uri: data.image,
-      name: data.image.filename,
-      type: data.image.content_type
-    })
-    console.log(data.image)
-    await createPost({
-      image: {
-        uri: data.image.uri,
-        filename: data.image.filename,
-        content_type: data.image.content_type
-      },
-      title: data.title,
-      content: data.content,
-      user_id: user_id
-    }).then(res => {
-      console.log(res)
-    }, err=>console.log(err))
-  }
-  const onError = async (err: any) => {
-    console.log(err)
-  }
+ 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
 
       <View style={styles.imageContainer}>
         {pickedImage && <Image
@@ -93,6 +67,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
       </View>
       
       <ImageInputController
+        
         name='image'
         control={control}
         type='URL'
@@ -102,34 +77,32 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
           placeholderTextColor: 'black',
         }}
       />
+      {errors.image && <Text style={styles.errorText}>{errors.image.message}</Text>}
       <InputController
+        label='Title'
         name='title'
         control={control}
         inputStyle={styles.input}
       />
 
       <InputController
+        label='Content'
         name='content'
         control={control}
         inputStyle={styles.input}
+        inputProps={{
+          multiline: true,
+          maxLength: 250,
+        }}
       />
-      <View style={styles.buttonWrapper}>
-         <Button
-        title='Choose Image'
-          buttonFunction={handleChoosePhoto}
-          buttonProps={{
-            icon: <Icon color='white' name='image' type='material-icons' />,
-            iconPosition: 'right'
-          }}
+
+      <CreatePostButtons
+        handleChoosePhoto={handleChoosePhoto}
+        buttonFunction={handleSubmit(data=>onSubmit(data, user_id, setError), onError)}
       />
-      <Button
-        title='Post'
-        buttonFunction={handleSubmit(onSubmit, onError)}
-      />
-      </View>
      
 
-    </View>
+    </ScrollView>
   );
 };
 
@@ -137,24 +110,16 @@ export default CreatePost;
 
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
-    padding: 15,
+    paddingHorizontal: 10,
+    // marginVertical: 10,
   },
   title: {
     color: props.text,
     fontSize: 24,
     textAlign: 'center',
   },
-  image: {
-    height: '100%',
-    width: '100%',
-  },
-  imageContainer: {
-    // justifyContent: 'center',
-    height: 250,
-    // width: 300,
-    marginVertical: 15,
-    alignItems: 'center',
-
+  errorText: {
+    color: 'orange',
   },
   input: {
     color: 'black',
@@ -166,11 +131,7 @@ const useStyles = makeStyles((theme, props: any) => ({
     borderRadius: 4,
     marginVertical: 10,
   },
-  buttonWrapper: {
-    alignItems: 'center',
-  },
   icon: {
     color: 'white',
-
   }
 }))

@@ -7,7 +7,7 @@ import {useTheme} from '@react-navigation/native'
 import {useForm, Controller } from "react-hook-form"
 import { loginUser } from '../api-helpers/users'
 import { useDispatch } from 'react-redux'
-import userSlice from '../redux/features/userSlice';
+// import userSlice from '../redux/features/userSlice'
 import { loginUser as loginUserAction } from '../redux/features/userSlice'
 import RNRestart from 'react-native-restart'; 
 import InputController from '../components/inputs/InputController'
@@ -62,20 +62,6 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
       type='username'
     />
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
-
-    {/* <Controller
-      control={control}
-      name='password'
-      rules={{ required: true }}
-      render={({ field: { onChange, onBlur, value } }) => (
-        <TextInput
-          style={styles.input}
-          onBlur={onBlur}
-          onChangeText={onChange}
-          value={value.toLowerCase()}
-          placeholder='Password'
-      />)} 
-    /> */}
     
     <InputController
       name='Password'
@@ -84,10 +70,6 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
       type='password'
     />
       {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
-
-
-
-
 
     <LogInOutButton
       name='Submit'
