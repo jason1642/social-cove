@@ -72,7 +72,7 @@ render json: @posts.as_json(include: {
     if @user.save
       render json: @user.as_json(only: [:id, :username, :email, :bio, :created_at])
     else 
-      render json: {message: 'There was an error'}, status: :bad_request
+      render json: { message: 'There was an error'}, status: :bad_request
     end 
   
     
@@ -96,7 +96,7 @@ render json: @posts.as_json(include: {
     
       render json: @current_user
     else
-      render json: {message: 'There was an error updating your account'}
+      render json: {errors: @user, message: 'There was an error updating your account'}, status: :bad_request
     end
 
     # render json: user

@@ -36,7 +36,7 @@ const Main: React.FunctionComponent<IMainProps> = ({ navigation }) => {
               // maxWidth: '100%',
               maxHeight: 300
               }}
-              source={require('../../resources/animation.json')}
+              source={require('../../resources/lottie-animation-files/animation.json')}
               autoPlay
               loop={false}
               />

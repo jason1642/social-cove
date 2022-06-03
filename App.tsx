@@ -85,7 +85,7 @@ const App = () => {
                         tabBarIcon: () => <Icon name='home' type='material-icons' />
                       })}
                     />
-                    { user.data.id && <Tab.Screen
+                    { !user.isLoading && user.data.id && <Tab.Screen
                       name='Create Post'
                       component={CreatePost}
                       options={{

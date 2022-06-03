@@ -6,7 +6,7 @@ import { RootState } from '../../redux/store'
 import { useSelector, useDispatch } from 'react-redux';
 import InputController from '../../components/inputs/InputController'
 import {Avatar} from '@rneui/themed'
-
+import { editUser } from '../../redux/actions/userActions'
 
 interface IEditProfileProps {
   userData: any,
@@ -15,6 +15,7 @@ interface IEditProfileProps {
 const editOptions = ['Username', 'Email', 'bio']
 const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
   const user = useSelector((state: RootState) => state.user.data)
+  const dispatch = useDispatch()
   const { control, handleSubmit, setError, formState: { errors } } = useForm({
     defaultValues: {
       username: user.username,
@@ -22,8 +23,9 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
       email: user.email,
     }
   })
-  const onSubmit = () => { 
-    
+  const onSubmit =  async (data: any) => { 
+    const response = dispatch(editUser(data))
+
   }
   return (
     <View style={styles.container}>
@@ -51,7 +53,7 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
 
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
       
-    <Button title='Submit' onPress={onSubmit} />
+    <Button title='Submit' onPress={handleSubmit(onSubmit)} />
 
     </View>
   );

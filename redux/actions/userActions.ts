@@ -46,10 +46,27 @@ export const verifyUser = createAsyncThunk('user/verify', async (thunkAPI) => {
       return response.data.username ?
         { data: response.data, authenticated: true, token: token }
         : { data: undefined, authenticated: false, token: undefined }
+      } else {
+        return { data: undefined, authenticated: false, token: undefined }
     }
-  return undefined
+  
 })
 
 
 
-// export const editUser = createAsyncThunk('user/edit', async (thunkAPI))
+export const editUser = createAsyncThunk('user/edit', async (data: any, thunkAPI) => 
+  
+  await api.put(`users/${data.user_id}`, data).then((res: any) => {
+    console.log(res.data)
+    if (!res.error) {
+      return {  }
+    } else {
+      return ({erorr: res.error})
+    }
+    
+  }, err => {
+    console.log(err)
+    return ({ error: 'something went wrong'})
+  })
+
+)

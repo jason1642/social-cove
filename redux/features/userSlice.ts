@@ -1,12 +1,13 @@
 import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 import { act } from 'react-test-renderer'
-import { loginUser as loginUserAction } from '../actions/userActions'
+import { editUser, loginUser as loginUserAction } from '../actions/userActions'
 import { verifyUser } from '../actions/userActions'
 export interface UserState {
   data: any,
   authenticated: boolean,
   token: string | undefined,
   isLoading?: boolean,
+  error?: any,
 }
 
 const initialState: UserState = {
@@ -14,6 +15,7 @@ const initialState: UserState = {
   authenticated: false,
   token: undefined,
   isLoading: false,
+  error: undefined,
 }
 
 export const userSlice = createSlice({
@@ -35,18 +37,28 @@ export const userSlice = createSlice({
 
       return ({...state, isLoading: false})
     })
-    // builder.addCase(verifyUser.pending, (state: any, action) => {
-    //   console.log('Pending...')
-    //   state.isLoading = true
-    //   return ({...state, isLoading: true})
-    // })
+    builder.addCase(verifyUser.pending, (state: any, action) => {
+      // console.log('Pending...')
+      state.isLoading = true
+      // console.log(state)
+      return state
+    })
     builder.addCase(verifyUser.fulfilled, (state: any, action) => {
       // console.log(action.payload)
       // console.log('No longer pendings...')
       state = action.payload
       return ({...state, isLoading: false,})
     })
-    
+    builder.addCase(editUser.fulfilled, (state: any, action) => {
+      console.log('Attempting to edit user')
+      console.log(action)
+      return ({...state, isLoading: false})
+    })
+    builder.addCase(editUser.rejected, (state: any, action: any) => { 
+      console.log("edit user Rejected!!")
+      console.log(action)
+      return ({...state, error: action.payload.error})
+    })
   }
 })
 
