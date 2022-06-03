@@ -58,11 +58,11 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
         <AccountOptionButton
           name='Edit Profile'
           color='grey'
-          buttonFunction={() => navigation.navigate('Settings')}
+          buttonFunction={() => navigation.navigate('EditProfile')}
 
         />
         <AccountOptionButton
-          name='Insights'
+          name='Settings'
           color=''
           buttonFunction={() => navigation.navigate('Settings')}
        

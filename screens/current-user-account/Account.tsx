@@ -15,6 +15,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Posts from './Posts';
 import Saved from './Saved';
 import Post from '../Post';
+import EditProfile from './EditProfile';
 // const myIcon = <Icon
 //   name="heartbeat"
 //   type="font-awesome"
@@ -47,6 +48,10 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
         <AccountStack.Screen
           name='Settings'
           component={Settings}
+        />
+        <AccountStack.Screen
+          name='EditProfile'
+          component={EditProfile}
         />
       </AccountStack.Group>
 

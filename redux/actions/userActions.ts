@@ -47,10 +47,9 @@ export const verifyUser = createAsyncThunk('user/verify', async (thunkAPI) => {
         { data: response.data, authenticated: true, token: token }
         : { data: undefined, authenticated: false, token: undefined }
     }
-    
-    
-  
-  
-    
   return undefined
 })
+
+
+
+// export const editUser = createAsyncThunk('user/edit', async (thunkAPI))

@@ -83,8 +83,7 @@ render json: @posts.as_json(include: {
 
 
 
-
-# Requires user to input password
+# Change allow_nil: true to false in models to require password
   def update
     # Should update only if user is logged in
     # Use current user instance so you don't have to find by id and compare current user id
