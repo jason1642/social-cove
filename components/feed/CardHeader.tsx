@@ -8,7 +8,7 @@ interface ICardHeaderProps {
 }
 
 const CardHeader: React.FunctionComponent<ICardHeaderProps> = ({ postData }) => {
-  console.log(postData.user)
+  // console.log(postData.user)
   return (
     <View style={styles.container}>
       {postData.user.profile_picture_url === null ?

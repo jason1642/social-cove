@@ -30,7 +30,7 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = (props) 
 
   useEffect(() => {
     fetchPosts()
-    console.log(data, authenticated)
+    // console.log(data, authenticated)
   
   }, []);
   return (

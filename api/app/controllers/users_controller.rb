@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # skip_before_action :verify_authenticity_token
-  before_action :set_user, only: [:show, :update]
+  before_action :set_user, only: [:show]
+  before_action :authorize_request, only: [:update, :destroy]
   
 
   def index
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
         include: :user
       }
     },
-    methods: :profile_picture_url)
+    methods: :profile_picture_url) 
   end
 
   def show_verbose
@@ -63,7 +64,7 @@ render json: @posts.as_json(include: {
     @user = User.new
     @user.username = params[:username]
     @user.password = params[:password]
-    @user.bio = params[:bio]
+    # @user.bio = params[:bio]
     @user.email = params[:email]
     @user.profile_picture.attach(params[:profile_picture])
     @user.bio = ''
@@ -83,21 +84,29 @@ render json: @posts.as_json(include: {
 
 
 
-
+# Requires user to input password
   def update
-    # Should update logged in user
+    # Should update only if user is logged in
     # Use current user instance so you don't have to find by id and compare current user id
-    user =  User.find_by(id: params[:id])
-
     
-    user.username = params[:new_username]
-    user.update(:username => params[:new_username])
-
-
-    render json: user
-
+    print params[:user]
+    
+    # @current_user.username = params[:new_username]
+    # @current_user.password = 'newpass1'
+    if @current_user.update user_params
+    
+      render json: @current_user
+    else
+      render json: {message: 'There was an error updating your account'}
     end
 
+    # render json: user
+
+  end
+
+  def update_password
+
+  end
 
 
 

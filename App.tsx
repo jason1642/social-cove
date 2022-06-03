@@ -46,7 +46,7 @@ const App = () => {
 
   useEffect(() => {
     // console.log('Loading status - ', user.isLoading)
-    console.log(user)
+    console.log(user.token)
   }, [user.isLoading]);
 
   useEffect(() => {
