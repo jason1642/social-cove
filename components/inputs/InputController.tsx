@@ -24,7 +24,7 @@ const App: React.FunctionComponent<IAppProps> = ({ name, label, control, inputSt
   return (
     <View style={styles.container}>
 
-      <Text style={styles.label}>{label}:</Text>
+      <Text style={styles.label}>{label || name}:</Text>
       <Controller
 
         name={name.toLowerCase()}
@@ -48,11 +48,12 @@ const App: React.FunctionComponent<IAppProps> = ({ name, label, control, inputSt
           style={inputStyle}
           onBlur={onBlur}
           onChangeText={onChange}
-          value={value.toLowerCase()}
-          placeholder={name}
+          value={value}
+          placeholder={label || name}
           textContentType={type}
           secureTextEntry={type === 'password' ? true : false}
           {...inputProps}
+          
         />)}
         {...controllerProps}
       />

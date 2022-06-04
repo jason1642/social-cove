@@ -17,7 +17,11 @@ const Card: React.FunctionComponent<ICardProps> = ({colors, commentData, navigat
     <View style={styles.container}>
       <Text>
         <Pressable
-          onPress={()=>navigation.navigate('User Account', {user_id: commentData.user.id})}
+          onPress={() => {
+            
+            navigation.navigate('User Account', { user_id: commentData.user.id })
+            
+          }}
         ><Text style={styles.username}>{commentData.user.username}: </Text>
         </Pressable>
         <Text style={styles.content}>

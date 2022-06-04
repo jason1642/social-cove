@@ -5,37 +5,65 @@ import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { StyleSheet, Text, View, } from 'react-native'
 import Header from '../components/account/Header'
 import { showVerboseUserInfo } from '../api-helpers/users'
-
-
+import Posts from './current-user-account/Posts'
+import AccountOptionButton from '../components/buttons/AccountOptions'
 
 interface IAccountProps {
   route: any,
+  navigation: any,
 }
 
-const Account: React.FunctionComponent<IAccountProps> = ({ route }) => {
+const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) => {
   const { user_id } = route.params
   const { colors } = useTheme()
   const styles = useStyles(colors)
 
-  const [userData, setUserData] = useState()
+  const [userData, setUserData] = useState<any>()
 
   useEffect(() => {
+    
     showVerboseUserInfo(user_id).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setUserData(res.data)
+      navigation.setOptions({headerTitle: res.data.username})
     })
   }, []);
   return (
     <View style={styles.container}>
+       <View style={{flex:3,}}>
       {userData &&
         <>
         <Header userData={userData} colors={colors} />
-              <Text style={styles.title}>
+              {/* <Text style={styles.title}>
                 This is another users account, or even the current user {user_id}
-              </Text>
+              </Text> */}
         </>
      
       }
+
+      
+
+      <View style={styles.buttonOptions}>
+      <AccountOptionButton
+          name='Follow'
+          // color='grey'
+          buttonFunction={() => navigation.navigate('')}
+
+        />
+      <AccountOptionButton
+          name='Follow'
+          // color='grey'
+          buttonFunction={() => navigation.navigate('')}
+
+        />
+        
+        </View>
+        </View>
+      <View style={{ flex: 6 }}>
+        
+      {userData && <Posts navigation={navigation} userPosts={userData.posts} />}
+
+      </View>
     </View>
   );
 };

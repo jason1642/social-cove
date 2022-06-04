@@ -8,9 +8,10 @@ interface ISectionProps {
   colors: any,
   commentArray: any,
   navigation: any,
+  postId: any,
 }
 
-const Section: React.FunctionComponent<ISectionProps> = ({ colors, commentArray, navigation }) => {
+const Section: React.FunctionComponent<ISectionProps> = ({ colors, postId, commentArray, navigation }) => {
   const styles = useStyles(colors)
   // console.log(commentArray)
   return (
@@ -18,7 +19,7 @@ const Section: React.FunctionComponent<ISectionProps> = ({ colors, commentArray,
       <Text style={styles.title}>{commentArray.length} Comment(s)</Text>
 
 
-      <Input />
+      <Input postId={postId} />
 
       <View>
         {

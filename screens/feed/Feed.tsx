@@ -54,8 +54,11 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
         component={Post}
         />
         <Stack.Screen
-        name='User Account'
+        name='Account'
         component={Account}
+        options={{
+          headerTitle: ''
+        }}
       />
       </Stack.Navigator>
   );

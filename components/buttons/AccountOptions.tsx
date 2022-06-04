@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 interface IAccountOptionsProps {
   name: string,
-  color: string,
+  color?: string,
   buttonFunction: Function,
   buttonProps?: any,
 }

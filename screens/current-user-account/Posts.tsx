@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
     paddingVertical: 5,
     width: '100%',
-    backgroundColor: 'grey'
+    // backgroundColor: 'grey'
     // justifyContent: 'flex-start'
   }
 }

@@ -99,7 +99,7 @@ const App = () => {
 
      
                     <Tab.Screen
-                      name='Account'
+                      name='Current User Account'
                       component={Account}
                       options={{
                         tabBarIcon: () => !user.authenticated ?

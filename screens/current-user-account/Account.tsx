@@ -42,7 +42,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
        />
 
         <AccountStack.Screen
-          name='Post'
+          name='Post Info'
           component={Post}
         />
         <AccountStack.Screen

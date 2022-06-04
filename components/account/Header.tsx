@@ -29,11 +29,11 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
       
        <Avatar
         size='large'
+        icon={{name:'account-circle', type:'material-icons'}}
         source={{uri: userData.profile_picture_url}}
-          rounded
-          title={'T'}
-          containerStyle={{ backgroundColor: 'blue', }}
-          iconStyle={{}}
+        rounded
+        containerStyle={{ backgroundColor: 'orange', }}
+        // iconStyle={{height: '100%'}}
         />
       
       <View style={styles.columnWrapper}>

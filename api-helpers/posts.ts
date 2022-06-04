@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Post from '../screens/Post'
 
 const api = axios.create({
   baseURL: 'http://localhost:3000'
@@ -14,4 +13,8 @@ export const createPost = async (data: any) =>
   })
 
 export const getPopularPosts = async () => 
-  await api.get('/posts').then(res=>res,err=>err)
+  await api.get('/posts').then(res => res, err => err)
+  
+
+export const createComment = async (data: any, post_id: number) => 
+  await api.post(`/posts/${post_id}/comments`, data).then(res=>res,err=>err)

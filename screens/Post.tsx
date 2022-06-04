@@ -53,6 +53,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
           width={1}
         />
         <CommentSection
+          postId={postData.id}
           navigation={navigation}
           colors={colors}
           commentArray={postData.comments}

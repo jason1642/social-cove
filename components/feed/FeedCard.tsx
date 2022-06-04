@@ -15,7 +15,7 @@ const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigatio
 
   return (
     <View style={styles.container}>
-      <CardHeader postData={postData} />
+      <CardHeader navigation={navigation} postData={postData} />
       
       <Pressable onPress={() => {
         // navigation.setOptions({title: 'UPDATED!'})

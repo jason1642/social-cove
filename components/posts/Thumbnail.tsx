@@ -11,7 +11,7 @@ const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data, navigation})
   return data !== 'x' ? (
 
 
-    <Pressable style={styles.container} onPress={()=>navigation.navigate('Post', {postId: data.id})}>
+    <Pressable style={styles.container} onPress={()=>navigation.navigate('Post Info', {postId: data.id})}>
       {/* <View style={styles.container}> */}
    
       {/* <Text>This is a thumbnail</Text> */}
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     
     marginVertical: 3,
     backgroundColor: 'green',
-    borderColor: 'grey',
-    borderWidth: 1,
+    // borderColor: 'grey',
+    // borderWidth: 1,
     // borderRadius: 4,
-    width: '32%',
+    width: '32.5%',
     height: 135,
     // padding: 4,
   },
