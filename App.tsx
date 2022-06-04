@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 import Landing from './screens/landing/Landing';
 import Feed from './screens/feed/Feed';
 import Home from './screens/Home';
-import { Alert, Button, useColorScheme, View, ScrollView } from 'react-native';
+import { Alert, Button, useColorScheme, View, ScrollView, StyleSheet } from 'react-native';
 import {
   NavigationContainer,
   // DarkTheme,
@@ -24,7 +24,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
 // import {setUsername } from './redux/features/user/userSlice'
-import { ThemeProvider, useThemeMode, Icon } from '@rneui/themed';
+import { ThemeProvider, useThemeMode, Icon, Avatar} from '@rneui/themed';
 import { DarkTheme, LightTheme } from './resources/themes'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CreatePost from './screens/CreatePost'
@@ -46,7 +46,7 @@ const App = () => {
 
   useEffect(() => {
     // console.log('Loading status - ', user.isLoading)
-    console.log(user.token)
+    console.log(user.data)
   }, [user.isLoading]);
 
   useEffect(() => {
@@ -70,14 +70,15 @@ const App = () => {
           
               <Stack.Screen name='Home'>
             { props=> <Tab.Navigator
-                    screenOptions={{
-                      headerStyle: {
-                      backgroundColor: '#414040',
-                      },
-                      headerTintColor: '#fff',
-                      headerTitleStyle: {
-                        fontWeight: 'bold',
-                      },}}>
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: '#414040',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}>
                     <Tab.Screen
                       name="Feed"
                       component={Feed}
@@ -99,7 +100,15 @@ const App = () => {
                       name='Account'
                       component={Account}
                       options={{
-                        tabBarIcon: () => <Icon name='account-circle' type='material-icons' />,
+                        tabBarIcon: () => !user.authenticated ?
+                          <Icon name='account-circle' type='material-icons' />
+                          :
+                          <Avatar
+                          size={26}
+                          rounded
+                            source={{ uri: user.data.profile_picture_url }}
+                            containerStyle={styles.profile_picture}
+                          />,
                         title: user.data ? user.data.username : 'Account',
                         headerTitleAlign: 'left',
                         headerTitleStyle: {paddingLeft: 15,fontWeight: 'bold', fontSize: 22}
@@ -126,3 +135,10 @@ const App = () => {
 };
 
 export default App;
+const styles = StyleSheet.create({
+  
+  profile_picture: { 
+    alignSelf: 'center',
+    backgroundColor: 'green',
+  }
+})

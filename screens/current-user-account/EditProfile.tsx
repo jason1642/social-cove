@@ -17,7 +17,7 @@ interface IEditProfileProps {
 const editOptions = ['Username', 'Email', 'bio']
 const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
   const user = useSelector((state: RootState) => state.user.data)
-  const [pickedImage, setPickedImage] = useState<any>(user.profile_picture)
+  const [pickedImage, setPickedImage] = useState<any>(user.profile_picture_url)
 
   const dispatch = useDispatch()
   const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
@@ -53,8 +53,13 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
     })
   }
 
-  const onSubmit =  async (data: any, user_id: number, setError: any) => { 
-    const response = dispatch(editUser(data))
+  const onSubmit =  async (data: any) => { 
+    // Entire function is within the redux user action file
+    dispatch(editUser({
+      ...data,
+      user_id: user.id,
+      setError: setError,
+    }))
 
   }
   return (
