@@ -56,7 +56,8 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
   return (<View style={styles.container}>
 
     <InputController
-      name='Username'
+      label='Username'
+      name='username'
       control={control}
       inputStyle={styles.input}
       type='username'
@@ -64,7 +65,8 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
     
     <InputController
-      name='Password'
+      label='Passwordanon'
+      name='password'
       control={control} 
       inputStyle={styles.input} 
       type='password'

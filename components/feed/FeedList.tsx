@@ -7,7 +7,7 @@ import {getPopularPosts} from '../../api-helpers/posts'
 
 
 interface IListProps {
-  route: any,
+  route?: any,
   navigation: any,
 }
 

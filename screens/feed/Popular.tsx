@@ -1,41 +1,24 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native'
-import Card from '../../components/posts/Card'
 import FeedList from '../../components/feed/FeedList'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import Post from '../Post'
+
 
 
 interface IPopularProps {
+  navigation: any,
+  route: any,
 }
-const Stack = createNativeStackNavigator()
 
-const Popular: React.FunctionComponent<IPopularProps> = (props) => {
+
+const Popular: React.FunctionComponent<IPopularProps> = ({route, navigation}) => {
 
 
   
   return (
-    <Stack.Navigator
-      screenOptions={{
-      // headerShown: false,
-    }}>
-      
-      <Stack.Screen
-        name='List'
-        component={FeedList}
-        options={{
-          headerShown: false,
-        }}
-        // initialParams={{query: '/'}}
-      />
-      <Stack.Screen 
-        name='Post Info'
-        component={Post}
-      />
-      
-    </Stack.Navigator>
-  );
+
+    <FeedList navigation={navigation}/>
+    
+  )
 };
 
 export default Popular;

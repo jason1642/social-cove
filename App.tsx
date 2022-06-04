@@ -78,6 +78,7 @@ const App = () => {
                 headerTitleStyle: {
                   fontWeight: 'bold',
                 },
+                headerShown: false,
               }}>
                     <Tab.Screen
                       name="Feed"
@@ -90,7 +91,8 @@ const App = () => {
                       name='Create Post'
                       component={CreatePost}
                       options={{
-                        tabBarIcon: () => <Icon name='add-circle' type='material-icons' />
+                        tabBarIcon: () => <Icon name='add-circle' type='material-icons' />,
+                        headerShown: true,
                       }}
                       initialParams={{user_id: user.data.id}}
                       />}
@@ -111,6 +113,7 @@ const App = () => {
                           />,
                         title: user.data ? user.data.username : 'Account',
                         headerTitleAlign: 'left',
+                        headerShown: true,
                         headerTitleStyle: {paddingLeft: 15,fontWeight: 'bold', fontSize: 22}
                       }}
 

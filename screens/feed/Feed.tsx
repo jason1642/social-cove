@@ -7,37 +7,54 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Popular from './Popular';
 import SubscribedPosts from './SubscribedPosts'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Post from '../Post'
+
 
 interface IFeedProps {
-  route: any,
+  route?: any,
   navigation: any,
 }
  
 const Tab = createMaterialTopTabNavigator();
-
+const Stack = createNativeStackNavigator()
 const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
 
-  useEffect(() => {
-    if (route.params) {
-      // Post updated, do something with `route.params.post 
-      // For example, send the post to the server
-      // console.log(route) 
-    }
-  }, [route.params]);
+  // useEffect(() => {
+  //   if (route.params) {
+  //     // Post updated, do something with `route.params.post 
+  //     // For example, send the post to the server
+  //     // console.log(route) 
+  //   }
+  // }, [route.params]);
 
   return (
-    <Tab.Navigator>
-
-      <Tab.Screen
+      <Stack.Navigator>
+      <Stack.Screen
+        name='Main'
+        options={{
+          // headerShown: false,
+        }}
+      >
+        {() =><Tab.Navigator>
+        <Tab.Screen
         name='Subscribed Posts'
         component={SubscribedPosts} 
         />
       <Tab.Screen
         name='Popular'
         component={Popular}
+        />
+    </Tab.Navigator>}
+      </Stack.Screen>
+      <Stack.Screen
+        name='Post Info'
+        component={Post}
+        />
+        <Stack.Screen
+        name='User Account'
+        component={Post}
       />
- 
-    </Tab.Navigator>
+      </Stack.Navigator>
   );
 };
 

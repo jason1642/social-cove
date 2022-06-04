@@ -8,11 +8,14 @@ import create from '@ant-design/icons/lib/components/IconFont';
 import List from '../../components/posts/List'
 import Post from '../Post'
 import {useDispatch, useSelector} from 'react-redux'
+import FeedList from '../../components/feed/FeedList';
 
 interface ISubscribedPostsProps {
+  navigation: any,
 }
 const Stack = createNativeStackNavigator()
-const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = (props) => {
+
+const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = ({navigation}) => {
   const [posts, setPosts ] = useState([])
   const { data, authenticated, token } = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
@@ -34,26 +37,9 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = (props) 
   
   }, []);
   return (
-    <Stack.Navigator>
-
-      <Stack.Screen
-        name='List'
-        component={List}
-        options={{
-          headerTitle: 'Posts from following',
-          headerShown: false
-        }}
-      />
-      <Stack.Screen
-        name='Post Info'
-        component={Post}
-      />
-    {/* <ScrollView>
-      <Text>SUBSCRIBED POSTS</Text>
-            {posts && posts.map((ele:any) =>
-        <Card key={ele.id} postData={ele} />)}
-    </ScrollView> */}
-    </Stack.Navigator>
+    <FeedList
+      navigation={navigation}
+    />
   );
 };
 

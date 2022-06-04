@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native'
-import {Avatar } from '@rneui/themed'
+import {Avatar, Icon } from '@rneui/themed'
 
 
 interface ICardHeaderProps {
@@ -13,17 +13,17 @@ const CardHeader: React.FunctionComponent<ICardHeaderProps> = ({ postData }) => 
     <View style={styles.container}>
       {postData.user.profile_picture_url === null ?
         <Avatar
-         title={'A'}
-         size={45}
-         rounded
-         containerStyle={{ backgroundColor: "#624587"}}
+          size={45}
+          rounded
+          // iconStyle={{height: 30, width: 30}}
+          icon={{name:'account-circle', type:'material-icons'}}
       />
         :
         <Avatar
-        title={'B'}
-        size={45}
-        rounded
-        containerStyle={{ backgroundColor: "#3d4db7"}}
+          icon={{name:'account-circle', type:'material-icons'}}
+          source={{uri: postData.user.profile_picture_url}}
+          size={45}
+          rounded
      />
       }
       <Text style={styles.title}>{postData.user.username}</Text>

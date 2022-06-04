@@ -17,7 +17,10 @@ const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigatio
     <View style={styles.container}>
       <CardHeader postData={postData} />
       
-      <Pressable onPress={()=>navigation.navigate('Post Info', {postId: postData.id})}>
+      <Pressable onPress={() => {
+        // navigation.setOptions({title: 'UPDATED!'})
+        navigation.navigate('Post Info', { postId: postData.id })
+      }}>
         <ImageContainer
         imageUrl={postData.image_url}
       />
