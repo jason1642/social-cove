@@ -15,7 +15,7 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => {
   const { followers, following, posts } = userData
-  // console.log(posts)
+  console.log(userData.profile_picture_url)
   const values = [
     { name: 'Posts', amount: posts.length },
     { name: 'Followers', amount: followers.length },
@@ -28,7 +28,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
     <View style={styles.topRow}>
       
        <Avatar
-          size='large'
+        size='large'
+        source={{uri: userData.profile_picture_url}}
           rounded
           title={'T'}
           containerStyle={{ backgroundColor: 'blue', }}

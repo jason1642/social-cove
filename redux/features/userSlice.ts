@@ -55,7 +55,7 @@ export const userSlice = createSlice({
       return ({...state, isLoading: false})
     })
     builder.addCase(editUser.rejected, (state: any, action: any) => { 
-      console.log("edit user Rejected!!")
+      console.log("edit user   Rejected!!")
       console.log(action)
       return ({...state, error: action.payload.error})
     })

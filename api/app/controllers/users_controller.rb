@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       following:{},
       followers:{},
 
-    })
+    }, methods: :profile_picture_url)
   
   end
 
@@ -92,7 +92,15 @@ render json: @posts.as_json(include: {
     
     # @current_user.username = params[:new_username]
     # @current_user.password = 'newpass1'
-    if @current_user.update user_params
+    doc = ActiveStorage::Blob.create_and_upload!(
+      io: File.open(params[:profile_picture][:uri]),
+      filename: params[:profile_picture][:filename],
+      content_type: params[:profile_picture][:content_type]
+    )
+    @current_user.profile_picture.attach(doc)
+    if @current_user.update user_params except: :profile_picture
+      
+      @current_user.save
     
       render json: @current_user
     else

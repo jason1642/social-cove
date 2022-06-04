@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { useState, useEffect } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import {useForm } from "react-hook-form"
 import { Button } from '@rneui/base';
 import { RootState } from '../../redux/store'
@@ -7,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import InputController from '../../components/inputs/InputController'
 import {Avatar} from '@rneui/themed'
 import { editUser } from '../../redux/actions/userActions'
+import { launchImageLibrary } from 'react-native-image-picker'
 
 interface IEditProfileProps {
   userData: any,
@@ -15,15 +17,43 @@ interface IEditProfileProps {
 const editOptions = ['Username', 'Email', 'bio']
 const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
   const user = useSelector((state: RootState) => state.user.data)
+  const [pickedImage, setPickedImage] = useState<any>(user.profile_picture)
+
   const dispatch = useDispatch()
-  const { control, handleSubmit, setError, formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
     defaultValues: {
       username: user.username,
       bio: user.bio,
       email: user.email,
+      profile_picture: user.profile_picture
     }
   })
-  const onSubmit =  async (data: any) => { 
+
+  const handleChoosePhoto = async () => {
+    await launchImageLibrary({ mediaType: 'photo', presentationStyle: 'formSheet' },
+      (res: any) => {
+        const {didCancel, errorMessage, errorCode} = res
+        // .didCancel, .error, .errorCode
+        if (!didCancel && !errorMessage) {
+           const { fileName, type, uri } = res.assets[0]
+        console.log(res.assets[0])
+        setValue('profile_picture',
+          {
+          uri: uri.replace('file://', ''),
+          filename: fileName,
+          content_type: type
+        })
+        setPickedImage(uri)
+
+        } else if (didCancel) {
+          console.log(didCancel)
+        } else if (errorMessage) {
+          console.log(errorMessage)
+        }
+    })
+  }
+
+  const onSubmit =  async (data: any, user_id: number, setError: any) => { 
     const response = dispatch(editUser(data))
 
   }
@@ -32,14 +62,19 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
 
 
       {/* <Text style={styles.title}>EDIT PROFILE</Text> */}
-
-      <Avatar
+      <Pressable
+        onPress={handleChoosePhoto}
+      >
+        <Avatar
           size='large'
           rounded
           title={'T'}
+          source={{uri: pickedImage}}
           containerStyle={styles.profile_picture}
           iconStyle={{}}
         />
+      </Pressable>
+      
       {
         editOptions.map(ele =>
           <InputController

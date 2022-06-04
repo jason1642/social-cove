@@ -54,19 +54,38 @@ export const verifyUser = createAsyncThunk('user/verify', async (thunkAPI) => {
 
 
 
-export const editUser = createAsyncThunk('user/edit', async (data: any, thunkAPI) => 
+export const editUser = createAsyncThunk('user/edit', async (data: any, thunkAPI) => {
   
-  await api.put(`users/${data.user_id}`, data).then((res: any) => {
-    console.log(res.data)
-    if (!res.error) {
-      return {  }
-    } else {
-      return ({erorr: res.error})
-    }
-    
-  }, err => {
-    console.log(err)
-    return ({ error: 'something went wrong'})
-  })
 
+  if (data.profile_picture.uri) {
+
+    const { filename, content_type, uri } = data.profile_picture
+    const { username, bio, email, user_id } = data
+    const formData = {
+      profile_picture: {
+        uri: uri,
+        filename: filename,
+        content_type: content_type
+      },
+      username: username,
+      bio: bio,
+      email: email,
+    }
+    await api.put(`users/${user_id}`, formData).then((res: any) => {
+      console.log(res.data)
+      if (!res.error) {
+        return {}
+      } else {
+        return ({ erorr: res.error })
+      }
+    
+    }, err => {
+      console.log(err)
+      return ({ error: 'something went wrong' })
+    })
+ 
+  }
+
+
+}
 )
