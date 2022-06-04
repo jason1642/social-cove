@@ -37,7 +37,7 @@ export default CardHeader;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'teal',
+    // backgroundColor: 'teal',
   },
   title: {
     color: 'white',

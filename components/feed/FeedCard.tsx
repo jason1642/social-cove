@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Pressable } from 'react-native'
 import ImageContainer from './ImageContainer'
 import CardHeader from './CardHeader'
-import Footer from './Footer'
+import Body from './Body'
 
 interface IFeedCardProps {
   postData: any,
@@ -25,7 +25,7 @@ const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigatio
         imageUrl={postData.image_url}
       />
       </Pressable>
-      <Footer postInfo={postData}/>
+      <Body postInfo={postData}/>
     </View>
   );
 };

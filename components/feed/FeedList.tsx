@@ -39,7 +39,7 @@ export default FeedList;
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 5,
-    backgroundColor: 'grey',
+    // backgroundColor: 'grey',
 
   }
 }
