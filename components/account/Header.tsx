@@ -54,7 +54,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
 
     <View style={{flex: 1}}>
       
-             <Text style={styles.title}>Logged in as {userData.username}</Text>
+             <Text style={styles.title}>{userData.username}</Text>
         <Text style={styles.bioLabel}>Bio:</Text>
     <Text style={styles.bio}>{userData.bio}</Text>
         </View>
@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme, props:any) => ({
     color: props.text,
     paddingVertical: 10,
     fontSize: 18,
+    paddingHorizontal: 15,
   },
   columnWrapper: {
     flex: 1,

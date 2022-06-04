@@ -12,9 +12,10 @@ import CommentSection from '../components/comment/Section'
 interface IPostProps {
   postData: any, 
   route: any,
+  navigation: any,
 } 
 
-const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
+const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
   const { postId } = route.params
   const { colors } = useTheme()
   const [postData, setPostData] = useState<any>()
@@ -52,6 +53,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route }) => {
           width={1}
         />
         <CommentSection
+          navigation={navigation}
           colors={colors}
           commentArray={postData.comments}
           />

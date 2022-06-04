@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   # skip_before_action :verify_authenticity_token
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :set_post, only: %i[index create]
-  before_action :set_user, only: %i[create]
+  # before_action :set_user, only: %i[create]
+  before_action :authorize_request, only: [:create]
   # GET /comments or /comments.json
   def index
     render json: @post.as_json(include: {
@@ -31,7 +32,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.post_id = params[:post_id]
-    @comment.user = @user
+    @comment.user = @current_user
     if @comment.save
       render json: {
         data: @comment,

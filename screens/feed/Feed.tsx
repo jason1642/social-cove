@@ -8,6 +8,7 @@ import Popular from './Popular';
 import SubscribedPosts from './SubscribedPosts'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Post from '../Post'
+import Account from '../Account'
 
 
 interface IFeedProps {
@@ -54,7 +55,7 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
         />
         <Stack.Screen
         name='User Account'
-        component={Post}
+        component={Account}
       />
       </Stack.Navigator>
   );

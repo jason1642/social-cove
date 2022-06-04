@@ -15,9 +15,16 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     render json: @post.as_json(include: {
-      user: {},
-      comments:{},
-      image:{}
+      user: {
+        methods: :profile_picture_url
+      },
+      comments:{
+        include: {
+          user: {
+            methods: :profile_picture_url
+          }
+        }
+      }
       
     }, methods: :image_url)
   end

@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 300,
-    minWidth: '90%',
-    maxWidth: '97%',
+    minWidth: '95%',
+    maxWidth: '98%',
     
   }
 })
