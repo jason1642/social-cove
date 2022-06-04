@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FlatList, View, Text, StyleSheet } from 'react-native'
 import FeedCard from './FeedCard'
 import {getPopularPosts} from '../../api-helpers/posts'
-
+import Skeleton from './Skeleton'
 
 
 interface IListProps {
@@ -29,9 +29,7 @@ const FeedList: React.FunctionComponent<IListProps> = ({ route, navigation }) =>
       data={postsArray.reverse()}
       renderItem={(item) => <FeedCard navigation={navigation} postData={item.item} />}
     />
-  ) : <View>
-      <Text>We had trouble loading posts</Text>
-  </View>
+  ) : <Skeleton />
 };
 
 export default FeedList;

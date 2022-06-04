@@ -35,7 +35,9 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
           // headerShown: false,
         }}
       >
-        {() =><Tab.Navigator>
+        {() => <Tab.Navigator
+          screenOptions={{lazy: true}}
+        >
         <Tab.Screen
         name='Subscribed Posts'
         component={SubscribedPosts} 
