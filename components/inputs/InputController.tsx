@@ -27,7 +27,7 @@ const App: React.FunctionComponent<IAppProps> = ({ name, label, control, inputSt
       <Text style={styles.label}>{label || name}:</Text>
       <Controller
 
-        name={name.toLowerCase()}
+        name={name}
         control={control}
 
         rules={{

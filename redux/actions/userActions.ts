@@ -39,6 +39,7 @@ export const verifyUser = createAsyncThunk('user/verify', async (thunkAPI) => {
       if (token) {
       console.log(token)
   // console.log()
+        console.log(window.localstorage)
       api.defaults.headers.common.authorization = `Bearer ${token}`
       const response = await api.get('/auth/verify')
       console.log('verifying....')

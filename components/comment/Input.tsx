@@ -19,10 +19,8 @@ const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
   })
 
   const onSubmit = async (data: any) => {
-    await createComment({
-      content: data.userComment,
-      user_id: user.id
-    }, postId)
+    console.log(data)
+    await createComment({ content: data.userComment }, postId)
   }
 
   const onError = async () => {
@@ -36,10 +34,8 @@ const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
         inputStyle={styles.input}
         control={control}
         inputProps={{
-          onSubmitEditing: () => {
-            console.log("submitting this form NOW")
-            handleSubmit(onSubmit, onError)
-        }}}
+          onSubmitEditing: handleSubmit(onSubmit, onError)
+        }}
       />
 
     </View>

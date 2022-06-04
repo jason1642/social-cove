@@ -31,9 +31,9 @@ has_many :followers, through: :received_follows, source: :follower
 
 
   # attribute :bio, :string, default: ''
-  validates :username, allow_nil: false, presence: true, uniqueness: true
+  validates :username, allow_nil: true, presence: true, uniqueness: true
   validates :password, allow_nil: true, length: { minimum: 6}
-  validates :email, allow_nil: false, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, allow_nil: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
 
 
