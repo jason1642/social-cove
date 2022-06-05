@@ -40,6 +40,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
     <ScrollView>
       { postData ?<>
         <Header
+          navigation={navigation}
           colors={colors}
           postData={postData}
         />

@@ -1,19 +1,24 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import {Avatar } from '@rneui/themed'
 import { makeStyles } from '@rneui/themed';
-
+import { StackActions } from '@react-navigation/native'
 interface IHeaderProps {
   postData: any,
   colors: any,
+  navigation: any,
  }
 //  Avatar + name
-const Header: React.FunctionComponent<IHeaderProps> = ({ postData, colors }) => {
+const Header: React.FunctionComponent<IHeaderProps> = ({ postData, colors, navigation}) => {
   // console.log(postData)
   const styles = useStyles(colors)
    return (
-     <View style={styles.container}>
+     <Pressable
+       onPress={() => navigation.dispatch(StackActions.push('Account', { user_id: postData.user.id }))}
+       style={styles.container}>
+
+      
        <Avatar
          title='A'
          size={45}
@@ -21,7 +26,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ postData, colors }) => 
          containerStyle={{ backgroundColor: "#3d4db7"}}
        />
        <Text style={styles.title}> {postData.user.username}</Text>
-     </View>
+        </Pressable>
+
    );
  };
  

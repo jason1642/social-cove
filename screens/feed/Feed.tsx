@@ -29,7 +29,9 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
   // }, [route.params]);
 
   return (
-      <Stack.Navigator>
+    <Stack.Navigator>
+      
+
       <Stack.Screen
         name='Main'
         options={{
@@ -49,10 +51,14 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
         />
     </Tab.Navigator>}
       </Stack.Screen>
+
+
+
       <Stack.Screen
         name='Post Info'
         component={Post}
-        />
+      />
+      
         <Stack.Screen
         name='Account'
         component={Account}
@@ -60,6 +66,7 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
           headerTitle: ''
         }}
       />
+      
       </Stack.Navigator>
   );
 };

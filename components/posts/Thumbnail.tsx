@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
-import {Button} from '@rneui/base'
+import { Button } from '@rneui/base'
+import { StackActions } from '@react-navigation/native'
+
+
+
 interface IThumbnailProps {
   data: any,
   navigation: any,
@@ -11,7 +15,9 @@ const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data, navigation})
   return data !== 'x' ? (
 
 
-    <Pressable style={styles.container} onPress={()=>navigation.navigate('Post Info', {postId: data.id})}>
+    <Pressable style={styles.container} onPress={() =>
+      navigation.dispatch(StackActions.push('Post Info', { postId: data.id }))
+    }>
       {/* <View style={styles.container}> */}
    
       {/* <Text>This is a thumbnail</Text> */}
