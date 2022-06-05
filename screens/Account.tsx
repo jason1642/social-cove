@@ -4,9 +4,12 @@ import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { StyleSheet, Text, View, } from 'react-native'
 import Header from '../components/account/Header'
-import { showVerboseUserInfo } from '../api-helpers/users'
 import Posts from './current-user-account/Posts'
 import AccountOptionButton from '../components/buttons/AccountOptions'
+import { useSelector } from 'react-redux'
+
+
+import { RootState } from '../redux/store'
 
 interface IAccountProps {
   route: any,
@@ -17,17 +20,15 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   const { user_id } = route.params
   const { colors } = useTheme()
   const styles = useStyles(colors)
-
+  const user = useSelector((state: RootState ) => state.user)
   const [userData, setUserData] = useState<any>()
 
   useEffect(() => {
     
-    showVerboseUserInfo(user_id).then(res => {
-      // console.log(res.data)
-      setUserData(res.data)
-      navigation.setOptions({headerTitle: res.data.username})
-    })
-  }, []);
+    user && navigation.setOptions({headerTitle: user.data.username})
+
+    
+  }, [user]);
   return (
     <View style={styles.container}>
        <View style={{flex:3,}}>

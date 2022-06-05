@@ -42,12 +42,14 @@ const App = () => {
   const user = useSelector((state: RootState) => state.user)
   // Use setColorTheme dispatch to set the theme based on users preference, or system theme
   const colorTheme = useSelector((state: RootState) => state.colorTheme.theme)
+  const [profilePicture, setProfilePicture] = useState<string | undefined>(undefined)
   const dispatch = useDispatch()
 
   useEffect(() => {
     // console.log('Loading status - ', user.isLoading)
-    console.log(user.data)
-  }, [user.isLoading]);
+    // console.log(user.data)
+    user.data && setProfilePicture(user.data.profile_picture_url)
+  }, [user.data]);
 
   useEffect(() => {
     dispatch(verifyUser())
@@ -98,17 +100,17 @@ const App = () => {
                       />}
 
      
-                    <Tab.Screen
+                   <Tab.Screen
                       name='Current User Account'
                       component={Account}
                       options={{
-                        tabBarIcon: () => !user.authenticated ?
+                        tabBarIcon: () => user.isLoading || !user.authenticated ?
                           <Icon name='account-circle' type='material-icons' />
                           :
                           <Avatar
                           size={26}
                           rounded
-                            source={{ uri: user.data.profile_picture_url }}
+                            source={{ uri: profilePicture }}
                             containerStyle={styles.profile_picture}
                           />,
                         title: user.data ? user.data.username : 'Account',

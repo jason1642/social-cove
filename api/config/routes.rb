@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   post '/auth/login', to: 'authentication#login'
   get '/auth/verify', to: 'authentication#verify'
+  get '/auth/verify/verbose-info', to: 'authentication#verify_and_verbose_info'
 
 
   # To make sure a paramter matches a regular expression

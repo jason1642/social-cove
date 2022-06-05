@@ -97,12 +97,20 @@ render json: @posts.as_json(include: {
       filename: params[:profile_picture][:filename],
       content_type: params[:profile_picture][:content_type]
     )
-    @current_user.profile_picture.attach(doc)
-    if @current_user.update user_params except: :profile_picture
-      
+    
+    if @current_user.update user_params  
+      @current_user.profile_picture.attach(doc)
       @current_user.save
     
-      render json: @current_user
+      render json: @current_user.as_json(include: {
+        posts: {
+          include: :user, include: :comments, methods: :image_url
+        },
+        following:{},
+        followers:{},
+  
+      }, methods: :profile_picture_url)
+
     else
       render json: {errors: @user, message: 'There was an error updating your account'}, status: :bad_request
     end

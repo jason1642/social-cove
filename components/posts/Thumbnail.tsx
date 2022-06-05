@@ -14,18 +14,13 @@ const Thumbnail: React.FunctionComponent<IThumbnailProps> = ({data, navigation})
   
   return data !== 'x' ? (
 
-
     <Pressable style={styles.container} onPress={() =>
       navigation.dispatch(StackActions.push('Post Info', { postId: data.id }))
     }>
-      {/* <View style={styles.container}> */}
-   
-      {/* <Text>This is a thumbnail</Text> */}
       <Image
         style={styles.image}
         source={{ uri: data.image_url, }}
       />
-    {/* </View> */}
         </Pressable>
   ) : 
     (<View style={{height: 10, width: '32%'}}>
