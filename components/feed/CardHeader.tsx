@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import {Avatar, Icon } from '@rneui/themed'
 

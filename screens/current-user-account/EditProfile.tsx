@@ -9,6 +9,7 @@ import InputController from '../../components/inputs/InputController'
 import {Avatar} from '@rneui/themed'
 import { editUser } from '../../redux/actions/userActions'
 import { launchImageLibrary } from 'react-native-image-picker'
+import RNRestart from 'react-native-restart'; 
 
 interface IEditProfileProps {
   userData: any,
@@ -94,7 +95,7 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ }) => {
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
       
     <Button title='Submit' onPress={handleSubmit(onSubmit)} />
-
+      <Button title='refresh' onPress={()=> RNRestart.Restart()} /> 
     </View>
   );
 };

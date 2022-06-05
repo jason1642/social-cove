@@ -10,7 +10,7 @@ interface IBodyProps {
 
 const Body: React.FunctionComponent<IBodyProps> = ({ postData, colors }) => {
   const postInfo = postData
-  console.log(postData)
+  // console.log(postData)
   // const styles = useStyles(colors)
   return (
     <View style={styles.container}>

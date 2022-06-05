@@ -30,6 +30,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CreatePost from './screens/CreatePost'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {verifyUser} from './redux/actions/userActions'
+import Login from './screens/Login';
 // import { verifyUser } from './api-helpers/users';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
@@ -88,29 +89,28 @@ const App = () => {
                       options={() => ({
                         tabBarIcon: () => <Icon name='home' type='material-icons' />
                       })}
-                    />
-                    { !user.isLoading && user.data.id && <Tab.Screen
+              />
+              
+                   <Tab.Screen
                       name='Create Post'
-                      component={CreatePost}
+                      component={user.data ? CreatePost : Login}
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />,
                         headerShown: true,
                       }}
-                      initialParams={{user_id: user.data.id}}
-                      />}
+                      initialParams={{user_id: user.data ? user.data.id : null}}
+                      />
 
      
                    <Tab.Screen
                       name='Current User Account'
                       component={Account}
                       options={{
-                        tabBarIcon: () => user.isLoading || !user.authenticated ?
-                          <Icon name='account-circle' type='material-icons' />
-                          :
-                          <Avatar
-                          size={26}
-                          rounded
-                            source={{ uri: profilePicture }}
+                        tabBarIcon: () =>  <Avatar
+                            size={26}
+                            icon={{name:'account-circle', type:'material-icons'}}
+                            rounded
+                            source={{ uri:  profilePicture }}
                             containerStyle={styles.profile_picture}
                           />,
                         title: user.data ? user.data.username : 'Account',

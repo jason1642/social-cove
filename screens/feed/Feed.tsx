@@ -18,7 +18,9 @@ interface IFeedProps {
  
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator()
-const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
+const Feed: React.FunctionComponent<IFeedProps> = (
+  // { route, navigation }
+) => {
 
   // useEffect(() => {
   //   if (route.params) {
@@ -39,7 +41,7 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
         }}
       >
         {() => <Tab.Navigator
-          screenOptions={{lazy: true}}
+          // screenOptions={{lazy: true}}
         >
         <Tab.Screen
         name='Subscribed Posts'
@@ -47,7 +49,8 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
         />
       <Tab.Screen
         name='Popular'
-        component={Popular}
+            component={Popular}
+            options={{lazy: true}}
         />
     </Tab.Navigator>}
       </Stack.Screen>
@@ -66,7 +69,7 @@ const Feed: React.FunctionComponent<IFeedProps> = ({ route, navigation }) => {
           headerTitle: ''
         }}
       />
-      
+
       </Stack.Navigator>
   );
 };

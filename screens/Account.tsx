@@ -25,7 +25,14 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
   useEffect(() => {
     
-    user && navigation.setOptions({headerTitle: user.data.username})
+    user && navigation.setOptions({headerTitle: user.data.username,
+     tabBarIcon:()=> <Avatar
+     size={26}
+     icon={{name:'account-circle', type:'material-icons'}}
+     rounded
+     source={{ uri: userData.profile_picture_url }}
+     containerStyle={styles.profile_picture}
+   />})
 
     
   }, [user]);
@@ -102,5 +109,9 @@ const useStyles = makeStyles((theme, props:any) => ({
     paddingVertical: 15,
     // backgroundColor: 'red'
     // justifyContent: 'flex-start'
+  },
+  profile_picture: { 
+    alignSelf: 'center',
+    backgroundColor: 'green',
   }
 }))

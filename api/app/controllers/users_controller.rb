@@ -101,8 +101,8 @@ render json: @posts.as_json(include: {
     if @current_user.update user_params  
       @current_user.profile_picture.attach(doc)
       @current_user.save
-    
-      render json: @current_user.as_json(include: {
+      user = User.find_by(id: @current_user.id)
+      render json: user.as_json(include: {
         posts: {
           include: :user, include: :comments, methods: :image_url
         },
@@ -112,7 +112,7 @@ render json: @posts.as_json(include: {
       }, methods: :profile_picture_url)
 
     else
-      render json: {errors: @user, message: 'There was an error updating your account'}, status: :bad_request
+      render json: {errors: @current_user, message: 'There was an error updating your account'}, status: :bad_request
     end
 
     # render json: user

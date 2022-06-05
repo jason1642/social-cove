@@ -15,7 +15,7 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => {
   const { followers, following, posts } = userData
-  console.log(userData.profile_picture_url)
+  // console.log(userData.profile_picture_url)
   const values = [
     { name: 'Posts', amount: posts.length },
     { name: 'Followers', amount: followers.length },

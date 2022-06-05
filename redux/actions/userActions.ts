@@ -42,7 +42,7 @@ export const verifyUser = createAsyncThunk('user/verify', async (thunkAPI) => {
       if (token) {
       const response = await api.get('/auth/verify/verbose-info')
       console.log('verifying....')
-      console.log(response.data.profile_picture_url)
+      // console.log(response.data.profile_picture_url)
       return response.data.username ?
         { data: response.data, authenticated: true, token: token }
         : { data: undefined, authenticated: false, token: undefined }
@@ -72,7 +72,7 @@ export const editUser = createAsyncThunk('user/edit', async (data: any, thunkAPI
       email: email,
     }
    return await api.put(`users/${user_id}`, formData).then((res: any) => {
-      console.log(res.data)
+      console.log(res.data.profile_picture_url)
       if (!res.error) {
         return ({ ...res.data })
         

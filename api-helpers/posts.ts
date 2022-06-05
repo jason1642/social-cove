@@ -6,7 +6,7 @@ const api = axios.create({
 
 export const createPost = async (data: any) => 
   await api.post('/posts', data).then(res => {
-    console.log(res.data)
+    // console.log(res.data)
   }, err => {
     console.log(data)
     console.log(err)
