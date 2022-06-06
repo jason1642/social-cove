@@ -37,7 +37,7 @@ const Feed: React.FunctionComponent<IFeedProps> = (
       <Stack.Screen
         name='Main'
         options={{
-          // headerShown: false,
+          headerTitle:'Home',
         }}
       >
         {() => <Tab.Navigator

@@ -11,6 +11,7 @@ export const DarkTheme = {
     card: '#4a4a4a',
     oopla: 'black',
     notification: 'grey',
+    secondary: 'grey',
   }
 }
 
@@ -20,7 +21,8 @@ export const LightTheme = {
   colors: {
     ...DefaultTheme.colors,
     background: "white",
-    primary: 'blue', 
+    primary: 'lightblue', 
+    secondary: 'lightgrey',
     text: 'black',
     border: 'grey',
   }

@@ -70,7 +70,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
     
     <InputController
-      label='Passwordanon'
+      label='Password'
       name='password'
       control={control} 
       inputStyle={styles.input} 
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme, props: any) => ({
   },
   input: {
     color: props.text,
-    backgroundColor: 'grey',
+    backgroundColor: props.secondary,
     borderColor: 'black',
     fontSize: 30,
     paddingVertical: 8,

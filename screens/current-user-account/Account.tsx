@@ -31,9 +31,10 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
      tabBarIcon:()=> <Avatar
      size={30}
      icon={{name:'account-circle', type:'material-icons'}}
-     rounded
+       rounded
+       
      source={{ uri: user.data.profile_picture_url }}
-     containerStyle={styles.profile_picture}
+     avatarStyle={styles.profile_picture}
    />})
 
     console.log(user) 

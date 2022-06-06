@@ -87,14 +87,18 @@ const App = () => {
                 headerTintColor: '#282331',
                 headerTitleStyle: {
                   fontWeight: 'bold',
+                  
                 },
+                
+                tabBarActiveTintColor: 'blue',
+                tabBarLabelStyle: {color: 'black'},
                 headerShown: false,
               }}>
                     <Tab.Screen
                       name="Feed"
                       component={Feed}
                       options={() => ({
-                        tabBarIcon: () => <Icon name='home' type='material-icons' />
+                        tabBarIcon: () => <Icon name='home' type='material-icons' />,
                       })}
               />
               
@@ -119,7 +123,7 @@ const App = () => {
                       icon={{ name: 'account-circle', type: 'material-icons' }}
                       rounded
                       source={{ uri: user.data && user.data.profile_picture_url }}
-                      containerStyle={styles.profile_picture}
+                      avatarStyle={styles.profile_picture}
                     />,
                     title: user.data ? user.data.username : 'Account',
                     headerTitleAlign: 'left',
@@ -149,6 +153,6 @@ const styles = StyleSheet.create({
   
   profile_picture: { 
     alignSelf: 'center',
-    // backgroundColor: 'green',
+    backgroundColor: 'green',
   }
 })
