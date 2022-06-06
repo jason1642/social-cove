@@ -74,7 +74,7 @@ export const editUser = createAsyncThunk('user/edit', async (data: any, thunkAPI
    return await api.put(`users/${user_id}`, formData).then((res: any) => {
       
      if (!res.error) {
-        console.log(res.data.profile_picture_url)
+        // console.log(res.data.profile_picture_url)
         return ({ ...res.data })
         
       } else {

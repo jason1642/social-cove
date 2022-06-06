@@ -4,12 +4,11 @@ import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { StyleSheet, Text, View, } from 'react-native'
 import Header from '../components/account/Header'
+import { showVerboseUserInfo } from '../api-helpers/users'
 import Posts from './current-user-account/Posts'
 import AccountOptionButton from '../components/buttons/AccountOptions'
-import { useSelector } from 'react-redux'
-
-
-import { RootState } from '../redux/store'
+import HeaderSkeleton from '../components/account/HeaderSkeleton'
+import PostsGroupSkeleton from '../components/account/PostsGroupSkeleton';
 
 interface IAccountProps {
   route: any,
@@ -17,23 +16,28 @@ interface IAccountProps {
 }
 
 const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) => {
-  const { user_id } = route.params
+  const { user_id} = route.params
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const user = useSelector((state: RootState ) => state.user)
+
   const [userData, setUserData] = useState<any>()
 
-
+  useEffect(() => {
+    
+    showVerboseUserInfo(user_id).then(res => {
+      console.log(res.data)
+      setUserData(res.data)
+      navigation.setOptions({headerTitle: res.data.username})
+    })
+  }, []);
   return (
     <View style={styles.container}>
        <View style={{flex:3,}}>
-      {userData &&
-        <>
+      {userData ?
+        
         <Header userData={userData} colors={colors} />
-              {/* <Text style={styles.title}>
-                This is another users account, or even the current user {user_id}
-              </Text> */}
-        </>
+          :
+          <HeaderSkeleton />
      
       }
 
@@ -43,12 +47,13 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
       <AccountOptionButton
           name='Follow'
           // color='grey'
+          buttonProps={{loading: userData ? false : true}}
           buttonFunction={() => navigation.navigate('')}
 
         />
       <AccountOptionButton
           name='Follow'
-          // color='grey'
+          buttonProps={{loading: userData ? false : true}}
           buttonFunction={() => navigation.navigate('')}
 
         />
@@ -57,7 +62,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
         </View>
       <View style={{ flex: 6 }}>
         
-      {userData && <Posts navigation={navigation} userPosts={userData.posts} />}
+      {userData ? <Posts navigation={navigation} userPosts={userData.posts} /> : <PostsGroupSkeleton />}
 
       </View>
     </View>
@@ -97,9 +102,5 @@ const useStyles = makeStyles((theme, props:any) => ({
     paddingVertical: 15,
     // backgroundColor: 'red'
     // justifyContent: 'flex-start'
-  },
-  profile_picture: { 
-    alignSelf: 'center',
-    backgroundColor: 'green',
   }
 }))

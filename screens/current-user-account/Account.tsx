@@ -29,7 +29,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
     user.data && navigation.setOptions({
      headerTitle: user.data.username,
      tabBarIcon:()=> <Avatar
-     size={56}
+     size={30}
      icon={{name:'account-circle', type:'material-icons'}}
      rounded
      source={{ uri: user.data.profile_picture_url }}
