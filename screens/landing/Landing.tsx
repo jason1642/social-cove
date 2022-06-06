@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Main from './Main'
 import { View } from 'react-native'
@@ -9,11 +11,13 @@ const LandingStack = createNativeStackNavigator()
 interface ILandingProps {
   navigation?: any;
   route?: any;
+  title?: string;
 }
 
-const Landing: React.FunctionComponent<ILandingProps> = ({route, navigation,}) => {
+const Landing: React.FunctionComponent<ILandingProps> = ({route, navigation, title}) => {
 
   // const { someParam } = route.params;
+  1
   return (
  
 
@@ -24,8 +28,9 @@ const Landing: React.FunctionComponent<ILandingProps> = ({route, navigation,}) =
     >
       <LandingStack.Screen
         name='Main'
-        component={Main}
-      />
+      >
+        {({navigation})=><Main navigation={navigation} title={title} />}
+      </LandingStack.Screen>
       <LandingStack.Screen
         name={'Login'}
         component={Login}

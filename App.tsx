@@ -104,7 +104,7 @@ const App = () => {
               
                    <Tab.Screen
                       name='Create Post'
-                      component={user.data ? CreatePost : Login}
+                     
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />,
                         headerShown: true,
@@ -112,7 +112,15 @@ const App = () => {
                         
                       }}
                       initialParams={{user_id: user.data ? user.data.id : null}}
-                      />
+              >
+                {
+                  ({ route }) => user.data
+                    ?
+                    <CreatePost route={route} />
+                    :
+                    <Landing title='To create a post, you must first be logged in' />
+                  }
+                    </Tab.Screen>
 
      
                  <Tab.Screen

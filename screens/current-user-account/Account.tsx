@@ -11,6 +11,7 @@ import EditProfile from './EditProfile'
 import { Avatar } from '@rneui/themed'
 import { RootState } from '../../redux/store';
 import { useSelector} from 'react-redux'
+import Landing from '../landing/Landing';
 
 
 interface IAccountProps { 
@@ -39,7 +40,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
 
     console.log(user) 
   }, [user]);
-  return user.data && !user.isLoading ?  (
+  return user.data && !user.isLoading ? (
 
     <AccountStack.Navigator>
       <AccountStack.Group>
@@ -47,8 +48,8 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
           name='Main'
           options={{ headerShown: false, }}
         >
-          {({ navigation }) => <Main navigation={navigation} user={user}/>}
-       </AccountStack.Screen>
+          {({ navigation }) => <Main navigation={navigation} user={user} />}
+        </AccountStack.Screen>
 
         <AccountStack.Screen
           name='Post Info'
@@ -66,12 +67,12 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
 
   
       <AccountStack.Group screenOptions={{ presentation: 'modal' }}>
-        <AccountStack.Screen options={{headerTitle: 'Register'}} name="RegisterModal" component={Register} />
-        <AccountStack.Screen options={{headerTitle: 'Login'}} name="LoginModal" component={Login} />
+        <AccountStack.Screen options={{ headerTitle: 'Register' }} name="RegisterModal" component={Register} />
+        <AccountStack.Screen options={{ headerTitle: 'Login' }} name="LoginModal" component={Login} />
       </AccountStack.Group>
 
-        </AccountStack.Navigator>
-  ) : <Login navigation={navigation} />
+    </AccountStack.Navigator>
+  ) : <Landing title="Create an account today to have access to all of Social Cove's features" />
 };
 
 

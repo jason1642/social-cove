@@ -9,9 +9,10 @@ import LottieView from 'lottie-react-native'
 
 interface IMainProps {
   navigation: any,
+  title?: string,
 }
 
-const Main: React.FunctionComponent<IMainProps> = ({ navigation }) => {
+const Main: React.FunctionComponent<IMainProps> = ({ navigation, title }) => {
   
   const { colors } = useTheme()
   const styles = useStyles(colors)
@@ -28,13 +29,14 @@ const Main: React.FunctionComponent<IMainProps> = ({ navigation }) => {
       <View style={styles.header}>
          <Text style={styles.title}>Social Cove</Text>
           {/* <Text>{someParam}</Text> */}
-          <Text style={styles.intro}>Made with the love for React</Text>
+        <Text style={styles.intro}>{title || 'Made with the love for React'}</Text>
            <LottieView
             style={{
               flex: 1,
               position: 'relative',
               // maxWidth: '100%',
-              maxHeight: 300
+            maxHeight: 300,
+              alignSelf: 'center',
               }}
               source={require('../../resources/lottie-animation-files/animation.json')}
               autoPlay
@@ -105,9 +107,11 @@ const useStyles = makeStyles((theme, props: any) => ({
   intro: {
     color: props.text,
     textAlign: 'center',
+    maxWidth: '95%',
+    height: 40,
   },
   buttonGroup: {
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
   },
   button: {
     marginVertical: 10,
