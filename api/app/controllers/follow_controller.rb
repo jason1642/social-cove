@@ -41,6 +41,7 @@ class FollowController < ApplicationController
 
 
   def follow_user
+    
     @follow = Follow.new(params[:follow].permit(:followed_id, :follower_id))
     if @follow.save
       render json: {data: @follow, status: :created}

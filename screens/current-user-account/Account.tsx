@@ -42,11 +42,16 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
   }, [user]);
   return user.data && !user.isLoading ? (
 
-    <AccountStack.Navigator>
+    <AccountStack.Navigator
+      
+    >
       <AccountStack.Group>
         <AccountStack.Screen
           name='Main'
-          options={{ headerShown: false, }}
+          options={{
+            headerShown: false,
+            // headerTintColor: 'grey'
+          }}
         >
           {({ navigation }) => <Main navigation={navigation} user={user} />}
         </AccountStack.Screen>

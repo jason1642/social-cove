@@ -41,3 +41,9 @@ export const removeToken = async (user_id?: string) => {
   RNRestart.Restart();
 
 }
+
+
+export const followuser = async (currentUserId: number, userToFollowId: number) => 
+  await api.post('/users/follow', {
+    followed_id: userToFollowId, follower_id: currentUserId
+  }).then(res=>res, err=>err)

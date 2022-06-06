@@ -108,7 +108,8 @@ const App = () => {
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />,
                         headerShown: true,
-                        headerTitleStyle: { color: 'black' }
+                        headerTitleStyle: { color: 'black' },
+                        headerTitleAlign: 'left'
                         
                       }}
                       initialParams={{user_id: user.data ? user.data.id : null}}
@@ -136,7 +137,7 @@ const App = () => {
                     title: user.data ? user.data.username : 'Account',
                     headerTitleAlign: 'left',
                     headerShown: true,
-                    headerTitleStyle: { paddingLeft: 15, fontWeight: 'bold', fontSize: 22 }
+                    headerTitleStyle: {  fontSize: 22 }
                   }}
                 >
                   {({navigation})=><Account navigation={navigation} user={user}/>}

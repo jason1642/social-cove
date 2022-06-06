@@ -31,13 +31,14 @@ const Feed: React.FunctionComponent<IFeedProps> = (
   // }, [route.params]);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    >
       
 
       <Stack.Screen
         name='Main'
         options={{
-          headerTitle:'Home',
+          headerTitle: 'Home',
         }}
       >
         {() => <Tab.Navigator
