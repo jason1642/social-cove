@@ -3,57 +3,44 @@ import { useState, useEffect } from 'react';
 import { Text, View, ScrollView } from 'react-native'
 import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
-import { useSelector} from 'react-redux'
+
 import Guest from './Guest'
 import { removeToken } from '../../api-helpers/users'
-import LogInOutButton from '../../components/buttons/LogInOut'
 import Header from '../../components/account/Header'
-import { showVerboseUserInfo } from '../../api-helpers/users'
 import AccountOptionButton from '../../components/buttons/AccountOptions'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Posts from './Posts';
 import Saved from './Saved';
 
 
+
 interface IMainProps {
   navigation: any,
+  user: any,
 }
 const Tab = createMaterialTopTabNavigator();
 
 
 
-const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
+const Main: React.FunctionComponent<IMainProps> = ({navigation, user}) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const { data, authenticated, token } = useSelector((state: any) => state.user)
-  const [userData, setUserData] = useState<any>()
-  const [requestFulfilled, setRequestFulfilled] = useState<boolean>(false)
+  const { data, authenticated, isLoading, token } = user
   
-
-  useEffect(() => {
-    
-    data && showVerboseUserInfo(data.id).then(res => {
-      setUserData(res.data)
-      // console.log(res.data)
-      setRequestFulfilled(true)
-    }, err=> console.log(err))
-
-    console.log(authenticated)
-    return setRequestFulfilled(false)
-  }, [authenticated, data]);
 
 
   useEffect(() => {
     // data && console.log(data.posts)
+    // console.log(data)
   }, [data]);
 
-  return authenticated ? (
+  return authenticated && !isLoading ? (
     <View style={{flex: 1}}>
 
-      {userData &&
         <View style={{flex:3,}}>
        
-        <Header userData={userData} colors={colors} />
+          <Header userData={data} colors={colors} />
+          
             <View style={styles.buttonOptions}>
         <AccountOptionButton
           name='Edit Profile'
@@ -78,44 +65,16 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation}) => {
         />
       </View>
            </View>
-      }
-
       
-
-      
-
+  
       <View style={{flex: 6}}>
-
-        {
-        requestFulfilled && userData && <Posts navigation={navigation} userPosts={userData.posts} />
-        }
-        
-          {/* <Tab.Navigator
-            
-          >
-        <Tab.Screen
-          
-          name='Posts'
-          component={Posts}
-        />
-        <Tab.Screen
-          name='Saved'
-          component={Saved}
-        />
-          </Tab.Navigator> */}
-      
+        <Posts navigation={navigation} userPosts={data.posts} />
        </View>
       
-      
-
-
+    
       </View>
       )
-    : (
-      <Guest
-        navigation={navigation}
-      />
-  );
+    : (<Guest navigation={navigation}/> );
 };
 
 export default Main;

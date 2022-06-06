@@ -23,19 +23,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   const user = useSelector((state: RootState ) => state.user)
   const [userData, setUserData] = useState<any>()
 
-  useEffect(() => {
-    
-    user && navigation.setOptions({headerTitle: user.data.username,
-     tabBarIcon:()=> <Avatar
-     size={26}
-     icon={{name:'account-circle', type:'material-icons'}}
-     rounded
-     source={{ uri: userData.profile_picture_url }}
-     containerStyle={styles.profile_picture}
-   />})
 
-    
-  }, [user]);
   return (
     <View style={styles.container}>
        <View style={{flex:3,}}>

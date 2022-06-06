@@ -43,13 +43,19 @@ const App = () => {
   const user = useSelector((state: RootState) => state.user)
   // Use setColorTheme dispatch to set the theme based on users preference, or system theme
   const colorTheme = useSelector((state: RootState) => state.colorTheme.theme)
-  const [profilePicture, setProfilePicture] = useState<string | undefined>(undefined)
+  const [profilePicture, setProfilePicture] = useState<React.FunctionComponent>()
   const dispatch = useDispatch()
-
+//////
   useEffect(() => {
     // console.log('Loading status - ', user.isLoading)
     // console.log(user.data)
-    user.data && setProfilePicture(user.data.profile_picture_url)
+    user.data && setProfilePicture(()=>(<Avatar
+      size={56}
+      icon={{name:'account-circle', type:'material-icons'}}
+      rounded
+      source={{ uri: user.data.profile_picture_url }}
+      containerStyle={styles.profile_picture}
+    />))
   }, [user.data]);
 
   useEffect(() => {
@@ -65,13 +71,13 @@ const App = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          {!user.isLoading && !user.authenticated &&
+          {!user.isLoading && !user.authenticated ?
             <Stack.Screen
               name='Landing'
               component={Landing}
-          />}
-          
-              <Stack.Screen name='Home'>
+          />
+          :
+             <Stack.Screen name='Home'>
             { props=> <Tab.Navigator
               screenOptions={{
                 headerStyle: {
@@ -102,32 +108,28 @@ const App = () => {
                       />
 
      
-                   <Tab.Screen
-                      name='Current User Account'
-                      component={Account}
-                      options={{
-                        tabBarIcon: () =>  <Avatar
-                            size={26}
-                            icon={{name:'account-circle', type:'material-icons'}}
-                            rounded
-                            source={{ uri:  profilePicture }}
-                            containerStyle={styles.profile_picture}
-                          />,
-                        title: user.data ? user.data.username : 'Account',
-                        headerTitleAlign: 'left',
-                        headerShown: true,
-                        headerTitleStyle: {paddingLeft: 15,fontWeight: 'bold', fontSize: 22}
-                      }}
-
-                    />
-                    {/* <Stack.Screen
-            options={{ headerShown: false }}
-            name="Landing"
-            component={Landing}
-          /> */}
+                 <Tab.Screen
+                  name='Current User Account'
+                  options={{
+                    tabBarIcon: () => <Avatar
+                      size={30}
+                      icon={{ name: 'account-circle', type: 'material-icons' }}
+                      rounded
+                      source={{ uri: user.data && user.data.profile_picture_url }}
+                      containerStyle={styles.profile_picture}
+                    />,
+                    title: user.data ? user.data.username : 'Account',
+                    headerTitleAlign: 'left',
+                    headerShown: true,
+                    headerTitleStyle: { paddingLeft: 15, fontWeight: 'bold', fontSize: 22 }
+                  }}
+                >
+                  {({navigation})=><Account navigation={navigation} user={user}/>}
+                  </Tab.Screen>
+              
                   </Tab.Navigator>}
             
-                </Stack.Screen>
+                </Stack.Screen>}
                   
                 
            
@@ -144,6 +146,6 @@ const styles = StyleSheet.create({
   
   profile_picture: { 
     alignSelf: 'center',
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
   }
 })

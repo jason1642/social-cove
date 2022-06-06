@@ -1,45 +1,53 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-// import Posts from './Posts';
-// import Saved from './Saved';
-// import { Icon } from "@rneui/themed";
-import { useTheme } from '@react-navigation/native'
+import { StyleSheet, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Register from '../Register'
 import Main from './Main'
 import Login from '../Login'
 import Settings from './Settings'
-
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Posts from './Posts';
-import Saved from './Saved';
 import Post from '../Post';
-import EditProfile from './EditProfile';
-// const myIcon = <Icon
-//   name="heartbeat"
-//   type="font-awesome"
-//   size={30}
-//   color="blue"
-//   onPress={()=>console.log('This is from the account bottom nav icon')}
-// />;
-interface IAccountProps { }
+import EditProfile from './EditProfile'
+import { Avatar } from '@rneui/themed'
+import { RootState } from '../../redux/store';
+import { useSelector} from 'react-redux'
+
+
+interface IAccountProps { 
+  navigation?: any,
+  user: any,
+}
 const AccountStack = createNativeStackNavigator()
-const Tab = createMaterialTopTabNavigator();
 
 
-const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
+const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
+  const user = useSelector((state: RootState) => state.user)
   
 
-  return (
+  useEffect(() => {
+    
+    user.data && navigation.setOptions({
+     headerTitle: user.data.username,
+     tabBarIcon:()=> <Avatar
+     size={56}
+     icon={{name:'account-circle', type:'material-icons'}}
+     rounded
+     source={{ uri: user.data.profile_picture_url }}
+     containerStyle={styles.profile_picture}
+   />})
+
+    console.log(user.data.profile_picture_url)
+  }, [user]);
+  return user.data && !user.isLoading ?  (
 
     <AccountStack.Navigator>
       <AccountStack.Group>
         <AccountStack.Screen
           name='Main'
-          component={Main}
           options={{ headerShown: false, }}
-       />
+        >
+          {({ navigation }) => <Main navigation={navigation} user={user}/>}
+       </AccountStack.Screen>
 
         <AccountStack.Screen
           name='Post Info'
@@ -62,8 +70,14 @@ const Account: React.FunctionComponent<IAccountProps> = ({ }) => {
       </AccountStack.Group>
 
         </AccountStack.Navigator>
-  );
+  ) : <><Text>NOTHING</Text></>
 };
 
 
 export default Account;
+const styles = StyleSheet.create({
+  profile_picture: { 
+    alignSelf: 'center',
+    backgroundColor: 'green',
+  }
+})

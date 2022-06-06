@@ -52,7 +52,9 @@ class AuthenticationController < ApplicationController
 
   def verify_and_verbose_info
     render json: @current_user.as_json(include: {
-      posts:{},
+      posts:{
+        methods: :image_url
+      },
       followers: {},
       following: {},
     },methods: :profile_picture_url)
