@@ -38,19 +38,29 @@ export const userSlice = createSlice({
       return ({...state, isLoading: false})
     })
     builder.addCase(verifyUser.pending, (state: any, action) => {
-      // console.log('Pending...')
+      console.log('Pending verify user...')
       state.isLoading = true
+      state.data = undefined
       // console.log(state)
-      return state
+      // return state
     })
     builder
       
       .addCase(verifyUser.fulfilled, (state: any, action) => {
-      // console.log(action.payload)
-      // console.log('No longer pendings...')
-      state = action.payload
-      return ({...state, isLoading: false,})
+      console.log(action.payload)
+      console.log('No longer pending user verify...')
+        state.data = action.payload.data
+        state.isLoading = false
+        state.authenticated = action.payload.authenticated
+      // return ({...state, isLoading: false,})
       })
+      .addCase(verifyUser.rejected, (state: any, action) => {
+        // console.log(action.payload)
+        console.log('REJECETED VERIFY USER')
+          state.data = undefined
+          state.isLoading = false
+        // return ({...state, isLoading: false,})
+        })
       
       .addCase(editUser.fulfilled, (state: any, action) => {
       console.log('Finished editing user')

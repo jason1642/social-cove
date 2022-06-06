@@ -25,7 +25,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   useEffect(() => {
     
     showVerboseUserInfo(user_id).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setUserData(res.data)
       navigation.setOptions({headerTitle: res.data.username})
     })

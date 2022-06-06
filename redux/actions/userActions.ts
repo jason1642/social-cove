@@ -38,14 +38,16 @@ export const verifyUser = createAsyncThunk('user/verify', async (thunkAPI) => {
   const token = await setTokenHeader(api)
   
 
-
-      if (token) {
-      const response = await api.get('/auth/verify/verbose-info')
-      console.log('verifying....')
-      // console.log(response.data.profile_picture_url)
-      return response.data.username ?
-        { data: response.data, authenticated: true, token: token }
+  console.log(token)
+  if (token) {
+        console.log('verifying....')
+    return await api.get('/auth/verify/verbose-info').then(res => {
+          // console.log(res.data)
+        return res.data.username ?
+        {data: res.data, authenticated: true}
         : { data: undefined, authenticated: false, token: undefined }
+      })
+      
       } else {
         return { data: undefined, authenticated: false, token: undefined }
     }

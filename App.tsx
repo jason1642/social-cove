@@ -71,12 +71,13 @@ const App = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          {!user.isLoading && !user.authenticated ?
+          {!user.isLoading && !user.authenticated &&
             <Stack.Screen
               name='Landing'
               component={Landing}
-          />
-          :
+            />
+          }
+          
              <Stack.Screen name='Home'>
             { props=> <Tab.Navigator
               screenOptions={{
@@ -129,7 +130,7 @@ const App = () => {
               
                   </Tab.Navigator>}
             
-                </Stack.Screen>}
+                </Stack.Screen>
                   
                 
            

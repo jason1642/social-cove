@@ -36,7 +36,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
      containerStyle={styles.profile_picture}
    />})
 
-    console.log(user.data.profile_picture_url)
+    console.log(user) 
   }, [user]);
   return user.data && !user.isLoading ?  (
 
