@@ -121,8 +121,9 @@ const useStyles = makeStyles((theme, props: any) => ({
   },
   input: {
     color: 'black',
-    backgroundColor: 'white',
-    borderColor: 'black',
+    // backgroundColor: 'white',
+    borderColor: props.border,
+    borderWidth: 1,
     fontSize: 14,
     paddingVertical: 8,
     paddingHorizontal: 4,

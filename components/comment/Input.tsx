@@ -48,10 +48,13 @@ export default Input;
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
+    color: 'black',
   },
   input: {
-    backgroundColor: 'grey',
+    backgroundColor: 'darkgrey',
     padding: 5,
     borderRadius: 3,
+    color: 'black',
+    minHeight: 32,
   },
 })

@@ -16,12 +16,13 @@ export const DarkTheme = {
 
 export const LightTheme = {
   dark: false,
+
   colors: {
     ...DefaultTheme.colors,
-    background: "purple",
-    primary: 'purple', 
-    text: 'red',
-    border: 'black',
+    background: "white",
+    primary: 'blue', 
+    text: 'black',
+    border: 'grey',
   }
 }
 

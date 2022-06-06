@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { Avatar } from '@rneui/themed';
 import { useTheme } from '@react-navigation/native'
+import { makeStyles } from '@rneui/themed'
+
 
 interface IBodyProps {
   postData: any,
@@ -11,7 +13,7 @@ interface IBodyProps {
 const Body: React.FunctionComponent<IBodyProps> = ({ postData, colors }) => {
   const postInfo = postData
   // console.log(postData)
-  // const styles = useStyles(colors)
+  const styles = useStyles(colors)
   return (
     <View style={styles.container}>
       <View>
@@ -43,7 +45,7 @@ export default Body
 
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props: any) => ({
   container: {
     padding: 5,
     maxHeight: 120,
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     
   },
   likedByRow: { 
-    color: 'white',
+    color: props.text,
     paddingLeft: 5,
   },
   username: {
@@ -73,4 +75,4 @@ const styles = StyleSheet.create({
     fontSize: 13,
     // lineHeight: 60,
   },
-})
+}))

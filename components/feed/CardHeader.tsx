@@ -2,17 +2,18 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import {Avatar, Icon } from '@rneui/themed'
+import {Avatar, Icon, makeStyles  } from '@rneui/themed'
 
 
 interface ICardHeaderProps {
   postData: any,
   navigation: any,
+  colors: any,
 }
 
-const CardHeader: React.FunctionComponent<ICardHeaderProps> = ({ postData, navigation }) => {
+const CardHeader: React.FunctionComponent<ICardHeaderProps> = ({ postData, navigation, colors }) => {
   // console.log(postData.user)
-
+  const styles = useStyles(colors)
   return (
     // <View style={styles.container}>
     <Pressable
@@ -20,21 +21,15 @@ const CardHeader: React.FunctionComponent<ICardHeaderProps> = ({ postData, navig
        onPress={()=>navigation.navigate('Account', {user_id: postData.user.id})}
       >
 
-{postData.user.profile_picture_url === null ?
-        <Avatar
-          size={45}
-          rounded
-          // iconStyle={{height: 30, width: 30}}
-          icon={{name:'account-circle', type:'material-icons'}}
-      />
-        :
+
         <Avatar
           icon={{name:'account-circle', type:'material-icons'}}
           source={{uri: postData.user.profile_picture_url}}
-          size={45}
+        size={45}
           rounded
+          containerStyle={styles.avatar}
      />
-      }        
+            
 
       
       <Text style={styles.title}>{postData.user.username}</Text>
@@ -46,15 +41,18 @@ const CardHeader: React.FunctionComponent<ICardHeaderProps> = ({ postData, navig
 export default CardHeader;
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props: any) => ({
   container: {
     flexDirection: 'row',
     // backgroundColor: 'teal',
   },
   title: {
-    color: 'white',
+    color: props.text,
     fontSize: 20,
     padding: 15
   },
-
-})
+  avatar: {
+    marginLeft: 10,
+    backgroundColor: 'grey',
+  }
+}))

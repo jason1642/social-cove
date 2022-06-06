@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, Image, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
+import { Image } from '@rneui/themed'
 interface IImageContainerProps {
   imageUrl: string,
 }
@@ -10,7 +11,8 @@ const ImageContainer: React.FunctionComponent<IImageContainerProps> = ({ imageUr
   return (<View style={styles.container}>
     <Image
       style={styles.image}
-      source={{uri: imageUrl}}
+      source={{ uri: imageUrl }}
+      PlaceholderContent={<Text>Can't load image</Text>}
     />
   </View>);
 };

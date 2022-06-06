@@ -9,15 +9,16 @@ import { StackActions } from '@react-navigation/native'
 interface IFeedCardProps {
   postData: any,
   navigation: any,
+  colors: any,
 }
 
-const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigation }) => {
+const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigation, colors }) => {
   // console.log(postData)
 
 
   return (
     <View style={styles.container}>
-      <CardHeader navigation={navigation} postData={postData} />
+      <CardHeader colors={colors} navigation={navigation} postData={postData} />
       
       <Pressable onPress={() => {
         // navigation.setOptions({title: 'UPDATED!'})

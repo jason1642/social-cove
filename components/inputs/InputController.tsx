@@ -67,6 +67,7 @@ export default App;
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
     marginVertical: 5,
+    border: props.border,
   },
   label: {
     color: props.text

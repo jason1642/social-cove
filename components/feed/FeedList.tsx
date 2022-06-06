@@ -6,6 +6,8 @@ import {getPopularPosts} from '../../api-helpers/posts'
 import Skeleton from './Skeleton'
 import { RootState } from '../../redux/store'
 import {useSelector} from 'react-redux'
+import { makeStyles } from '@rneui/themed'
+import {useTheme,useFocusEffect} from '@react-navigation/native'
 
 interface IListProps {
   route?: any,
@@ -13,7 +15,9 @@ interface IListProps {
 }
 
 const FeedList: React.FunctionComponent<IListProps> = ({ route, navigation }) => {
-  // const { query } = route.params
+  const { colors } = useTheme()
+  const styles = useStyles(colors)
+
   const user = useSelector((state: RootState) => state.user)
   const [postsArray, setpostsArray] = useState<Array<any>>();
   useEffect(() => {
@@ -30,7 +34,7 @@ const FeedList: React.FunctionComponent<IListProps> = ({ route, navigation }) =>
     <FlatList
       contentContainerStyle={styles.container}
       data={postsArray.reverse()}
-      renderItem={(item) => <FeedCard navigation={navigation} postData={item.item} />}
+      renderItem={(item) => <FeedCard colors={colors} navigation={navigation} postData={item.item} />}
     />
   ) : <Skeleton />
 };
@@ -39,11 +43,12 @@ export default FeedList;
 
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props:any) => ({
+
   container: {
     paddingVertical: 5,
     // backgroundColor: 'grey',
 
   }
 }
-)
+))

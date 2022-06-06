@@ -52,7 +52,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
         />
       <AccountOptionButton
-          name='Follow'
+          name='Message'
           buttonProps={{loading: userData ? false : true}}
           buttonFunction={() => navigation.navigate('')}
 

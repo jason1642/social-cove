@@ -82,9 +82,9 @@ const App = () => {
             { props=> <Tab.Navigator
               screenOptions={{
                 headerStyle: {
-                  backgroundColor: '#414040',
+                  backgroundColor: '#84b4dd',
                 },
-                headerTintColor: '#fff',
+                headerTintColor: '#282331',
                 headerTitleStyle: {
                   fontWeight: 'bold',
                 },
@@ -104,6 +104,8 @@ const App = () => {
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />,
                         headerShown: true,
+                        headerTitleStyle: { color: 'black' }
+                        
                       }}
                       initialParams={{user_id: user.data ? user.data.id : null}}
                       />

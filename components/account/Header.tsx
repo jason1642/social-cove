@@ -33,7 +33,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
         source={{uri: userData.profile_picture_url}}
         rounded
         containerStyle={{ backgroundColor: 'orange', }}
-        iconStyle={{backgroundColor: 'orange'}}
+        // iconStyle={{backgroundColor: 'orange'}}
         />
       
       <View style={styles.columnWrapper}>

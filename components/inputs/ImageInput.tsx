@@ -16,7 +16,7 @@ interface IAppProps {
 }
 
 
-const ImageInput: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
+const ImageInput: React.FunctionComponent<IAppProps> = ({ name, control, inputStyle, type, inputProps, controllerProps, extraRules }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
@@ -31,7 +31,7 @@ const ImageInput: React.FunctionComponent<IAppProps> = ({ name, control, inputSt
           style={inputStyle}
           onBlur={onBlur}
           onChangeText={onChange}
-          value={value.uri ? value.uri : 'Image!'}
+          value={value.uri ? value.uri : 'Image url'}
           placeholder={name}
           textContentType={type}
           {...inputProps}

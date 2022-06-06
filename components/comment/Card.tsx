@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme, props: any) => ({
     fontSize: 14,
   },
   username: { 
-    color: 'white',
+    color: props.text,
     fontWeight: 'bold',
     padding: 2,
   }
