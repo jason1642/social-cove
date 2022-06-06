@@ -22,9 +22,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    height: 300,
-    minWidth: '95%',
-    maxWidth: '98%',
+    minHeight: 300,
+    maxHeight: 340,
+    width: '100%',
+    // maxWidth: '99%',
     
   }
 })

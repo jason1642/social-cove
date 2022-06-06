@@ -16,23 +16,32 @@ const Body: React.FunctionComponent<IBodyProps> = ({ postData, colors }) => {
   const styles = useStyles(colors)
   return (
     <View style={styles.container}>
-      <View>
+      
+      
+      {/* <View style={styles.likedByRowContainer}>
         <Text style={styles.likedByRow}>
-          <Avatar
-          avatarStyle={styles.avatar}
           
-        rounded
-        size={20}
-        source={{ uri: postInfo.user.profile_picture_url}}
-        />
           Liked By </Text>
-      </View>
+      </View> */}
+      
+      
+      
       <Text style={styles.bodyText}>
 
           
     
         
-        
+      {/* <Avatar
+          avatarStyle={styles.avatar}
+          icon={{name:'account-circle', type:'material-icons'}}
+
+        rounded
+            size={20}
+            containerStyle={{ backgroundColor: "#3d4db7"}}
+        source={{ uri: postInfo.user.profile_picture_url}}
+        /> */}
+
+
         <Text style={styles.username}>{postInfo.user.username}: </Text>
         
         <Text style={styles.description}>{postInfo.content}</Text>
@@ -57,11 +66,16 @@ const useStyles = makeStyles((theme, props: any) => ({
   likedByRow: { 
     color: props.text,
     paddingLeft: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  likedByRowContainer: {
+    justifyContent: 'center'
   },
   username: {
     marginLeft: 6,
     fontSize: 16,
-    color: 'white',
+    color: props.text,
     fontWeight: 'bold',
     // lineHeight: 60,
   },
@@ -71,7 +85,7 @@ const useStyles = makeStyles((theme, props: any) => ({
     // lineHeight: 60,
   },
   description: {
-    color: 'white',
+    color: props.text,
     fontSize: 13,
     // lineHeight: 60,
   },
