@@ -29,6 +29,11 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
     }
   })
   
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: 'Login'
+    })
+  }, []);
   const onSubmit = async (data: any) => 
     await loginUser(data).then(res => {
         if (res.error) {

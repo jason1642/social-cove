@@ -70,7 +70,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
       </AccountStack.Group>
 
         </AccountStack.Navigator>
-  ) : <><Text>NOTHING</Text></>
+  ) : <Login navigation={navigation} />
 };
 
 

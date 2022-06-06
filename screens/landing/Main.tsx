@@ -46,28 +46,29 @@ const Main: React.FunctionComponent<IMainProps> = ({ navigation }) => {
       
       <View style={styles.buttonGroup}>
          <Button
-      title="Log in"
-      type='outline'
-      onPress={() =>
-      navigation.navigate('Login')}
-      style={styles.button}
-      />
+          title="Log in"
+          type='outline'
+          onPress={() =>
+          navigation.navigate('Login')}
+          buttonStyle={styles.button}
+        />
     <Button
       title="Register"
       type='outline'
       onPress={() =>
       navigation.navigate('Register')}
-      style={styles.button}
+      buttonStyle={styles.button}
     />
     <Button
         title="Skip for now"
-        type='outline'
+          type='outline'
+          // color={'error'}
         onPress={() =>
         navigation.reset({
           index: 0,
           routes: [{name: 'Home'}]
         })}
-        style={styles.button}
+        buttonStyle={styles.button}
     />
       </View>
    
@@ -111,5 +112,6 @@ const useStyles = makeStyles((theme, props: any) => ({
   button: {
     marginVertical: 10,
     minWidth: '70%',
+    borderWidth: 1,
   }
 }))
