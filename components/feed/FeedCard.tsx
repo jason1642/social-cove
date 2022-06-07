@@ -28,7 +28,7 @@ const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigatio
         imageUrl={postData.image_url}
       />
       </Pressable>
-      <Body postInfo={postData}/>
+      <Body colors={colors} postInfo={postData}/>
     </View>
   );
 };

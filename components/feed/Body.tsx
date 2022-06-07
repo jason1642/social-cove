@@ -1,14 +1,24 @@
-import { Avatar } from '@rneui/themed';
+import { Avatar, makeStyles, } from '@rneui/themed';
 import * as React from 'react';
 import { StyleSheet, Text, View, } from 'react-native'
+import { useTheme } from '@react-navigation/native'
+
+
+
 interface ICardFooterProps {
   postInfo: any,
+  colors: any,
 }
 
-const CardBody: React.FunctionComponent<ICardFooterProps> = ({postInfo}) => {
+const CardBody: React.FunctionComponent<ICardFooterProps> = ({ postInfo, colors }) => {
+
+  const styles = useStyles(colors)
   return (
     <View style={styles.container}>
-      <View>
+
+
+
+      {/* <View>
         <Text style={styles.likedByRow}>
           <Avatar
           avatarStyle={styles.avatar}
@@ -18,7 +28,12 @@ const CardBody: React.FunctionComponent<ICardFooterProps> = ({postInfo}) => {
         source={{ uri: postInfo.user.profile_picture_url}}
         />
           Liked By </Text>
-      </View>
+      </View> */}
+
+
+
+
+
       <Text style={styles.bodyText}>
 
           
@@ -36,7 +51,7 @@ const CardBody: React.FunctionComponent<ICardFooterProps> = ({postInfo}) => {
 export default CardBody;
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props:any) => ({
   container: {
     padding: 5,
     maxHeight: 120,
@@ -45,13 +60,13 @@ const styles = StyleSheet.create({
     
   },
   likedByRow: { 
-    color: 'white',
+    color: props.text,
     paddingLeft: 5,
   },
   username: {
     marginLeft: 6,
     fontSize: 16,
-    color: 'white',
+    color: props.text,
     fontWeight: 'bold',
     // lineHeight: 60,
   },
@@ -61,8 +76,8 @@ const styles = StyleSheet.create({
     // lineHeight: 60,
   },
   description: {
-    color: 'white',
+    color: props.text,
     fontSize: 13,
     // lineHeight: 60,
   },
-})
+}))
