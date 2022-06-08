@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View } from 'react-native'
 import { makeStyles, Avatar, } from '@rneui/themed'
 import StatColumn from './StatColumn';
@@ -16,13 +16,15 @@ interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => {
   const { followers, following, posts } = userData
   // console.log(userData.profile_picture_url)
-  const values = [
-    { name: 'Posts', amount: posts.length },
-    { name: 'Followers', amount: followers.length },
-    { name: 'Following', amount: following.length}
-  ]
 
-
+  const [values, setvalues] = useState<Array<any>>([]);
+  useEffect(() => {
+    userData && setvalues([
+      { name: 'Posts', amount: posts.length },
+      { name: 'Followers', amount: followers.length },
+      { name: 'Following', amount: following.length}
+    ])
+  }, [userData]);
   const styles = useStyles(colors)
   return (<View style={styles.container}>
     <View style={styles.topRow}>

@@ -4,12 +4,13 @@ import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 import { StyleSheet, Text, View, } from 'react-native'
 import Header from '../components/account/Header'
-import { showVerboseUserInfo } from '../api-helpers/users'
+import { showVerboseUserInfo, followUser } from '../api-helpers/users'
 import Posts from './current-user-account/Posts'
 import AccountOptionButton from '../components/buttons/AccountOptions'
 import HeaderSkeleton from '../components/account/HeaderSkeleton'
 import PostsGroupSkeleton from '../components/account/PostsGroupSkeleton';
-
+import { RootState } from '../redux/store'
+import { useSelector } from 'react-redux'
 interface IAccountProps {
   route: any,
   navigation: any,
@@ -19,7 +20,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   const { user_id} = route.params
   const { colors } = useTheme()
   const styles = useStyles(colors)
-
+  const user = useSelector((state: RootState) => state.user)
   const [userData, setUserData] = useState<any>()
 
   useEffect(() => {
@@ -43,12 +44,12 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
       
 
-      <View style={styles.buttonOptions}>
+      {userData &&user.authenticated && userData.id !== user.data.id && <View style={styles.buttonOptions}>
       <AccountOptionButton
           name='Follow'
           // color='grey'
           buttonProps={{loading: userData ? false : true}}
-          buttonFunction={() => navigation.navigate('')}
+          buttonFunction={() => followUser(user.data.id, userData.id)}
 
         />
       <AccountOptionButton
@@ -58,7 +59,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
         />
         
-        </View>
+        </View>}
         </View>
       <View style={{ flex: 6 }}>
         
