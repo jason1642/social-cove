@@ -46,7 +46,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
       {userData &&user.authenticated && userData.id !== user.data.id && <View style={styles.buttonOptions}>
       <AccountOptionButton
-          name='Follow'
+          name={'Follow'}
           // color='grey'
           buttonProps={{loading: userData ? false : true}}
           buttonFunction={() => followUser(user.data.id, userData.id)}
