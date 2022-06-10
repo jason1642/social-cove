@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native'
+// import { useState, useEffect } from 'react';
+import { Text, Pressable } from 'react-native'
 import {Avatar } from '@rneui/themed'
 import { makeStyles } from '@rneui/themed';
 import { StackActions } from '@react-navigation/native'

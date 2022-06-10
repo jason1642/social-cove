@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
-import { StyleSheet, Text, View, } from 'react-native'
+import { View, } from 'react-native'
 import Header from '../components/account/Header'
 import { showVerboseUserInfo, followUser } from '../api-helpers/users'
 import Posts from './current-user-account/Posts'
@@ -24,7 +24,6 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   const [userData, setUserData] = useState<any>()
 
   useEffect(() => {
-    
     showVerboseUserInfo(user_id).then(res => {
       // console.log(res.data)
       setUserData(res.data)

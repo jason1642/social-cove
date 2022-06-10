@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, TextInput, StyleSheet, } from 'react-native'
+import { View, StyleSheet, } from 'react-native'
 import InputController from '../../components/inputs/InputController'
 import {useForm } from "react-hook-form"
 import {createComment } from '../../api-helpers/posts'

@@ -50,7 +50,6 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
 
     </View>
      
-      
         </View>
         
 
