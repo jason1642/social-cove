@@ -31,7 +31,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ postData, colors, navig
 
    );
  };
- 
+   
  export default Header;
  
  const useStyles = makeStyles((theme, props:any) => ({
