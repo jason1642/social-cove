@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, FlatList } from 'react-native'
 import axios from 'axios'
 import { makeStyles, Divider } from '@rneui/themed';
 import { useTheme } from '@react-navigation/native'
 import Header from '../components/posts/info-page/Header';
 import MainImage from '../components/posts/info-page/MainImage'
 import Body from '../components/posts/info-page/Body';
-import CommentSection from '../components/comment/Section'
+// import CommentSection from '../components/comment/Section'
+import Card from '../components/comment/Card'
+import Input from '../components/comment/Input'
+
 
 interface IPostProps {
   postData: any, 
@@ -36,38 +39,53 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
  
 
   }, [postId]); 
-  return (
-    <ScrollView>
-      { postData ?<>
-        <Header
+
+
+  const UpperBodyComponents = postData && <>
+  <Header
           navigation={navigation}
           colors={colors}
           postData={postData}
         />
         <MainImage imageUrl={postData.image_url}/>
-        <Body
+    <View style={{padding: 10}}>
+      <Body
           colors={colors}
           postData={postData}
         />
         <Divider
           style={{width: '95%', alignSelf: 'center'}}
           width={1}
-        />
-        <CommentSection
-          postId={postData.id}
-          navigation={navigation}
-          colors={colors}
-          commentArray={postData.comments}
-          />
-      </>
+    />
+          <Text style={styles.title}>{postData.comments.length} Comment(s)</Text>
+    <Input postId={postId} />
+        </View>
+        
+    
+
+  </>
+
+
+  return postData ?(
+    // <ScrollView>
+
+      
+        
+        
+    <FlatList
+      style={styles.container}
+          data={postData.comments}
+          renderItem={({ item }) => <Card navigation={navigation} key={item.key} colors={colors} commentData={item} />}
+          ListHeaderComponent={UpperBodyComponents}
+        />)
         :
         <View>
           <Text>Can't load post data</Text>
         </View>
     }
-    </ScrollView>
-  );
-};
+    // </ScrollView>
+  
+
 
 export default Post;
 
@@ -76,5 +94,8 @@ export default Post;
 const useStyles = makeStyles((theme, props:any) => ({
   title: {
     color: props.text
-  }
+  },
+  container: {
+    paddingVertical: 10,
+  },
 }))

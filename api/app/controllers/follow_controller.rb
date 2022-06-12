@@ -5,7 +5,7 @@ class FollowController < ApplicationController
   # GET /posts or /posts.json
  def following_list
   @user = User.find(params[:id])
-  render json: @user.followings
+  render json: @user.following
  end
 
  def followers_list
@@ -24,26 +24,9 @@ class FollowController < ApplicationController
   end
 
 
-  # POST /posts or /posts.json
-  def create
-    @follow = Follow.new(follow_params)
-    # respond_to do |format|
-    
-    return render json: @current_user.as_json(include: {
-      following: {}
-      })
-      if @follow.save
-        # format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
-        render json: { data: @follow, status: :created }
-      else
-        # format.html { render :new, status: :unprocessable_entity }
-        render json: {  errors: @follow.errors, status: :unprocessable_entity }
-      end
-    # end
-  end
 
 
-
+ # Follows user if not already following, unfollows if association already exists and delete association
   def follow_user
     
     @follow = Follow.new(params[:follow].permit(:followed_id, :follower_id))

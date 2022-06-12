@@ -4,6 +4,7 @@ import { makeStyles } from '@rneui/themed'
 
 
 
+
 interface ICardProps {
   commentData: any,
   colors: any,
@@ -15,15 +16,16 @@ const Card: React.FunctionComponent<ICardProps> = ({colors, commentData, navigat
   const styles = useStyles(colors)
   return (
     <View style={styles.container}>
-      <Text>
-        <Pressable
-          onPress={() => {
+      <Text
+      onPress={() => {
             
-            navigation.navigate('User Account', { user_id: commentData.user.id })
-            
-          }}
-        ><Text style={styles.username}>{commentData.user.username}: </Text>
-        </Pressable>
+        navigation.navigate('Account', { user_id: commentData.user.id })
+        
+      }}
+      >
+        
+          <Text style={styles.username}>{commentData.user.username}: </Text>
+ 
         <Text style={styles.content}>
         {commentData.content}
         </Text>
@@ -40,22 +42,28 @@ export default Card;
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
     padding: 5,
+    width: '95%',
+    alignSelf: 'center',
     borderRadius: 5,
     // backgroundColor: 'grey',
     borderColor: 'grey',
     borderWidth: 1,
     marginVertical: 5,
-    minHeight: 40,
+    // minHeight: 30,
     maxHeight: 200,
-    justifyContent: 'center',
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
+
   },
   content: {
     color: props.text,
-    fontSize: 14,
+    // fontSize: 14,
+    borderWidth: 1,
+    borderColor: 'black',
   },
   username: { 
     color: props.text,
     fontWeight: 'bold',
-    padding: 2,
+    // padding: 2,
   }
 }))

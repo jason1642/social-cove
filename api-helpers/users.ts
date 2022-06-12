@@ -7,6 +7,9 @@ const api = axios.create({
   baseURL: 'http://localhost:3000',
 })
 
+
+
+
 export const loginUser = async (data: any) =>
   await api.post('/auth/login', data).then(async res => {
     // console.log(res.data)
@@ -47,6 +50,6 @@ export const followUser = async (currentUserId: number, userToFollowId: number) 
   await api.post('/users/follow', {
     followed_id: userToFollowId, follower_id: currentUserId
   }).then(res => {
-    console.log(res)
+    console.log(res.data)
     return res
   }, err => err)

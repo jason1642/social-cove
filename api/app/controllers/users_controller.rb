@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   def posts
     @user = User.find_by(id: params[:id])
     @posts = Post.where(user_id: @user)
-render json: @posts.as_json(include: {
+  render json: @posts.as_json(include: {
       user: {},
       comments:{},
       image: {}

@@ -20,7 +20,11 @@ const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
 
   const onSubmit = async (data: any) => {
     console.log(data)
-    await createComment({ content: data.userComment }, postId)
+    await createComment({ content: data.userComment }, postId).then(res => {
+      console.log(res.data)
+    }, err => {
+      console.log(err)
+    })
   }
 
   const onError = async () => {

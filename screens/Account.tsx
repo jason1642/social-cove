@@ -22,6 +22,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   const styles = useStyles(colors)
   const currentUser = useSelector((state: RootState) => state.user)
   const [userData, setUserData] = useState<any>()
+  const [isFollowing, setIsFollowing] = useState<boolean>(false);
 
   useEffect(() => {
     showVerboseUserInfo(user_id).then(res => {
@@ -29,8 +30,14 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
       setUserData(res.data)
       navigation.setOptions({headerTitle: res.data.username})
     })
-    currentUser && console.log(currentUser.data.following)
   }, []);
+
+  useEffect(() => {
+    currentUser && userData && 
+    setIsFollowing(currentUser.data.following.find(({id}: {id: number})=>id === userData.id) ? true : false)
+  }, [currentUser, userData]);
+
+
   return (
     <View style={styles.container}>
        <View style={{flex:3,}}>
@@ -44,12 +51,16 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
       
 
-      {userData &&currentUser.authenticated && userData.id !== currentUser.data.id && <View style={styles.buttonOptions}>
-      <AccountOptionButton
-          name={currentUser.data.following.find((ele:number)=>ele.id === userData.id) ? 'Unfollow': 'Follow'}
+        {userData && currentUser.authenticated && userData.id !== currentUser.data.id &&
+          <View style={styles.buttonOptions}>
+          <AccountOptionButton
+            name={isFollowing ? 'Unfollow' : 'Follow'}
           // color='grey'
           buttonProps={{loading: userData ? false : true}}
-          buttonFunction={() => followUser(currentUser.data.id, userData.id)}
+              buttonFunction={() => {
+                followUser(currentUser.data.id, userData.id)
+                setIsFollowing(prev=> !prev)
+              }}
 
         />
       <AccountOptionButton
