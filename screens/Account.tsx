@@ -20,7 +20,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   const { user_id} = route.params
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const user = useSelector((state: RootState) => state.user)
+  const currentUser = useSelector((state: RootState) => state.user)
   const [userData, setUserData] = useState<any>()
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
       setUserData(res.data)
       navigation.setOptions({headerTitle: res.data.username})
     })
+    currentUser && console.log(currentUser.data.following)
   }, []);
   return (
     <View style={styles.container}>
@@ -43,12 +44,12 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
       
 
-      {userData &&user.authenticated && userData.id !== user.data.id && <View style={styles.buttonOptions}>
+      {userData &&currentUser.authenticated && userData.id !== currentUser.data.id && <View style={styles.buttonOptions}>
       <AccountOptionButton
-          name={'Follow'}
+          name={currentUser.data.following.find((ele:number)=>ele.id === userData.id) ? 'Unfollow': 'Follow'}
           // color='grey'
           buttonProps={{loading: userData ? false : true}}
-          buttonFunction={() => followUser(user.data.id, userData.id)}
+          buttonFunction={() => followUser(currentUser.data.id, userData.id)}
 
         />
       <AccountOptionButton
