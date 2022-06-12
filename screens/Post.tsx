@@ -7,7 +7,6 @@ import { useTheme } from '@react-navigation/native'
 import Header from '../components/posts/info-page/Header';
 import MainImage from '../components/posts/info-page/MainImage'
 import Body from '../components/posts/info-page/Body';
-// import CommentSection from '../components/comment/Section'
 import Card from '../components/comment/Card'
 import Input from '../components/comment/Input'
 
