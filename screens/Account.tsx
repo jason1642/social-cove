@@ -43,7 +43,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
        <View style={{flex:3,}}>
       {userData ?
         
-        <Header userData={userData} colors={colors} />
+          <Header navigation={navigation} userData={userData} colors={colors} />
           :
           <HeaderSkeleton />
      

@@ -32,14 +32,10 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
   } 
   
   useEffect(() => {
-    // console.log(postId)
-
     fetchPostData()
- 
-
   }, [postId]); 
 
-
+ 
   const UpperBodyComponents = postData && <>
   <Header
           navigation={navigation}
@@ -53,7 +49,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
           postData={postData}
         />
         <Divider
-          style={{width: '95%', alignSelf: 'center'}}
+        style={styles.divider}
           width={1}
     />
           <Text style={styles.title}>{postData.comments.length} Comment(s)</Text>
@@ -65,13 +61,8 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
   </>
 
 
-  return postData ?(
-    // <ScrollView>
-
-      
-        
-        
-    <FlatList
+  return postData ?
+    (<FlatList
       style={styles.container}
           data={postData.comments}
           renderItem={({ item }) => <Card navigation={navigation} key={item.key} colors={colors} commentData={item} />}
@@ -92,9 +83,15 @@ export default Post;
 
 const useStyles = makeStyles((theme, props:any) => ({
   title: {
-    color: props.text
+    color: props.text,
+    marginVertical: 5,
   },
   container: {
-    paddingVertical: 10,
+    paddingVertical: 5,
   },
+  divider: {
+    width: '98%',
+    marginVertical: 5,
+    alignSelf: 'center'
+  }
 }))

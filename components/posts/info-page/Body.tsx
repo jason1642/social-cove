@@ -56,7 +56,7 @@ export default Body
 
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
-    padding: 5,
+    // padding: 5,
     maxHeight: 120,
     marginBottom: 15,
   },

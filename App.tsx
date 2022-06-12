@@ -162,6 +162,6 @@ const styles = StyleSheet.create({
   
   profile_picture: { 
     alignSelf: 'center',
-    backgroundColor: 'green',
+    backgroundColor: 'orange',
   }
 })

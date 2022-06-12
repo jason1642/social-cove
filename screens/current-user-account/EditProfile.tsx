@@ -77,7 +77,8 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ navigation, }
         <Avatar
           size='large'
           rounded
-          title={'T'}
+          title={'No image'}
+          titleStyle={{fontSize: 14}}
           source={{uri: pickedImage}}
           containerStyle={styles.profile_picture}
           iconStyle={{}}
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   },
   profile_picture: { 
     alignSelf: 'center',
-    backgroundColor: 'green',
+    backgroundColor: 'orange',
   },
   input: {
     width: "80%",

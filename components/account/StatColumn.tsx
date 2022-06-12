@@ -1,18 +1,30 @@
 import * as React from 'react';
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { makeStyles, Avatar, } from '@rneui/themed'
 
 interface IStatColumnProps { 
   colors: any,
   title: string,
   amount: number,
+  navigation: any,
+  userId: number,
 }
 
-const StatColumn: React.FunctionComponent<IStatColumnProps> = ({ colors, title, amount }) => {
+const StatColumn: React.FunctionComponent<IStatColumnProps> = ({ navigation, userId, colors, title, amount }) => {
   const styles = useStyles(colors)
   return (
     <View style={styles.container}>
-      <Text style={styles.span} >{title}</Text>
+      
+      <Pressable
+        disabled={title === 'Posts' ? true :false}
+        onPress={()=>navigation.navigate('Follow List', {method: title.toLowerCase(), user_id: userId})}
+        >
+          <Text style={styles.span} >
+          
+          {title}
+      </Text>
+        </Pressable>
+        
       <Text style={styles.span} >{amount}</Text>
     </View>
   );

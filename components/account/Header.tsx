@@ -9,11 +9,12 @@ import StatColumn from './StatColumn';
 interface IHeaderProps {
   colors: any,
   userData: any,
+  navigation: any,
 }
 
 
 
-const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => {
+const Header: React.FunctionComponent<IHeaderProps> = ({ navigation, colors, userData }) => {
   const { followers, following, posts } = userData
   // console.log(userData.profile_picture_url)
 
@@ -45,7 +46,9 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ colors, userData }) => 
           key={ele.name}
           colors={colors}
           title={ele.name}
-          amount={ele.amount}
+            amount={ele.amount}
+            navigation={navigation}
+            userId={userData.id}
         />)}
 
     </View>

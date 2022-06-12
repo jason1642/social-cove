@@ -12,7 +12,7 @@ interface IInputProps {
 
 const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
   const user = useSelector((state: RootState) => state.user.data)
-  const { control, handleSubmit, setError, formState: { errors } } = useForm({
+  const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
     defaultValues: {
       userComment: '',
     }
@@ -22,6 +22,7 @@ const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
     console.log(data)
     await createComment({ content: data.userComment }, postId).then(res => {
       console.log(res.data)
+      setValue('userComment', '')
     }, err => {
       console.log(err)
     })

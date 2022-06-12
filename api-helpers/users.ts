@@ -46,6 +46,20 @@ export const removeToken = async (user_id?: string) => {
 }
 
 
+
+export const getFollowList = async (userId: number, method: string) => {
+  return await api.get(`users/${userId}/${method}`).then(res => {
+    console.log(res.data)
+    return res.data
+  }, err => {
+    return err
+    console.log(err)
+  })
+}
+
+
+
+
 export const followUser = async (currentUserId: number, userToFollowId: number) => 
   await api.post('/users/follow', {
     followed_id: userToFollowId, follower_id: currentUserId

@@ -39,7 +39,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation, user}) => {
 
         <View style={{flex:3,}}>
        
-          <Header userData={data} colors={colors} />
+          <Header navigation={navigation} userData={data} colors={colors} />
           
             <View style={styles.buttonOptions}>
         <AccountOptionButton
