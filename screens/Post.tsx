@@ -71,10 +71,13 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
     (<FlatList
       refreshing={isRefreshing}
       onRefresh={() => {
-        console.log('Refreshed page!')
+        
+        console.log('Refreshed page!', addedComment)
         setIsRefreshing(true)
         setIsRefreshing(false)
+
       }}
+     
       style={styles.container}
           data={postData.comments}
           renderItem={({ item }) => <Card navigation={navigation} key={item.key} colors={colors} commentData={item} />}
