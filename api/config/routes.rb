@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :group_chats
+  resources :private_chats
   resources :comments
   resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -10,6 +12,11 @@ Rails.application.routes.draw do
   post '/auth/login', to: 'authentication#login'
   get '/auth/verify', to: 'authentication#verify'
   get '/auth/verify/verbose-info', to: 'authentication#verify_and_verbose_info'
+
+  # PRIVATE CHATS
+  post '/private_chat/:private_chat_id/messages', to: 'group_chats#send_private_message'
+
+  # GROUP CHATS
 
 
   # To make sure a paramter matches a regular expression

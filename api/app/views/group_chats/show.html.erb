@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @group_chat %>
+
+<div>
+  <%= link_to "Edit this group chat", edit_group_chat_path(@group_chat) %> |
+  <%= link_to "Back to group chats", group_chats_path %>
+
+  <%= button_to "Destroy this group chat", @group_chat, method: :delete %>
+</div>

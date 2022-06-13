@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Private chats</h1>
+
+<div id="private_chats">
+  <% @private_chats.each do |private_chat| %>
+    <%= render private_chat %>
+    <p>
+      <%= link_to "Show this private chat", private_chat %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New private chat", new_private_chat_path %>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Group chats</h1>
+
+<div id="group_chats">
+  <% @group_chats.each do |group_chat| %>
+    <%= render group_chat %>
+    <p>
+      <%= link_to "Show this group chat", group_chat %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New group chat", new_group_chat_path %>

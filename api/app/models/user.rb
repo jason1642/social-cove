@@ -8,8 +8,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, through: :posts
 
-
-
+  has_many :private_chats
+  has_many :group_chats
+  has_many :messages
 
 
 
