@@ -12,7 +12,8 @@ import { Avatar } from '@rneui/themed'
 import { RootState } from '../../redux/store';
 import { useSelector} from 'react-redux'
 import Landing from '../landing/Landing';
-
+import FollowingList from '../../components/account/follow-list/FollowList';
+import AnotherUserAccount from '../Account'
 
 interface IAccountProps { 
   navigation?: any,
@@ -61,8 +62,16 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
           component={Post}
         />
         <AccountStack.Screen
+          name='Follow List'
+          component={FollowingList}
+        />
+        <AccountStack.Screen
           name='Settings'
           component={Settings}
+        />
+        <AccountStack.Screen
+          name='Account'
+          component={AnotherUserAccount}
         />
         <AccountStack.Screen
           name='EditProfile'

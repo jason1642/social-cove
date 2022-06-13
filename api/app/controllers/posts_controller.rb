@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    # @post.comments.sort_by {|hash| hash['id']}
+    @post.comments = @post.comments.sort_by(&:content).reverse
     render json: @post.as_json(include: {
       user: {
         methods: :profile_picture_url
@@ -25,11 +25,12 @@ class PostsController < ApplicationController
             methods: :profile_picture_url
           }
           
-        }
+        },
+        sort_by: :id
         
       }
       
-    }, methods: [:image_url, :comments_sort_by_latest])
+    }, methods: [:image_url])
   end
 
   # GET /posts/new

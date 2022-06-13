@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :comments, dependent: :destroy
+  has_many :comments, -> {order('created_at DESC')}, dependent: :destroy
 
   has_one_attached :image
 
@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   end
 
   def comments_sort_by_latest
-    comments.order('id')
+    
+    comments.includes(:user).order('id').reverse
   end
 end
