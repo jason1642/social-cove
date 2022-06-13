@@ -9,7 +9,7 @@ import SubscribedPosts from './SubscribedPosts'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Post from '../Post'
 import Account from '../Account'
-import FollowingList from '../../components/account/FollowList';
+import FollowingList from '../../components/account/follow-list/FollowList';
 
 
 interface IFeedProps {

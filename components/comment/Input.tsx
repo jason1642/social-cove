@@ -8,9 +8,10 @@ import { RootState } from '../../redux/store'
 
 interface IInputProps {
   postId: number,
+  addedCommentIndicator: Function, 
 }
 
-const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
+const Input: React.FunctionComponent<IInputProps> = ({postId, addedCommentIndicator}) => {
   const user = useSelector((state: RootState) => state.user.data)
   const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm({
     defaultValues: {
@@ -23,6 +24,7 @@ const Input: React.FunctionComponent<IInputProps> = ({postId,}) => {
     await createComment({ content: data.userComment }, postId).then(res => {
       console.log(res.data)
       setValue('userComment', '')
+      addedCommentIndicator()
     }, err => {
       console.log(err)
     })

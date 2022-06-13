@@ -21,6 +21,8 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
   const { postId } = route.params
   const { colors } = useTheme()
   const [postData, setPostData] = useState<any>()
+  const [addedComment, setAddedComment ] = useState<number>(0)
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const styles = useStyles(colors)
 
 
@@ -33,9 +35,13 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
   
   useEffect(() => {
     fetchPostData()
-  }, [postId]); 
+    setIsRefreshing(false)
+    
+  }, [addedComment, postId]); 
 
- 
+  const addedCommentIndicator = () => {
+    setAddedComment(prev => prev + 1)
+  }
   const UpperBodyComponents = postData && <>
   <Header
           navigation={navigation}
@@ -53,7 +59,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
           width={1}
     />
           <Text style={styles.title}>{postData.comments.length} Comment(s)</Text>
-    <Input postId={postId} />
+    <Input addedCommentIndicator={addedCommentIndicator} postId={postId} />
         </View>
         
     
@@ -63,6 +69,12 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
 
   return postData ?
     (<FlatList
+      refreshing={isRefreshing}
+      onRefresh={() => {
+        console.log('Refreshed page!')
+        setIsRefreshing(true)
+        setIsRefreshing(false)
+      }}
       style={styles.container}
           data={postData.comments}
           renderItem={({ item }) => <Card navigation={navigation} key={item.key} colors={colors} commentData={item} />}

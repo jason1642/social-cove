@@ -17,7 +17,7 @@ const StatColumn: React.FunctionComponent<IStatColumnProps> = ({ navigation, use
       
       <Pressable
         disabled={title === 'Posts' ? true :false}
-        onPress={()=>navigation.navigate('Follow List', {method: title.toLowerCase(), user_id: userId})}
+        onPress={()=>navigation.push('Follow List', {method: title.toLowerCase(), user_id: userId})}
         >
           <Text style={styles.span} >
           
