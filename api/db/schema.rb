@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_13_053414) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_030248) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -64,14 +64,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_053414) do
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.string "content"
     t.boolean "is_private"
     t.bigint "private_chat_id"
     t.bigint "group_chat_id"
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
     t.index ["group_chat_id"], name: "index_messages_on_group_chat_id"
     t.index ["private_chat_id"], name: "index_messages_on_private_chat_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -107,6 +109,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_053414) do
   add_foreign_key "comments", "users"
   add_foreign_key "messages", "group_chats"
   add_foreign_key "messages", "private_chats"
-  add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
 end

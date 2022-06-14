@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/auth/verify/verbose-info', to: 'authentication#verify_and_verbose_info'
 
   # PRIVATE CHATS
-  post '/private_chat/:private_chat_id/messages', to: 'group_chats#send_private_message'
+  post '/private_chat/send_message', to: 'private_chats#send_private_message'
 
   # GROUP CHATS
 

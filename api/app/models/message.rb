@@ -1,8 +1,9 @@
 class Message < ApplicationRecord
-  belongs_to :user
-  belongs_to :private_chat, optional: true
-  belongs_to :group_chat, optional: true
+  # belongs_to :user, foreign_key: :sender, class_name: 'User'
+  has_one :user, foreign_key: :recipient
+  # belongs_to :private_chat, optional: true
+  # belongs_to :group_chat, optional: true
   
 
-  validates_presence_of :content, :private_chat_id || :group_chat_id, :user_id
+  validates_presence_of :content, :sender_id, :recipient_id
 end
