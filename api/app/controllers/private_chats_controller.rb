@@ -1,8 +1,11 @@
 class PrivateChatsController < ApplicationController
-  before_action :set_private_chat, only: %i[ show edit update destroy ]
+  before_action :set_private_chat, only: %i[ edit update destroy ]
 
   # GET /private_chats/1 or /private_chats/1.json
   def show
+    @conversation = Message.where(`(sender_id=#{params[:sender_id]} AND recipient_id=#{params[:recipient_id]}) OR (sender_id=#{params[:recipient_id]} AND recipient_id=#{params[:sender_id]})`)
+    render json: @conversation.as_json()
+
   end
 
   # POST /private_chats or /private_chats.json
@@ -34,6 +37,9 @@ class PrivateChatsController < ApplicationController
   def send_private_message
     @message = Message.new(private_chat_params)
     @message.content = params[:content]
+
+
+
     if @message.save
       render json: @message.as_json()
     else

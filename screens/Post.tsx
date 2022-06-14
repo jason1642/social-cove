@@ -52,7 +52,8 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
     <View style={{padding: 10}}>
       <Body
           colors={colors}
-          postData={postData}
+        postData={postData}
+        navigation={navigation}
         />
         <Divider
         style={styles.divider}

@@ -8,9 +8,11 @@ import { makeStyles } from '@rneui/themed'
 interface IBodyProps {
   postData: any,
   colors?: any,
+  navigation: any,
+
 }
 
-const Body: React.FunctionComponent<IBodyProps> = ({ postData, colors }) => {
+const Body: React.FunctionComponent<IBodyProps> = ({ navigation, postData, colors }) => {
   const postInfo = postData
   // console.log(postData)
   const styles = useStyles(colors)
@@ -42,7 +44,7 @@ const Body: React.FunctionComponent<IBodyProps> = ({ postData, colors }) => {
         /> */}
 
 
-        <Text style={styles.username}>{postInfo.user.username}: </Text>
+        <Text onPress={()=>navigation.push('Account', {user_id: postData.user.id})} style={styles.username}>{postInfo.user.username}: </Text>
         
         <Text style={styles.description}>{postInfo.content}</Text>
       </Text>

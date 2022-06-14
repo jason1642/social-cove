@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, Pressable } from 'react-native'
 import ImageContainer from './ImageContainer'
 import CardHeader from './CardHeader'
 import Body from './Body'
-import { StackActions } from '@react-navigation/native'
 
 
 interface IFeedCardProps {
@@ -22,13 +21,13 @@ const FeedCard: React.FunctionComponent<IFeedCardProps> = ({ postData, navigatio
       
       <Pressable onPress={() => {
         // navigation.setOptions({title: 'UPDATED!'})
-        navigation.dispatch(StackActions.push('Post Info', { postId: postData.id }))
+        navigation.push('Post Info', { postId: postData.id })
       }}>
         <ImageContainer
         imageUrl={postData.image_url}
       />
       </Pressable>
-      <Body colors={colors} postInfo={postData}/>
+      <Body navigation={navigation} colors={colors} postInfo={postData}/>
     </View>
   );
 };

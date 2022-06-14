@@ -31,6 +31,7 @@ import CreatePost from './screens/CreatePost'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {verifyUser} from './redux/actions/userActions'
 import Login from './screens/Login';
+import MainMessagesOverview from './screens/messages/MessagesDashboard';
 // import { verifyUser } from './api-helpers/users';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
@@ -68,9 +69,9 @@ const App = () => {
 
       <NavigationContainer theme={colorTheme === 'dark' ? DarkTheme : LightTheme}>
         <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
+          screenOptions={({ navigation })=> ({
+            // headerShown: false,
+          })}>
           {!user.isLoading && !user.authenticated &&
             <Stack.Screen
               name='Landing'
@@ -78,8 +79,13 @@ const App = () => {
             />
           }
           
-             <Stack.Screen name='Home'>
-            { props=> <Tab.Navigator
+          <Stack.Screen
+            options={({ navigation }) => ({
+              headerShown: false,
+              // headerRight: ()=> (<Button onPress={()=>navigation.push('Messages Dashboard', )} title='Messages' />)
+            })}
+            name='Home'>
+            { ({navigation})=> <Tab.Navigator
               screenOptions={{
                 headerStyle: {
                   backgroundColor: '#84b4dd',
@@ -91,8 +97,8 @@ const App = () => {
                 },
                 
                 tabBarActiveTintColor: 'blue',
-                tabBarLabelStyle: {color: 'black'},
-                headerShown: false,
+                tabBarLabelStyle: { color: 'black' },
+                headerShown: false
               }}>
                     <Tab.Screen
                       name="Feed"
@@ -146,7 +152,11 @@ const App = () => {
                   </Tab.Navigator>}
             
                 </Stack.Screen>
-                  
+          <Stack.Screen
+            name='Messages Dashboard'
+            component={MainMessagesOverview}
+
+          />
                 
            
             

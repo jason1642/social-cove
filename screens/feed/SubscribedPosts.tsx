@@ -42,7 +42,7 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = ({naviga
     <FlatList
       contentContainerStyle={styles.container}
       data={postsArray}
-      renderItem={(item) => <FeedCard navigation={navigation} postData={item.item} /> }
+      renderItem={({item}) => <FeedCard navigation={navigation} postData={item} /> }
     />
   ) : <Skeleton />
 };

@@ -8,9 +8,11 @@ import { useTheme } from '@react-navigation/native'
 interface ICardFooterProps {
   postInfo: any,
   colors: any,
+  navigation: any,
+
 }
 
-const CardBody: React.FunctionComponent<ICardFooterProps> = ({ postInfo, colors }) => {
+const CardBody: React.FunctionComponent<ICardFooterProps> = ({ navigation, postInfo, colors }) => {
 
   const styles = useStyles(colors)
   return (
@@ -40,7 +42,7 @@ const CardBody: React.FunctionComponent<ICardFooterProps> = ({ postInfo, colors 
     
         
         
-        <Text style={styles.username}>{postInfo.user.username}: </Text>
+        <Text onPress={()=>navigation.push('Account', {user_id: postInfo.user.id})} style={styles.username}>{postInfo.user.username}: </Text>
         
         <Text style={styles.description}>{postInfo.content}</Text>
       </Text>

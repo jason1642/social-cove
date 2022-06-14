@@ -10,7 +10,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Post from '../Post'
 import Account from '../Account'
 import FollowingList from '../../components/account/follow-list/FollowList';
-
+import MainMessagesOverview from '../messages/MessagesDashboard'
 
 interface IFeedProps {
   route?: any,
@@ -38,9 +38,13 @@ const Feed: React.FunctionComponent<IFeedProps> = (
 
       <Stack.Screen
         name='Main'
-        options={{
+        options={({ navigation }) => ({
+
           headerTitle: 'Home',
-        }}
+          headerRight: ()=> (<Button onPress={()=>navigation.push('Messages Dashboard', )} title='Messages' />)
+
+          // headerShown: false,
+        })}
       >
         {() => <Tab.Navigator
           // screenOptions={{lazy: true}}
@@ -77,6 +81,15 @@ const Feed: React.FunctionComponent<IFeedProps> = (
         options={{
           headerTitle: ''
         }}  
+      />
+
+
+      <Stack.Screen
+        name='Messages Dashboard'
+        component={MainMessagesOverview}
+        options={{
+          headerTitle: 'Messages',
+        }}
       />
 
       </Stack.Navigator>

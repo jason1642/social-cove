@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   # PRIVATE CHATS
   post '/private_chat/send_message', to: 'private_chats#send_private_message'
-
+  post '/private_chat/conversation', to: 'private_chats#show'
   # GROUP CHATS
 
 
