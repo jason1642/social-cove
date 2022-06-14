@@ -11,6 +11,7 @@ import Post from '../Post'
 import Account from '../Account'
 import FollowingList from '../../components/account/follow-list/FollowList';
 import MainMessagesOverview from '../messages/MessagesDashboard'
+import Conversation from '../messages/Conversation';
 
 interface IFeedProps {
   route?: any,
@@ -92,6 +93,11 @@ const Feed: React.FunctionComponent<IFeedProps> = (
         }}
       />
 
+      <Stack.Screen 
+        name='Conversation'
+        component={Conversation}
+        
+      />
       </Stack.Navigator>
   );
 };

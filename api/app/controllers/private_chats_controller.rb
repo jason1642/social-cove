@@ -3,9 +3,8 @@ class PrivateChatsController < ApplicationController
 
   # GET /private_chats/1 or /private_chats/1.json
   def show
-    @conversation = Message.where(`(sender_id=#{params[:sender_id]} AND recipient_id=#{params[:recipient_id]}) OR (sender_id=#{params[:recipient_id]} AND recipient_id=#{params[:sender_id]})`)
+    @conversation = Message.where(sender_id: params[:sender_id], recipient_id: params[:recipient_id]).or(Message.where(sender_id: params[:recipient_id], recipient_id: params[:sender_id]))
     render json: @conversation.as_json()
-
   end
 
   # POST /private_chats or /private_chats.json
