@@ -26,6 +26,7 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
       console.log(res.data)
       // Filter if object key is equal to current user's username
       const filteredChats = Object.keys(res.data).filter((e: string) => e !== currentUser.username)
+      
       console.log(filteredChats)
       setChatList(filteredChats.map((ele, i) => 
         res.data[ele][0]

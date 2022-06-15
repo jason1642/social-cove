@@ -16,9 +16,15 @@ class PrivateChatsController < ApplicationController
     # Get ALL messages where sender is equal to current user id, then organize them?
     @all_users_chats = Message.where(sender_id: params[:id]).or(Message.where(recipient_id: params[:id]))
     @all_users_chats = @all_users_chats.group_by do |message|
-      message.recipient.username
+      if @current_user.username == message.recipient.username 
+        message.sender.username 
+      else
+        message.recipient.username 
+      end
     end
+    
     render json: @all_users_chats.as_json(include: {
+      sender: {}, 
       recipient: {
         # methods: :profile_picture_url
       }
