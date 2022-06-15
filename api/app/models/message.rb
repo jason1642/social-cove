@@ -1,6 +1,7 @@
 class Message < ApplicationRecord
   # belongs_to :user, foreign_key: :sender, class_name: 'User'
-  has_one :user, foreign_key: :recipient
+  belongs_to :recipient, class_name: 'User', foreign_key: :recipient_id
+  belongs_to :sender, class_name: 'User', foreign_key: :sender_id
   # belongs_to :private_chat, optional: true
   # belongs_to :group_chat, optional: true
   

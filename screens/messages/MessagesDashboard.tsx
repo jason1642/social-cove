@@ -15,7 +15,7 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
   const currentUser = useSelector((state: RootState)=> state.user)
   return (
     <Text
-      onPress={()=>navigation.push('Conversation', {recipient_id: 4})}
+      onPress={()=>navigation.push('Conversation', {recipient_id: 5})}
     >No Messages!</Text>
   )
 };

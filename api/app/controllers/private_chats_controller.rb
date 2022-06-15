@@ -4,32 +4,15 @@ class PrivateChatsController < ApplicationController
   # GET /private_chats/1 or /private_chats/1.json
   def show
     @conversation = Message.where(sender_id: params[:sender_id], recipient_id: params[:recipient_id]).or(Message.where(sender_id: params[:recipient_id], recipient_id: params[:sender_id]))
-    render json: @conversation.as_json()
+    render json: @conversation.as_json(include: {
+    sender: {},
+    recipient: {}
+    })
   end
 
-  # POST /private_chats or /private_chats.json
-  def create
-    @private_chat = PrivateChat.new(private_chat_params)
-
-    @private_chat_recipient = PrivateChat.new()
-    @private_chat_recipient.sender_id = params[:recipient_id]
-    @private_chat_recipient.recipient_id = params[:sender_id]
-
-    if @private_chat.save && @private_chat_recipient.save
-      render json: @private_chat.as_json()
-    else
-      render json: {message: 'There was an error creating this chatroom'}
-    end
-    # respond_to do |format|
-    #   if @private_chat.save && @private_chat_recipient.save
-    #     render json: @private_chat.as_json(include: :user)
-    #     format.html { redirect_to private_chat_url(@private_chat), notice: "Private chat was successfully created." }
-    #     format.json { render :show, status: :created, location: @private_chat }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @private_chat.errors, status: :unprocessable_entity }
-    #   end
-    # end
+  # GET /private_chat/all_current_user_chats/:id
+  def all_current_user_chats
+    # Get ALL messages where sender is equal to current user id, then organize them?
   end
 
 
@@ -71,7 +54,7 @@ class PrivateChatsController < ApplicationController
 
       # Only allow a list of trusted parameters through.
     def private_chat_params
-      params.require(:private_chat).permit(:sender_id, :recipient_id, :content)
+      params.require(:private_chat).permit(:sender_id, :recipient_id, :content, :id)
     end
 
     def message_params
