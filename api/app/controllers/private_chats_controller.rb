@@ -1,5 +1,6 @@
 class PrivateChatsController < ApplicationController
   before_action :set_private_chat, only: %i[ edit update destroy ]
+  before_action :authorize_request, only: %i[ all_current_user_chats]
 
   # GET /private_chats/1 or /private_chats/1.json
   def show
@@ -13,6 +14,16 @@ class PrivateChatsController < ApplicationController
   # GET /private_chat/all_current_user_chats/:id
   def all_current_user_chats
     # Get ALL messages where sender is equal to current user id, then organize them?
+    @all_users_chats = Message.where(sender_id: params[:id]).or(Message.where(recipient_id: params[:id]))
+    @all_users_chats = @all_users_chats.group_by do |message|
+      message.recipient.username
+    end
+    render json: @all_users_chats.as_json(include: {
+      recipient: {
+        # methods: :profile_picture_url
+      }
+    })
+
   end
 
 

@@ -4,5 +4,14 @@ class PrivateChat < ApplicationRecord
   has_many :messages
 
  
+  def current_users_chats(array_of_messages)
+
+    # array_of_conversations = []
+
+    return array_of_messages.group_by do |message|
+        message.recipient_id
+       end
+
+  end
 
 end

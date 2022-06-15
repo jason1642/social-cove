@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post '/private_chat/send_message', to: 'private_chats#send_private_message'
   post '/private_chat/conversation', to: 'private_chats#show'
   # GROUP CHATS
-
+  get '/private_chat/:id/all_active_chats',to: 'private_chats#all_current_user_chats'
 
   # To make sure a paramter matches a regular expression
   # resources :users, constraints: { id: /[A-Z]/}

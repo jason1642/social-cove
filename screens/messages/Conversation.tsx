@@ -23,13 +23,19 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({ navigation,
       sender_id: 2,
       recipient_id: recipient_id
     }).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setCurrentChat(res.data)
     })
-    navigation.setOptions({
-      headerTitle: currentChat && currentChat[0].sender.id === currentUser.id ? currentChat[0].recipient.username : currentChat[0].sender.username
-    })
+  
   }, [recipient_id])
+
+
+
+  useEffect(() => {
+    currentChat && navigation.setOptions({
+      headerTitle: currentChat[0].sender.id === currentUser.id ? currentChat[0].recipient.username : currentChat[0].sender.username
+    })
+  }, [currentChat]);
 
   return currentChat ? (
     <FlatList
