@@ -6,6 +6,7 @@ import { RootState } from '../../redux/store'
 import {useSelector} from 'react-redux'
 import ConversationCard from '../../components/messenger/ConversationCard'
 import { setTokenHeader } from '../../redux/helpers';
+import { current } from '@reduxjs/toolkit';
 
 interface IMessagesDashboardProps {
   navigation: any,
@@ -25,10 +26,8 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
     await api.get(`/private_chat/${currentUser.id}/all_active_chats`).then(res => {
       console.log(res.data)
       // Filter if object key is equal to current user's username
-      const filteredChats = Object.keys(res.data).filter((e: string) => e !== currentUser.username)
       
-      console.log(filteredChats)
-      setChatList(filteredChats.map((ele, i) => 
+      setChatList(Object.keys(res.data).map((ele, i) => 
         res.data[ele][0]
       ))
     })
@@ -38,10 +37,15 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
   useEffect(() => {
     fetchAllCurrentChats()
   }, [currentUser]);
+
+
+   useEffect(() => {
+     console.log(chatList)
+   }, [chatList]);
   return chatList ? (
     <FlatList
       data={chatList}
-      renderItem={({item})=> <ConversationCard conversationData={item} navigation={navigation} />}
+      renderItem={({item})=> <ConversationCard currentUser={currentUser.username} chattingWithUsername={item.sender.username !== currentUser.username ? item.sender.username : item.recipient.username} conversationData={item} navigation={navigation} />}
     />
    
   ) :

@@ -24,7 +24,9 @@ class PrivateChatsController < ApplicationController
     end
     
     render json: @all_users_chats.as_json(include: {
-      sender: {}, 
+      sender: {
+        methods: :profile_picture_url
+      }, 
       recipient: {
         # methods: :profile_picture_url
       }

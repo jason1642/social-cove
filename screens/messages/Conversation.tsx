@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { RootState } from '../../redux/store'
 import {useSelector} from 'react-redux'
-import { ScrollView, Text, FlatList, StyleSheet,  } from 'react-native';
+import { ScrollView, View, Text, FlatList, StyleSheet,  } from 'react-native';
 import MessageBubble from '../../components/messenger/MessageBubble';
+import InputMessage from '../../components/messenger/InputMessage';
 
 
 
@@ -38,11 +39,22 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({ navigation,
   }, [currentChat]);
 
   return currentChat ? (
-    <FlatList
-      data={currentChat}
-      renderItem={({ item }) => <MessageBubble currentUserId={currentUser.id} messageData={item} />}
-      ListHeaderComponent={<Text style={styles.introTitle}>This is the start of your conversation</Text>}
-    />
+    <View style={{flex: 1}}>
+      <FlatList
+            data={currentChat}
+            style={{
+              borderWidth: 1,
+              // flex: 1,
+              borderColor: 'blue',
+              flexGrow: 1,
+            }}
+            renderItem={({ item }) => <MessageBubble currentUserId={currentUser.id} messageData={item} />}
+            ListHeaderComponent={<Text style={styles.introTitle}>This is the start of your conversation</Text>}
+            ListFooterComponent={<InputMessage />}
+          />
+
+    </View>
+    
   ) : 
     (<Text>No Messages!</Text>)
 };
