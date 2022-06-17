@@ -43,7 +43,7 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({ navigation,
       <FlatList
             data={currentChat}
             style={{
-              borderWidth: 1,
+              // borderWidth: 1,
               // flex: 1,
               borderColor: 'blue',
               flexGrow: 1,

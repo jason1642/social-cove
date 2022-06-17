@@ -19,7 +19,7 @@ const Card: React.FunctionComponent<ICardProps> = ({colors, commentData, navigat
       <Text
       onPress={() => {
             
-        navigation.navigate('Account', { user_id: commentData.user.id })
+        navigation.push('Account', { user_id: commentData.user.id })
         
       }}
       >
