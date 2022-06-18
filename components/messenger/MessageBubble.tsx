@@ -2,14 +2,18 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, } from 'react-native'
 import moment from 'moment'
+import { makeStyles } from '@rneui/themed'
 
 interface IMessageBubbleProps {
   messageData: any,
   currentUserId: number,
+  colors: any,
 }
 
-const MessageBubble: React.FunctionComponent<IMessageBubbleProps> = ({ messageData, currentUserId, }) => {
+const MessageBubble: React.FunctionComponent<IMessageBubbleProps> = ({ messageData, colors, currentUserId, }) => {
   // console.log(messageData)
+  const styles = useStyles(colors)
+
   return (
     <View style={{
       ...styles.container,
@@ -22,7 +26,7 @@ const MessageBubble: React.FunctionComponent<IMessageBubbleProps> = ({ messageDa
     <Text style={styles.date}>{moment(messageData.created_at).format('MMM D YYYY, h:mm a')}</Text>
 
     <View style={styles.contentWrapper}>
-    <Text>{messageData.content}x</Text>
+    <Text style={styles.content}>{messageData.content}</Text>
       </View>
       
       
@@ -33,7 +37,7 @@ const MessageBubble: React.FunctionComponent<IMessageBubbleProps> = ({ messageDa
 export default MessageBubble;
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props: any) => ({
   container: {
     minWidth: '40%',
     maxWidth: '75%',
@@ -44,13 +48,16 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     backgroundColor: 'lightblue',
-    padding: 4,
+    padding: 6,
     // alignSelf: 'stretch',
     marginVertical: 2,
     // minWidth: '100%',
     borderWidth: 1,
     borderColor: 'grey',
-    borderRadius: 5,
+    borderRadius: 10,
+  },
+  content: {
+
   },
   label: {
     textAlign: 'center',
@@ -58,5 +65,6 @@ const styles = StyleSheet.create({
   date: {
     textAlign: 'center',
     fontSize: 11,
+    color: props.text,
   },
-})
+}))

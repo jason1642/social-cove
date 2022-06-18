@@ -67,7 +67,7 @@ const App = () => {
 
     <SafeAreaProvider>
 
-      <NavigationContainer theme={colorTheme === 'dark' ? DarkTheme : LightTheme}>
+      <NavigationContainer theme={colorTheme !== 'dark' ? DarkTheme : LightTheme}>
         <Stack.Navigator
           screenOptions={({ navigation })=> ({
             // headerShown: false,

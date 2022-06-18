@@ -6,18 +6,23 @@ import {useSelector} from 'react-redux'
 import { ScrollView, View, Text, FlatList, StyleSheet,  } from 'react-native';
 import MessageBubble from '../../components/messenger/MessageBubble';
 import InputMessage from '../../components/messenger/InputMessage';
-
+import { makeStyles } from '@rneui/themed'
+import {useTheme,useFocusEffect} from '@react-navigation/native'
 
 
 interface IConversationProps {
   navigation: any,
   route: any,
+  
 }
 
-const Conversation: React.FunctionComponent<IConversationProps> = ({ navigation, route }) => {
-  const {recipient_id} = route.params
+const Conversation: React.FunctionComponent<IConversationProps> = ({  navigation, route }) => {
+  const { recipient_id } = route.params
+  const { colors } = useTheme()
+
   const [currentChat, setCurrentChat] = useState<any>();
   const currentUser = useSelector((state: RootState)=> state.user.data)
+  const styles = useStyles(colors)
 
   useEffect(() => {
     axios.post('http://localhost:3000/private_chat/conversation', {
@@ -45,10 +50,11 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({ navigation,
             style={{
               // borderWidth: 1,
               // flex: 1,
+              // height: '100%',
               borderColor: 'blue',
-              flexGrow: 1,
+              // flexGrow: 6,
             }}
-            renderItem={({ item }) => <MessageBubble currentUserId={currentUser.id} messageData={item} />}
+        renderItem={({ item }) => <MessageBubble colors={colors} currentUserId={currentUser.id} messageData={item} />}
             ListHeaderComponent={<Text style={styles.introTitle}>This is the start of your conversation</Text>}
             ListFooterComponent={<InputMessage />}
           />
@@ -62,9 +68,10 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({ navigation,
 export default Conversation;
 
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props: any) => ({
   introTitle: {
     textAlign: 'center',
     paddingVertical: 5,
+    color: props.text,
   }
-})
+}))

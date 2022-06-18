@@ -6,7 +6,8 @@ import { RootState } from '../../redux/store'
 import {useSelector} from 'react-redux'
 import ConversationCard from '../../components/messenger/ConversationCard'
 import { setTokenHeader } from '../../redux/helpers';
-import { current } from '@reduxjs/toolkit';
+import ChatListSkeleton from '../../components/messenger/ChatListSkeleton'
+import {useTheme} from '@react-navigation/native'
 
 interface IMessagesDashboardProps {
   navigation: any,
@@ -20,6 +21,7 @@ const api = axios.create({
 const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({navigation, }) => {
   const [chatList, setChatList] = useState<any>();
   const currentUser = useSelector((state: RootState) => state.user.data)
+  const { colors } = useTheme()
 
   const fetchAllCurrentChats = async () => {
     await setTokenHeader(api)
@@ -45,11 +47,18 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
   return chatList ? (
     <FlatList
       data={chatList}
-      renderItem={({item})=> <ConversationCard currentUser={currentUser.username} chattingWithUsername={item.sender.username !== currentUser.username ? item.sender.username : item.recipient.username} conversationData={item} navigation={navigation} />}
+      renderItem={({ item }) =>
+        <ConversationCard
+          colors={colors}
+          currentUser={currentUser.username}
+          chattingWithUsername={currentUser && item.sender.username !== currentUser.username ? item.sender.username : item.recipient.username}
+          conversationData={item}
+          navigation={navigation}
+        />}
     />
    
   ) :
-     <Text> No active conversations</Text>
+     <ChatListSkeleton />
 };
 
 export default MessagesDashboard;

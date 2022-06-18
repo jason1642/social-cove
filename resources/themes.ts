@@ -5,7 +5,7 @@ export const DarkTheme = {
   colors: {
     // ...DefaultTheme.colors, 
     primary: 'lightgrey',
-    text: 'white',
+    text: '#e7e7e7',
     border: 'lightgrey',
     background: '#303030',
     card: '#4a4a4a',

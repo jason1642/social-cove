@@ -1,22 +1,28 @@
-import { Avatar } from '@rneui/themed';
-import * as React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native'
+import { Avatar } from '@rneui/themed'
+import * as React from 'react'
+import { View, Text, Pressable } from 'react-native'
 import moment from 'moment'
+import { makeStyles } from '@rneui/themed'
+
 interface IConversationCardProps {
   conversationData: any,
   navigation: any,
   chattingWithUsername: string,
   currentUser: string,
+  colors: any,
+
 }
 
-const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conversationData, currentUser, navigation, chattingWithUsername}) => {
+const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conversationData, colors, currentUser, navigation, chattingWithUsername}) => {
+  const styles = useStyles(colors)
+
   return (
     <Pressable
       style={styles.container}
       onPress={() => navigation.push('Conversation', { recipient_id: 5 })}>
       <View style={styles.avatarContainer}>
       <Avatar
-        // size={60}
+        size={45}
         icon={{ name: 'account-circle', type: 'material-icons',  }}
         avatarStyle={{backgroundColor: 'orange' }}
         rounded
@@ -78,12 +84,12 @@ const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conv
 
 export default ConversationCard;
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props: any) => ({
   container: { 
     paddingVertical: 8, 
     paddingHorizontal: 4,
-    borderWidth: 1,
-    borderColor: 'grey',
+    // borderWidth: 1,
+    borderColor: props.border,
     marginVertical: 4,
     width: '95%',
     alignSelf: 'center',
@@ -94,6 +100,7 @@ const styles = StyleSheet.create({
   latestMessage: {
     // flexWrap: 'nowrap',
     fontSize: 13,
+    color: props.text,
     // width: '30%',
     // overflow: 'hidden',
 
@@ -110,19 +117,19 @@ const styles = StyleSheet.create({
   },
   chattingWithUser: {
     fontWeight: 'bold',
+    color: props.text,
   },
   messageSender: {
     fontWeight: 'bold',
-    // borderWidth: 1, 
-    // borderColor: 'green',
+    color: props.text,
     fontSize: 13,
   },
   avatarContainer: { 
-    width: '10%',
+    width: 45,
     height: '100%',
   },
   date: {
     fontSize: 10,
-    color: 'blue',
+    color: '#4370ff',
   }
-})
+}))

@@ -18,7 +18,7 @@ const InputMessage: React.FunctionComponent<IInputMessageProps> = (props) => {
     }
   })
   return (
-    <View style={{borderWidth: 1, borderColor: 'black',}}>
+    <View >
        <InputController
         label='Message'
         name='content'
@@ -36,8 +36,9 @@ export default InputMessage;
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
     marginVertical: 5,
-    borderColor: props.border,
-    borderWidth: 1,
+    // borderColor: props.border,
+    // borderWidth: 1,
+    
   },
   label: {
     color: props.text
@@ -45,12 +46,15 @@ const useStyles = makeStyles((theme, props: any) => ({
   input: {
     color: props.text,
     backgroundColor: props.secondary,
-    borderColor: 'black',
+    // borderColor: 'black',
     fontSize: 16,
+    // borderWidth: 0,
     paddingVertical: 8,
     paddingHorizontal: 4,
     borderRadius: 4,
     marginVertical: 10,
+    width: '95%',
+    alignSelf: 'center',
   },
   errorText: {
     color: 'orange'
