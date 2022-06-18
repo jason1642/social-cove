@@ -37,7 +37,7 @@ const Card: React.FunctionComponent<ICardProps> = ({colors, commentData, navigat
 };
 
 export default Card;
-
+ 
 
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
