@@ -49,16 +49,14 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({  navigation
             data={currentChat}
             style={{
               // borderWidth: 1,
-              // flex: 1,
-              // height: '100%',
+              height: '100%',
               borderColor: 'blue',
-              // flexGrow: 6,
             }}
         renderItem={({ item }) => <MessageBubble colors={colors} currentUserId={currentUser.id} messageData={item} />}
             ListHeaderComponent={<Text style={styles.introTitle}>This is the start of your conversation</Text>}
-            ListFooterComponent={<InputMessage />}
+            // ListFooterComponent={}
           />
-
+<InputMessage />
     </View>
     
   ) : 

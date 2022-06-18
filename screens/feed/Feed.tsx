@@ -20,17 +20,9 @@ interface IFeedProps {
  
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator()
-const Feed: React.FunctionComponent<IFeedProps> = (
-  // { route, navigation }
-) => {
+const Feed: React.FunctionComponent<IFeedProps> = () => {
 
-  // useEffect(() => {
-  //   if (route.params) {
-  //     // Post updated, do something with `route.params.post 
-  //     // For example, send the post to the server
-  //     // console.log(route) 
-  //   }
-  // }, [route.params]);
+  
 
   return (
     <Stack.Navigator

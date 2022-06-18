@@ -49,10 +49,11 @@ const useStyles = makeStyles((theme, props: any) => ({
   title: {
     color: props.text,
     fontSize: 20,
-    padding: 15
+
+    marginVertical: 20
   },
   avatar: {
-    marginLeft: 10,
+    margin: 5,
     backgroundColor: 'grey',
   }
 }))

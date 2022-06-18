@@ -17,47 +17,32 @@ import { Alert, Button, useColorScheme, View, ScrollView, StyleSheet } from 'rea
 import {
   NavigationContainer,
   // DarkTheme,
-  DefaultTheme} from '@react-navigation/native';
+  DefaultTheme
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Account from './screens/current-user-account/Account';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { RootState } from './redux/store'
 import { useSelector, useDispatch } from 'react-redux';
-// import {setUsername } from './redux/features/user/userSlice'
-import { ThemeProvider, useThemeMode, Icon, Avatar} from '@rneui/themed';
+import { makeStyles, Icon, Avatar} from '@rneui/themed';
 import { DarkTheme, LightTheme } from './resources/themes'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CreatePost from './screens/CreatePost'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {verifyUser} from './redux/actions/userActions'
-import Login from './screens/Login';
+import {useTheme} from '@react-navigation/native'
 import MainMessagesOverview from './screens/messages/MessagesDashboard';
-// import { verifyUser } from './api-helpers/users';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator()
-const retrieveToken = async () => {
-  const myToken = await AsyncStorage.getItem('authToken')
-  console.log(myToken)
-}
+
 
 const App = () => {
   const user = useSelector((state: RootState) => state.user)
   // Use setColorTheme dispatch to set the theme based on users preference, or system theme
   const colorTheme = useSelector((state: RootState) => state.colorTheme.theme)
-  const [profilePicture, setProfilePicture] = useState<React.FunctionComponent>()
   const dispatch = useDispatch()
-//////
-  useEffect(() => {
-    // console.log('Loading status - ', user.isLoading)
-    // console.log(user.data)
-    user.data && setProfilePicture(()=>(<Avatar
-      size={56}
-      icon={{name:'account-circle', type:'material-icons'}}
-      rounded
-      source={{ uri: user.data.profile_picture_url }}
-      containerStyle={styles.profile_picture}
-    />))
-  }, [user.data]);
+  const { colors } = useTheme()
+  const styles = useStyles(colors)
+
 
   useEffect(() => {
     dispatch(verifyUser())
@@ -67,7 +52,7 @@ const App = () => {
 
     <SafeAreaProvider>
 
-      <NavigationContainer theme={colorTheme !== 'dark' ? DarkTheme : LightTheme}>
+      <NavigationContainer theme={colorTheme === 'dark' ? DarkTheme : LightTheme}>
         <Stack.Navigator
           screenOptions={({ navigation })=> ({
             // headerShown: false,
@@ -97,7 +82,7 @@ const App = () => {
                 },
                 
                 tabBarActiveTintColor: 'blue',
-                tabBarLabelStyle: { color: 'black' },
+                tabBarLabelStyle: {color: colorTheme === 'dark' ? '#e7e7e7' : 'black'},
                 headerShown: false
               }}>
                     <Tab.Screen
@@ -114,7 +99,7 @@ const App = () => {
                       options={{
                         tabBarIcon: () => <Icon name='add-circle' type='material-icons' />,
                         headerShown: true,
-                        headerTitleStyle: { color: 'black' },
+                        // headerTitleStyle: { color: colors.text},
                         headerTitleAlign: 'left'
                         
                       }}
@@ -143,7 +128,9 @@ const App = () => {
                     title: user.data ? user.data.username : 'Account',
                     headerTitleAlign: 'left',
                     headerShown: true,
-                    headerTitleStyle: {  fontSize: 22 }
+                    headerTitleStyle: {
+                      fontSize: 22
+                    }
                   }}
                 >
                   {({navigation})=><Account navigation={navigation} user={user}/>}
@@ -155,12 +142,8 @@ const App = () => {
           <Stack.Screen
             name='Messages Dashboard'
             component={MainMessagesOverview}
-
           />
-                
-           
-            
-       
+
            </Stack.Navigator>
       </NavigationContainer>
       </SafeAreaProvider>
@@ -168,10 +151,13 @@ const App = () => {
 };
 
 export default App;
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props:any) => ({
   
   profile_picture: { 
     alignSelf: 'center',
     backgroundColor: 'orange',
+  },
+  tabBarLabel: {
+    color: props.text,
   }
-})
+}))

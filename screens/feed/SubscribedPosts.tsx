@@ -4,6 +4,8 @@ import { ScrollView, Text, FlatList, StyleSheet } from 'react-native'
 import axios from 'axios'
 import Skeleton from '../../components/feed/Skeleton'
 import FeedCard from '../../components/feed/FeedCard'
+import {useTheme,useFocusEffect} from '@react-navigation/native'
+import { makeStyles, Avatar, } from '@rneui/themed'
 
 interface ISubscribedPostsProps {
   navigation: any,
@@ -22,7 +24,9 @@ interface ISubscribedPostsProps {
 const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = ({navigation}) => {
   const [postsArray, setPostsArray] = useState([])
   // const user = useSelector((state: RootState) => state.user)
+  const { colors } = useTheme()
 
+  const styles = useStyles(colors)
 
  
   
@@ -42,17 +46,17 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = ({naviga
     <FlatList
       contentContainerStyle={styles.container}
       data={postsArray}
-      renderItem={({item}) => <FeedCard navigation={navigation} postData={item} /> }
+      renderItem={({ item }) => <FeedCard colors={colors} navigation={navigation} postData={item} /> }
     />
   ) : <Skeleton />
 };
 
 export default SubscribedPosts;
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props:any) => ({
   container: {
     paddingVertical: 5,
     // backgroundColor: 'grey',
 
   }
 }
-)
+))
