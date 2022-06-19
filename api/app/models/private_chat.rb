@@ -8,7 +8,7 @@ class PrivateChat < ApplicationRecord
 
     # array_of_conversations = []
     # array_of_messages.sort_by!(&:created_at)
-    return array_of_messages.order(sort: :asc).group_by do |message|
+    return array_of_messages.sort_by(&:created_at).group_by do |message|
         message.recipient_id
        end
 

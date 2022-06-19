@@ -52,8 +52,8 @@ const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conv
               
 
 
-                <Text style={styles.latestMessage}>
-         {conversationData.content}{conversationData.content}
+              <Text numberOfLines={1} style={styles.latestMessage}>
+         {conversationData.content}
             </Text>
             </Text>
             
@@ -113,8 +113,8 @@ const useStyles = makeStyles((theme, props: any) => ({
     flexDirection: 'row',
     flex: 1,
     width: '100%',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-end',
   },
   chattingWithUser: {
     fontWeight: 'bold',
