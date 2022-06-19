@@ -24,8 +24,8 @@ const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conv
       <View style={styles.avatarContainer}>
       <Avatar
         size={45}
-        icon={{ name: 'account-circle', type: 'material-icons',  }}
-        avatarStyle={{backgroundColor: 'orange' }}
+        icon={{ size: 45, name: 'account-circle', type: 'material-icons', color: 'grey' }}
+        // avatarStyle={{backgroundColor: 'orange' }}
         rounded
         source={{uri: chattingWithUserData.username === conversationData.sender.username ? conversationData.sender.profile_picture_url : conversationData.recipient.profile_picture_url}}
       />

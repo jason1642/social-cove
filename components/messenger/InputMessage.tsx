@@ -43,11 +43,12 @@ const InputMessage: React.FunctionComponent<IInputMessageProps> = ({currentUser,
   }
 
   return (
-    <View >
+    <View style={styles.container}>
        <InputController
         label='Message'
         name='content'
         control={control}
+        hideLabel={true}
         inputStyle={styles.input}
         inputProps={{
           onSubmitEditing: handleSubmit(onSubmitMessage, onError)
@@ -63,7 +64,9 @@ export default InputMessage;
 
 const useStyles = makeStyles((theme, props: any) => ({
   container: {
-    marginVertical: 5,
+    borderTopWidth: 1,
+    // borderWidth: 1,
+    borderColor: 'grey',
     // borderColor: props.border,
     // borderWidth: 1,
     
@@ -81,7 +84,7 @@ const useStyles = makeStyles((theme, props: any) => ({
     paddingHorizontal: 4,
     borderRadius: 4,
     marginVertical: 10,
-    width: '95%',
+    width: '97%',
     alignSelf: 'center',
   },
   errorText: {

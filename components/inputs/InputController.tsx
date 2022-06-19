@@ -15,16 +15,17 @@ interface IAppProps {
   minLength?: number,
   extraRules?: any,
   label?: string,
+  hideLabel?: boolean,
 }
 
 
-const App: React.FunctionComponent<IAppProps> = ({ name, label, control, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
+const App: React.FunctionComponent<IAppProps> = ({ name, label, control, hideLabel, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
     <View style={styles.container}>
 
-      <Text style={styles.label}>{label || name}:</Text>
+      <Text style={{...styles.label, display: hideLabel ? 'none' : 'flex'}}>{label}:</Text>
       <Controller
 
         name={name}
@@ -70,7 +71,8 @@ const useStyles = makeStyles((theme, props: any) => ({
     border: props.border,
   },
   label: {
-    color: props.text
+    color: props.text,
+    marginLeft: 10,
   }
 }))
 

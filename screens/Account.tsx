@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { makeStyles, Avatar, } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
-import { View, } from 'react-native'
+import { View, Text} from 'react-native'
 import Header from '../components/account/Header'
 import { showVerboseUserInfo, followUser } from '../api-helpers/users'
 import Posts from './current-user-account/Posts'
@@ -40,7 +40,13 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
 
   return (
     <View style={styles.container}>
-       <View style={{flex:3,}}>
+       <View style={{flex:3, shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+        shadowRadius: 1,
+        // elevation: 5,
+    borderBottomWidth: 1,
+}}>
       {userData ?
         
           <Header navigation={navigation} userData={userData} colors={colors} />
@@ -74,7 +80,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
         </View>
       <View style={{ flex: 6 }}>
         
-      {userData ? <Posts navigation={navigation} userPosts={userData.posts} /> : <PostsGroupSkeleton />}
+      {userData && userData.posts.length === 0 ? <View style={styles.emptyPosts}><Text style={{textAlign: 'center', fontSize: 20, padding: 10,}}> No posts yet</Text></View> : userData && userData.posts.length > 0 ? <Posts navigation={navigation} userPosts={userData.posts} /> : <PostsGroupSkeleton />}
 
       </View>
     </View>
@@ -108,6 +114,11 @@ const useStyles = makeStyles((theme, props:any) => ({
     paddingVertical: 2,
     // backgroundColor: 'grey',
     alignSelf: 'flex-start',
+  },
+  emptyPosts: {
+    // borderTopWidth: 1,
+    borderColor: 'grey',
+   
   },
   container: {
     flex: 1,
