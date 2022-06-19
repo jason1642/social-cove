@@ -4,19 +4,44 @@ import {useForm, Controller } from "react-hook-form"
 import InputController from '../../components/inputs/InputController'
 import { useTheme } from '@react-navigation/native'
 import { makeStyles, } from '@rneui/themed'
+import axios from 'axios'
 
+const api = axios.create({
+  baseURL: 'http://localhost:3000'
+})
 
 interface IInputMessageProps {
+  currentUser: any,
+  recipient: any,
 }
 
-const InputMessage: React.FunctionComponent<IInputMessageProps> = (props) => {
+const InputMessage: React.FunctionComponent<IInputMessageProps> = ({currentUser, recipient}) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
-  const { control, handleSubmit, setError, formState: { errors } } = useForm({
+  const { control, handleSubmit, setError, setValue, formState: { errors } } = useForm({
     defaultValues: {
       content: '',
     }
   })
+
+
+  const onSubmitMessage = async (data: any) => {
+    console.log('SENDING A MESSAGE', data.content)
+    await api.post('/private_chat/send_message', {
+      sender_id: currentUser.id,
+      recipient_id: recipient.id,
+      content: data.content
+    }).then(res => {
+      setValue('content', '')
+      
+    })
+
+  }
+
+  const onError = (err:any) => {
+    console.log(err)
+  }
+
   return (
     <View >
        <InputController
@@ -24,7 +49,10 @@ const InputMessage: React.FunctionComponent<IInputMessageProps> = (props) => {
         name='content'
         control={control}
         inputStyle={styles.input}
-        // type=''
+        inputProps={{
+          onSubmitEditing: handleSubmit(onSubmitMessage, onError)
+        }}
+
       />
         {errors.content && <Text style={styles.errorText}>{errors.content.message}</Text>}
     </View>

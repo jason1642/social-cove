@@ -12,6 +12,9 @@ import Account from '../Account'
 import FollowingList from '../../components/account/follow-list/FollowList';
 import MainMessagesOverview from '../messages/MessagesDashboard'
 import Conversation from '../messages/Conversation';
+import { RootState } from '../../redux/store'
+import { useSelector } from 'react-redux'
+
 
 interface IFeedProps {
   route?: any,
@@ -21,8 +24,8 @@ interface IFeedProps {
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator()
 const Feed: React.FunctionComponent<IFeedProps> = () => {
+  const user = useSelector((state: RootState) => state.user)
 
-  
 
   return (
     <Stack.Navigator
@@ -34,7 +37,7 @@ const Feed: React.FunctionComponent<IFeedProps> = () => {
         options={({ navigation }) => ({
 
           headerTitle: 'Home',
-          headerRight: ()=> (<Button onPress={()=>navigation.push('Messages Dashboard', )} title='Messages' />)
+          headerRight: ()=> user.authenticated && (<Button onPress={()=>navigation.push('Messages Dashboard', )} title='Messages' />)
 
           // headerShown: false,
         })}
@@ -88,7 +91,9 @@ const Feed: React.FunctionComponent<IFeedProps> = () => {
       <Stack.Screen 
         name='Conversation'
         component={Conversation}
-        
+        options={{
+          headerTitle: ''
+        }}
       />
       </Stack.Navigator>
   );

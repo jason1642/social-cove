@@ -8,7 +8,7 @@ import MessageBubble from '../../components/messenger/MessageBubble';
 import InputMessage from '../../components/messenger/InputMessage';
 import { makeStyles } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
-
+import { getOneConversation } from '../../api-helpers/messages'
 
 interface IConversationProps {
   navigation: any,
@@ -16,22 +16,23 @@ interface IConversationProps {
   
 }
 
+const ws = new WebSocket('ws://localhost:3000')
+
 const Conversation: React.FunctionComponent<IConversationProps> = ({  navigation, route }) => {
   const { recipient_id } = route.params
   const { colors } = useTheme()
-
+  const [ recipient, setRecipient] = useState<any>()
   const [currentChat, setCurrentChat] = useState<any>();
   const currentUser = useSelector((state: RootState)=> state.user.data)
   const styles = useStyles(colors)
 
   useEffect(() => {
-    axios.post('http://localhost:3000/private_chat/conversation', {
-      sender_id: 2,
-      recipient_id: recipient_id
-    }).then(res => {
-      // console.log(res.data)
-      setCurrentChat(res.data)
+
+    getOneConversation(recipient_id, currentUser.id).then(res => {
+      setRecipient(res[0].sender.id !== currentUser.id ? res[0].sender : res[0].recipient)
+      setCurrentChat(res)
     })
+   
   
   }, [recipient_id])
 
@@ -52,15 +53,16 @@ const Conversation: React.FunctionComponent<IConversationProps> = ({  navigation
               height: '100%',
               borderColor: 'blue',
             }}
+        // inverted={true}
         renderItem={({ item }) => <MessageBubble colors={colors} currentUserId={currentUser.id} messageData={item} />}
             ListHeaderComponent={<Text style={styles.introTitle}>This is the start of your conversation</Text>}
             // ListFooterComponent={}
           />
-<InputMessage />
+      <InputMessage recipient={recipient} currentUser={currentUser} />
     </View>
     
   ) : 
-    (<Text>No Messages!</Text>)
+    (<Text>No Messages Yet</Text>)
 };
 
 export default Conversation;

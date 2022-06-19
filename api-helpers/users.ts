@@ -67,3 +67,11 @@ export const followUser = async (currentUserId: number, userToFollowId: number) 
     console.log(res.data)
     return res
   }, err => err)
+
+
+
+
+
+export const sendMessage = async (currentUserId: number, recipientId: number) => {
+    
+  }

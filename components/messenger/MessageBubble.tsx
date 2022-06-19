@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme, props: any) => ({
   },
   date: {
     textAlign: 'center',
-    fontSize: 11,
+    fontSize: 10,
     color: props.text,
   },
 }))

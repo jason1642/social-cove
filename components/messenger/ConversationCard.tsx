@@ -1,5 +1,7 @@
 import { Avatar } from '@rneui/themed'
-import * as React from 'react'
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+
 import { View, Text, Pressable } from 'react-native'
 import moment from 'moment'
 import { makeStyles } from '@rneui/themed'
@@ -7,33 +9,32 @@ import { makeStyles } from '@rneui/themed'
 interface IConversationCardProps {
   conversationData: any,
   navigation: any,
-  chattingWithUsername: string,
+  chattingWithUserData: any,
   currentUser: string,
   colors: any,
 
 }
 
-const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conversationData, colors, currentUser, navigation, chattingWithUsername}) => {
+const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conversationData, colors, currentUser, navigation, chattingWithUserData}) => {
   const styles = useStyles(colors)
-
   return (
     <Pressable
       style={styles.container}
-      onPress={() => navigation.push('Conversation', { recipient_id: 5 })}>
+      onPress={() => navigation.push('Conversation', { recipient_id: chattingWithUserData.id })}>
       <View style={styles.avatarContainer}>
       <Avatar
         size={45}
         icon={{ name: 'account-circle', type: 'material-icons',  }}
         avatarStyle={{backgroundColor: 'orange' }}
         rounded
-        source={{uri: chattingWithUsername === conversationData.sender.username ? conversationData.sender.profile_picture_url : conversationData.recipient.profile_picture_url}}
+        source={{uri: chattingWithUserData.username === conversationData.sender.username ? conversationData.sender.profile_picture_url : conversationData.recipient.profile_picture_url}}
       />
 
       </View>
       <View style={styles.bodyContainer}>
 
         <View >
-        <Text style={styles.chattingWithUser}>{chattingWithUsername}</Text>
+        <Text style={styles.chattingWithUser}>{chattingWithUserData.username}</Text>
       </View>
       
         

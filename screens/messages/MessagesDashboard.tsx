@@ -8,13 +8,11 @@ import ConversationCard from '../../components/messenger/ConversationCard'
 import { setTokenHeader } from '../../redux/helpers';
 import ChatListSkeleton from '../../components/messenger/ChatListSkeleton'
 import {useTheme} from '@react-navigation/native'
-
+import { getAllConversations } from '../../api-helpers/messages'
 interface IMessagesDashboardProps {
   navigation: any,
 }
-const api = axios.create({
-  baseURL: 'http://localhost:3000'
-})
+
 
 
 
@@ -23,21 +21,19 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
   const currentUser = useSelector((state: RootState) => state.user.data)
   const { colors } = useTheme()
 
-  const fetchAllCurrentChats = async () => {
-    await setTokenHeader(api)
-    await api.get(`/private_chat/${currentUser.id}/all_active_chats`).then(res => {
-      console.log(res.data)
-      // Filter if object key is equal to current user's username
-      
-      setChatList(Object.keys(res.data).map((ele, i) => 
-        res.data[ele][0]
-      ))
-    })
-  }
+  
 
 
   useEffect(() => {
-    fetchAllCurrentChats()
+
+    getAllConversations(currentUser.id).then((res:any) => {
+      
+      setChatList(Object.keys(res).map((ele, i) => 
+        res[ele][0]
+      ))
+    })
+
+
   }, [currentUser]);
 
 
@@ -51,7 +47,7 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
         <ConversationCard
           colors={colors}
           currentUser={currentUser.username}
-          chattingWithUsername={currentUser && item.sender.username !== currentUser.username ? item.sender.username : item.recipient.username}
+          chattingWithUserData={currentUser && item.sender.username !== currentUser.username ? item.sender : item.recipient}
           conversationData={item}
           navigation={navigation}
         />}
