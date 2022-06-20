@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { ScrollView, Text, View, FlatList,  } from 'react-native';
+import { ScrollView, Text, View, FlatList, TextInput,  } from 'react-native';
 import axios from 'axios'
 import { RootState } from '../../redux/store'
 import {useSelector} from 'react-redux'
@@ -9,6 +9,8 @@ import { setTokenHeader } from '../../redux/helpers';
 import ChatListSkeleton from '../../components/messenger/ChatListSkeleton'
 import {useTheme} from '@react-navigation/native'
 import { getAllConversations } from '../../api-helpers/messages'
+import { makeStyles } from '@rneui/themed'
+
 interface IMessagesDashboardProps {
   navigation: any,
 }
@@ -20,7 +22,8 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
   const [chatList, setChatList] = useState<any>();
   const currentUser = useSelector((state: RootState) => state.user.data)
   const { colors } = useTheme()
-
+  
+  const styles = useStyles(colors)
   
 
 
@@ -51,6 +54,10 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
           conversationData={item}
           navigation={navigation}
         />}
+      ListHeaderComponent={
+        <View style={styles.searchBarContainer}>
+          <TextInput placeholderTextColor={'white'} placeholder='Search' style={styles.searchBarPlaceHolder}></TextInput>
+        </View>}
     />
    
   ) :
@@ -58,3 +65,19 @@ const MessagesDashboard: React.FunctionComponent<IMessagesDashboardProps> = ({na
 };
 
 export default MessagesDashboard;
+
+const useStyles = makeStyles((theme, props: any) => ({
+  container: {
+    
+  },
+  searchBarContainer: { 
+    padding: 8,
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 8,
+  },
+  searchBarPlaceHolder: {
+    color: props.text,
+    fontSize: 16,
+  }
+}))

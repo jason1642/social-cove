@@ -37,9 +37,9 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ navigation, }
       (res: any) => {
         const {didCancel, errorMessage, errorCode} = res
         // .didCancel, .error, .errorCode
-        if (!didCancel && !errorMessage) {
+        console.log(res)
+        if (!didCancel && !errorMessage && res.assets.length !== 0) {
            const { fileName, type, uri } = res.assets[0]
-        console.log(res.assets[0])
         setValue('profile_picture',
           {
           uri: uri.replace('file://', ''),
@@ -65,6 +65,10 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ navigation, }
     }))
     navigation.dispatch(CommonActions.reset({index: 1, routes: [{name: 'Main'}]}))
 
+  }
+
+  const onError = async (err: any) => {
+    console.log(err)
   }
   return (
     <View style={styles.container}>
@@ -92,13 +96,14 @@ const EditProfile: React.FunctionComponent<IEditProfileProps> = ({ navigation, }
             label={ele}
             name={ele.toLowerCase()}
             control={control}
+            isRequired={ele === 'bio' && false}
             inputStyle={styles.input}
           />)
       }
 
       {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
       
-    <Button title='Submit' onPress={handleSubmit(onSubmit)} />
+    <Button title='Submit' onPress={handleSubmit(onSubmit, onError)} />
       {/* <Button title='refresh' onPress={()=> RNRestart.Restart()} />  */}
     </View>
   );

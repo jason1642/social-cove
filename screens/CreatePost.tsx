@@ -12,17 +12,18 @@ import InputController from '../components/inputs/InputController'
 import CreatePostButtons from '../components/create-post/CreatePostButtons'
 import { onSubmit, onError } from '../components/create-post/Methods'
 import ImageContainer from '../components/create-post/ImageContainer';
-
+import { RootState } from '../redux/store'
+import { useSelector } from 'react-redux'
 
 interface ICreatePostProps {
   route: any,
 }
 
 const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
-  const { user_id} = route.params
+  const user = useSelector((state: RootState) => state.user)
 
   const [pickedImage, setPickedImage] = useState(undefined)
-  console.log(user_id)
+
   const { colors } = useTheme()
   const styles = useStyles(colors)
   const { control, handleSubmit, setValue, setError, formState: { errors } } = useForm<any>({
@@ -96,7 +97,7 @@ const CreatePost: React.FunctionComponent<ICreatePostProps> = ({ route }) => {
 
       <CreatePostButtons
         handleChoosePhoto={handleChoosePhoto}
-        buttonFunction={handleSubmit(data=>onSubmit(data, user_id, setError), onError)}
+        buttonFunction={handleSubmit(data=>onSubmit(data, user.data.id, setError), onError)}
       />
      
 

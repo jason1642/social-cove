@@ -27,7 +27,7 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
   })
 
   const onSubmit = async (data: any) => {
-
+    console.log(data)
     await registerUser(data).then(res => {
       if (res.error) {
         console.log(res.error)
@@ -51,7 +51,8 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
      
 
       <View style={styles.form}>
-      <InputController
+        <InputController
+          label='Username'
         name='Username'
         control={control}
         inputStyle={styles.input}
@@ -62,26 +63,26 @@ const Register: React.FunctionComponent<IRegisterProps> = ({ navigation }) => {
         {errors.username && <Text style={styles.errorText}>{errors.username.message}</Text>}
 
         <InputController
-        name='Email'
-        control={control}
-        inputStyle={styles.input}
-        minLength={5}
-        extraRules={{
-            pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "invalid email address"
-          }}}
+          label='Email'
+          name='Email'
+          control={control}
+          inputStyle={styles.input}
+          minLength={5}
+          extraRules={{
+              pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "invalid email address"
+            }}}
       />
         {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
 
       <InputController
-        name='Password'
-        control={control}
-        inputStyle={styles.input}
-        type='password'
-        minLength={6}
-          
-          // controllerProps={}
+          name='Password'
+          label='Password'
+          control={control}
+          inputStyle={styles.input}
+          type='password'
+          minLength={6}
 
         />
       {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}

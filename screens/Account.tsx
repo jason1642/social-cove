@@ -80,7 +80,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
         </View>
       <View style={{ flex: 6 }}>
         
-      {userData && userData.posts.length === 0 ? <View style={styles.emptyPosts}><Text style={{textAlign: 'center', fontSize: 20, padding: 10,}}> No posts yet</Text></View> : userData && userData.posts.length > 0 ? <Posts navigation={navigation} userPosts={userData.posts} /> : <PostsGroupSkeleton />}
+      {userData && userData.posts.length === 0 ? <View style={styles.emptyPosts}><Text style={styles.emptyPostsText}> No posts yet</Text></View> : userData && userData.posts.length > 0 ? <Posts navigation={navigation} userPosts={userData.posts} /> : <PostsGroupSkeleton />}
 
       </View>
     </View>
@@ -118,7 +118,14 @@ const useStyles = makeStyles((theme, props:any) => ({
   emptyPosts: {
     // borderTopWidth: 1,
     borderColor: 'grey',
+    colors: props.text,
    
+  },
+  emptyPostsText: {
+    textAlign: 'center',
+    fontSize: 20,
+    padding: 10,
+    color: props.text,
   },
   container: {
     flex: 1,

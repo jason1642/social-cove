@@ -68,7 +68,14 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation, user}) => {
       
   
       <View style={{flex: 6}}>
-        <Posts navigation={navigation} userPosts={data.posts} />
+        {
+          data.posts.length > 1 ? <Posts navigation={navigation} userPosts={data.posts} />
+            : <View style={styles.emptyPostContainer}>
+              <Text style={styles.emptyPostText}>
+                No posts yet
+              </Text>
+          </View>
+        }
        </View>
       
     
@@ -112,5 +119,17 @@ const useStyles = makeStyles((theme, props:any) => ({
     paddingVertical: 15,
     // backgroundColor: 'red'
     // justifyContent: 'flex-start'
+  },
+  emptyPostContainer: {
+    borderTopWidth: 1,
+    borderColor: 'grey',
+    marginTop: 5,
+  },
+  emptyPostText: {
+    alignSelf: 'center',
+    fontSize: 20,
+    padding: 10,
+    color: props.text,
+
   }
 }))

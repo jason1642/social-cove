@@ -16,10 +16,12 @@ interface IAppProps {
   extraRules?: any,
   label?: string,
   hideLabel?: boolean,
+  isRequired?: boolean,
+
 }
 
 
-const App: React.FunctionComponent<IAppProps> = ({ name, label, control, hideLabel, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
+const App: React.FunctionComponent<IAppProps> = ({ name, isRequired = true, label, control, hideLabel, inputStyle, type, inputProps, controllerProps, extraRules, minLength = 0 }) => {
   const { colors } = useTheme()
   const styles = useStyles(colors)
   return (
@@ -28,10 +30,10 @@ const App: React.FunctionComponent<IAppProps> = ({ name, label, control, hideLab
       <Text style={{...styles.label, display: hideLabel ? 'none' : 'flex'}}>{label}:</Text>
       <Controller
 
-        name={name}
+        name={name.toLowerCase()}
         control={control}
 
-        rules={{
+        rules={isRequired && {
           required: {
             value: true,
             message: `${name} is required`
@@ -44,9 +46,10 @@ const App: React.FunctionComponent<IAppProps> = ({ name, label, control, hideLab
           
           
         }}
+        
         render={({ field: { onChange, onBlur, value } }) =>
         (<TextInput
-          style={inputStyle}
+          style={{...inputStyle, ...styles.inputBox}}
           onBlur={onBlur}
           onChangeText={onChange}
           value={value}
@@ -73,6 +76,9 @@ const useStyles = makeStyles((theme, props: any) => ({
   label: {
     color: props.text,
     marginLeft: 10,
+  },
+  inputBox: {
+    backgroundColor: props.primary
   }
 }))
 

@@ -1,5 +1,5 @@
 import { createPost } from '../../api-helpers/posts'
-
+import RNRestart from 'react-native-restart'
 
 export const onSubmit = async (data: any, user_id: number, setError: any) => {
  
@@ -25,7 +25,8 @@ export const onSubmit = async (data: any, user_id: number, setError: any) => {
         user_id: user_id
       })
         .then(res => {
-        console.log(res)
+          console.log(res)
+          RNRestart.Restart();
         },
           err => console.log(err))
 

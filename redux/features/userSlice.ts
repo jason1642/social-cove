@@ -67,19 +67,20 @@ export const userSlice = createSlice({
       // console.log(action.payload, 'This is the edit user builder case')
       state.isLoading = false
       state.data= action.payload
-      // return ({ ...state,  data: action.payload, isLoading: false})
       })
 
       .addCase(editUser.pending, (state: any, action) => {
       console.log('Attempting to edit user')
-      console.log(action)
-      return ({...state, isLoading: true})
+        console.log(action)
+        state.isLoading = true
+
       })
 
       .addCase(editUser.rejected, (state: any, action: any) => { 
       console.log("edit user Rejected!!")
-      console.log(action)
-      return ({...state, error: action.payload.error, isLoading: false})
+        console.log(action)
+        state.isLoading = false
+        
       })
     
   }
