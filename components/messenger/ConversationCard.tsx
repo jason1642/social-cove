@@ -39,17 +39,14 @@ const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conv
       
         
 
-
+  
 
         <View style={styles.contentWrapper}>
-          <View style={{borderWidth: 0, maxWidth: '95%', borderColor: 'purple'}}>
+          <View style={{borderWidth: 0, paddingVertical: 3, maxWidth: '95%', borderColor: 'purple'}}>
             <Text numberOfLines={1} style={{}}>
               <Text style={styles.messageSender}>
                 {conversationData.sender.username !== currentUser ? '' : conversationData.sender.username + ': '}
               </Text>
-
-       
-              
 
 
               <Text numberOfLines={1} style={styles.latestMessage}>
@@ -59,12 +56,6 @@ const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conv
             
               </View>
 
-      
-          
-        
-            
-          
-          
           </View>
       <View style={{flex: 1}}>
             
@@ -89,12 +80,13 @@ const useStyles = makeStyles((theme, props: any) => ({
   container: { 
     paddingVertical: 8, 
     paddingHorizontal: 4,
-    // borderWidth: 1,
+    borderBottomWidth: 1,
+
     borderColor: props.border,
     marginVertical: 4,
     width: '95%',
     alignSelf: 'center',
-    borderRadius: 6,
+    // borderRadius: 6,
     flexDirection: 'row',
 
   },
@@ -102,6 +94,7 @@ const useStyles = makeStyles((theme, props: any) => ({
     // flexWrap: 'nowrap',
     fontSize: 13,
     color: props.text,
+    // paddingVertical: 3,
     // width: '30%',
     // overflow: 'hidden',
 

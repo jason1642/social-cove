@@ -69,7 +69,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation, user}) => {
   
       <View style={{flex: 6}}>
         {
-          data.posts.length > 1 ? <Posts navigation={navigation} userPosts={data.posts} />
+          data.posts.length > 0 ? <Posts navigation={navigation} userPosts={data.posts} />
             : <View style={styles.emptyPostContainer}>
               <Text style={styles.emptyPostText}>
                 No posts yet

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.order('posts.created_at DESC')
     render json: @posts.as_json(include: {
       user: {
         methods: :profile_picture_url

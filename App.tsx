@@ -60,7 +60,10 @@ const App = () => {
           {!user.isLoading && !user.authenticated &&
             <Stack.Screen
               name='Landing'
-              component={Landing}
+            component={Landing}
+            options={{
+              headerShown: false,
+            }}
             />
           }
           
@@ -73,12 +76,12 @@ const App = () => {
             { ({navigation})=> <Tab.Navigator
               screenOptions={{
                 headerStyle: {
-                  backgroundColor: '#84b4dd',
+                  backgroundColor: '#32313f',
                 },
-                headerTintColor: '#282331',
+                headerTintColor: '#c1c1c1',
                 headerTitleStyle: {
                   fontWeight: 'bold',
-                  
+                  color: 'lightgrey'
                 },
                 
                 tabBarActiveTintColor: 'blue',

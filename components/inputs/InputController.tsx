@@ -53,6 +53,7 @@ const App: React.FunctionComponent<IAppProps> = ({ name, isRequired = true, labe
           onBlur={onBlur}
           onChangeText={onChange}
           value={value}
+          placeholderTextColor={'darkgrey'}
           placeholder={label || name}
           textContentType={type}
           secureTextEntry={type === 'password' ? true : false}
@@ -78,7 +79,8 @@ const useStyles = makeStyles((theme, props: any) => ({
     marginLeft: 10,
   },
   inputBox: {
-    backgroundColor: props.primary
+    backgroundColor: props.primary,
+    color: 'black'
   }
 }))
 

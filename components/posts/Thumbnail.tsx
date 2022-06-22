@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     
     marginVertical: 3,
-    backgroundColor: 'green',
+    backgroundColor: 'grey',
     // borderColor: 'grey',
     // borderWidth: 1,
     // borderRadius: 4,
