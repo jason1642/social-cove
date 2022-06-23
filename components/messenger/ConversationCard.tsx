@@ -38,7 +38,7 @@ const ConversationCard: React.FunctionComponent<IConversationCardProps> = ({conv
       </View>
       
         
-
+  
   
 
         <View style={styles.contentWrapper}>
