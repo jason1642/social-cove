@@ -5,19 +5,42 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# require 'open-uri'
+require 'ffaker'
 
+#  ActiveStorage_blobs.destroy
+#  active_storage_blobs.destroy
+#  active_storage_variant_records.destroy
+# ActiveStorage.destroy
 
+Comment.delete_all
+Post.delete_all
+User.delete_all
 
-Comment.destroy_all
-Post.destroy_all
-User.destroy_all
+# downloaded_image = URI.parse('https://www.timeforkids.com/wp-content/uploads/2021/10/K1-habitat-back.jpg?w=1024').open
+User.create(username: 'admin', email: 'admin@gmail.com', password: 'password', bio: '35 Years old, working as a full stack developer', profile_picture:{io:  FFaker::Image.file, filename: 'profileimage'})
 
+User.create(username: FFaker::Name.unique.name , email: 'anon1@gmail.com', password: 'testpass1', bio: 'This is my bio 1', profile_picture:{io:  FFaker::Image.file, filename: 'profileimage'}
+#     ,:profile_picture  => {
+#     # :uri => 'https://www.timeforkids.com/wp-content/uploads/2021/10/K1-habitat-back.jpg?w=1024',
+#     :io => downloaded_image,
+#     :filename => 'profileimage1.jpg'
+#     # content_type: 'jpg'
+#   }
+)
 
-User.create(username: 'anon1', email: 'anon1@gmail.com', password: 'testpass1', bio: 'This is my bio 1')
-User.create(username: 'anon2', email: 'anon2@gmail.com', password: 'testpass1', bio: 'This is my bio 2')
-User.create(username: 'anon3', email: 'anon3@gmail.com', password: 'testpass1', bio: 'This is my bio 3')
-User.create(username: 'anon4', email: 'anon4@gmail.com', password: 'testpass1', bio: 'This is my bio 4')
-User.create(username: 'anon5', email: 'anon5@gmail.com', password: 'testpass1', bio: 'This is my bio 5')
+User.create(username: FFaker::Name.unique.name , email: 'anon2@gmail.com', password: 'testpass1', bio: 'This is my bio 2'
+    # , profile_picture: 'https://images.unsplash.com/photo-1598755257130-c2aaca1f061c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d2lsZCUyMGFuaW1hbHxlbnwwfHwwfHw%3D&w=1000&q=80'
+)
+User.create(username: FFaker::Name.unique.name , email: 'anon3@gmail.com', password: 'testpass1', bio: 'This is my bio 3'
+    # , profile_picture: 'https://www.ndow.org/wp-content/uploads/2021/10/spec-info.jpeg'
+)
+User.create(username: FFaker::Name.unique.name , email: 'anon4@gmail.com', password: 'testpass1', bio: 'This is my bio 4'
+    # , profile_picture: 'https://avatars.githubusercontent.com/u/92739107?v=4'
+)
+User.create(username: FFaker::Name.unique.name , email: 'anon5@gmail.com', password: 'testpass1', bio: 'This is my bio 5'
+    # , profile_picture: 'https://www.animalhumanesociety.org/sites/default/files/styles/crop_16_9_960x540/public/media/image/2018-05/AdobeStock_117975584_web.jpg?h=b3660f0d&itok=KeJCkEAE'
+)
 
 
 

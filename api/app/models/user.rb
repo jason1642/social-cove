@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_secure_password
   # has_secure_password :recovery_password, validations: false
 
-  has_one_attached :profile_picture
+  has_one_attached :profile_picture, :dependent => :delete_all
 
   has_many :posts, dependent: :destroy
   has_many :comments, through: :posts
@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :group_chats
   has_many :messages
 
-
+  
 
 # Will return an array of follows for the given user instance
 has_many :received_follows, foreign_key: :followed_id, class_name: "Follow"
@@ -39,7 +39,9 @@ has_many :followers, through: :received_follows, source: :follower
 
 
   def profile_picture_url
+    
     Rails.application.routes.url_helpers.url_for(profile_picture) if profile_picture.attached?
+
   end
 
 end

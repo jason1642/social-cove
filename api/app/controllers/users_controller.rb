@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    secondUser = User.where(id:2)
-    print json: secondUser
-    render json: @users
+    # secondUser = User.where(id:2)
+    # print json: secondUser
+    render json: @users.as_json(include: {},methods: :profile_picture_url)
   end
 
   def show 
@@ -131,7 +131,8 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find_by(id: params[:id])
-    User.destroy(params[:id])
+    user.destroy(params[:id])
+
     render json: user
   end
 

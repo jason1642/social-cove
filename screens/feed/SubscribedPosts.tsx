@@ -22,7 +22,7 @@ interface ISubscribedPostsProps {
 
 
 const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = ({navigation}) => {
-  const [postsArray, setPostsArray] = useState([])
+  const [postsArray, setPostsArray] = useState<Array<any>>([])
   // const user = useSelector((state: RootState) => state.user)
   const { colors } = useTheme()
 
@@ -35,7 +35,7 @@ const SubscribedPosts: React.FunctionComponent<ISubscribedPostsProps> = ({naviga
   useEffect(() => {
     let isMounted = true; 
     fetchPosts().then(res => {
-      isMounted && setPostsArray(res)
+      isMounted && res && setPostsArray(res)
     })
     // console.log(data, authenticated)
     return () => {

@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :comments, -> {order('created_at DESC')}, dependent: :delete_all
+  has_many :comments, -> {order('created_at DESC')}, :dependent => :delete_all
 
-  has_one_attached :image, dependent: :destroy
+  has_one_attached :image, :dependent => :delete_all
 
   def image_url
     Rails.application.routes.url_helpers.url_for(image) if image.attached?

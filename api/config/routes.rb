@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # GROUP CHATS
   get '/private_chat/:id/all_active_chats',to: 'private_chats#all_current_user_chats'
 
-  # To make sure a paramter matches a regular expression
+  # To make sure a parameter matches a regular expression
   # resources :users, constraints: { id: /[A-Z]/}
   # Look into member and collection block to add unique restful actions 
 
