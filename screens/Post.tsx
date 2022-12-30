@@ -35,6 +35,7 @@ const Post: React.FunctionComponent<IPostProps> = ({ route, navigation }) => {
   
   useEffect(() => {
     fetchPostData()
+
     setIsRefreshing(false)
     
   }, [addedComment, postId]); 

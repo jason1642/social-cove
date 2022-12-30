@@ -1,6 +1,6 @@
-import { applyMiddleware } from 'redux';
+// import { applyMiddleware } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
+// import thunk from 'redux-thunk';
 // import reducers from './reducers/index';
 import userReducer from './features/userSlice'
 import colorThemeReducer from './features/colorThemeSlice'

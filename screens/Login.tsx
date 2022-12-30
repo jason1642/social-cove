@@ -36,6 +36,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({ navigation }) => {
   }, []);
   const onSubmit = async (data: any) => 
     await loginUser(data).then(res => {
+      
         if (res.error) {
           res.error === 'Username not found' ?
           setError('username', { type: 'required', message: 'Username not found' }, { shouldFocus: true })

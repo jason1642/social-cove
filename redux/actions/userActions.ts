@@ -7,7 +7,7 @@ const api = axios.create({
 })
 
 export const loginUser = createAsyncThunk('user/login',
-  async (data: any, thunkAPI) => {
+  async (data: any, thunkAPI) => 
     await axios.post('/auth/login', data).then((res: any) => {
       // console.log(res.data)
     if (res) {
@@ -28,7 +28,7 @@ export const loginUser = createAsyncThunk('user/login',
   })
 
   
-})
+)
 
 
 
