@@ -4,6 +4,8 @@ import {getFollowList} from '../../../api-helpers/users'
 import { FlatList, Text, StyleSheet, } from 'react-native'
 import UserCard from './FollowListUserCard'
 import CardSkeleton from './CardSkeleton'
+import { makeStyles } from '@rneui/themed'
+import {useTheme} from '@react-navigation/native'
 
 
 interface IFollowingListProps {
@@ -12,6 +14,9 @@ interface IFollowingListProps {
 }
 
 const FollowingList: React.FunctionComponent<IFollowingListProps> = ({ route, navigation}) => {
+  const { colors } = useTheme()
+  const styles = useStyles(colors)
+
   const { user_id, method } = route.params
   const [followArray, setFollowArray] = useState<any>();
   useEffect(() => {
@@ -41,10 +46,11 @@ const FollowingList: React.FunctionComponent<IFollowingListProps> = ({ route, na
 
 export default FollowingList;
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles((theme, props:any) => ({
   noFollowsMessage: {
     paddingVertical: 15,
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: props.text
   }
-})
+}))

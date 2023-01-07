@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+// import AsyncStorage from '@react-native-async-storage/async-storage'
 import { setTokenHeader } from '../helpers'
 const api = axios.create({
   baseURL: 'http://localhost:3000'
@@ -19,10 +19,10 @@ export const loginUser = createAsyncThunk('user/login',
     }
   } else {
     return {
-        authenticated: false,
-        token: undefined,
+      authenticated: false,
+      token: undefined,
       data: undefined,
-        isLoading: false,
+      isLoading: false,
       }
   } 
   })

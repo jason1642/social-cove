@@ -37,6 +37,8 @@ export const showVerboseUserInfo = async (user_id: number) =>
   await api.get(`/users/${user_id}/verbose_info`).then(res=>res,err=>err)
 
 
+
+  
 export const removeToken = async (user_id?: string) => {
 
   api.defaults.headers.common.authorization = false;

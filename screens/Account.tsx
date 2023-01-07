@@ -33,8 +33,8 @@ const Account: React.FunctionComponent<IAccountProps> = ({ route, navigation }) 
   }, []);
 
   useEffect(() => {
-    currentUser && userData && 
-    setIsFollowing(currentUser.data.following.find(({id}: {id: number})=>id === userData.id) ? true : false)
+    (currentUser.data && userData) && setIsFollowing(currentUser.data.following.find(({id}: {id: number})=>id === userData.id) ? true : false)
+    console.log(currentUser) 
   }, [currentUser, userData]);
 
 

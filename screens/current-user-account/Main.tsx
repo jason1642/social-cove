@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Text, View, ScrollView } from 'react-native'
-import { makeStyles, Avatar, } from '@rneui/themed'
+import { makeStyles } from '@rneui/themed'
 import {useTheme,useFocusEffect} from '@react-navigation/native'
 
 import Guest from './Guest'
 import { removeToken } from '../../api-helpers/users'
 import Header from '../../components/account/Header'
 import AccountOptionButton from '../../components/buttons/AccountOptions'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+// import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Posts from './Posts';
-import Saved from './Saved';
+// import Saved from './Saved';
 
 
 
@@ -18,7 +18,7 @@ interface IMainProps {
   navigation: any,
   user: any,
 }
-const Tab = createMaterialTopTabNavigator();
+// const Tab = createMaterialTopTabNavigator();
 
 
 
@@ -32,7 +32,9 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation, user}) => {
   useEffect(() => {
     // data && console.log(data.posts)
     // console.log(data)
-  }, [data]);
+    navigation.setOptions({title: 'something!'})
+ 
+  }, [navigation]);
 
   return authenticated && !isLoading ? (
     <View style={{flex: 1}}>
@@ -69,7 +71,7 @@ const Main: React.FunctionComponent<IMainProps> = ({navigation, user}) => {
   
       <View style={{flex: 6}}>
         {
-          data.posts.length > 0 ? <Posts navigation={navigation} userPosts={data.posts} />
+         (data &&  data.posts.length > 0) ? <Posts navigation={navigation} userPosts={data.posts} />
             : <View style={styles.emptyPostContainer}>
               <Text style={styles.emptyPostText}>
                 No posts yet
@@ -101,7 +103,7 @@ const useStyles = makeStyles((theme, props:any) => ({
     marginBottom: 10,
       // backgroundColor: 'red'
   },
-  bioLabel: {
+  bioLabel: { 
     alignSelf: 'flex-start',
     paddingHorizontal: 20,
     color: props.text,
