@@ -121,6 +121,11 @@ class UsersController < ApplicationController
 
   end
 
+  def update_settings
+    
+
+  end
+
   def update_password
 
   end

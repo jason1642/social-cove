@@ -59,7 +59,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ navigation, colors, use
     <View style={{flex: 1}}>
       
              <Text style={styles.title}>{userData.username}</Text>
-        <Text style={styles.bioLabel}>Bio:</Text>
+        {/* <Text style={styles.bioLabel}></Text> */}
     <Text style={styles.bio}>{userData.bio}</Text>
         </View>
 
@@ -100,6 +100,7 @@ const useStyles = makeStyles((theme, props:any) => ({
     paddingHorizontal: 20,
     paddingVertical: 2,
     // backgroundColor: 'grey',
+    margin: 2, 
     alignSelf: 'flex-start',
   },
   container: {

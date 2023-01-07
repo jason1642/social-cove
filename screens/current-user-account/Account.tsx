@@ -68,6 +68,7 @@ const Account: React.FunctionComponent<IAccountProps> = ({navigation}) => {
         <AccountStack.Screen
           name='Settings'
           component={Settings}
+          options={{headerTitle: 'Settings'}}
         />
         <AccountStack.Screen
           name='Account'
