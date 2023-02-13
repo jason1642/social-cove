@@ -122,7 +122,16 @@ class UsersController < ApplicationController
   end
 
   def update_settings
-    
+    print params[:user]
+    if @current_user.update[:]
+      @current_user.save
+      render json: user.as_json(include: {
+        posts: {}
+      })
+    else
+      render json: {errors: @current_User, message: 'There was an error updating user settings'}, status: :bad_request
+    end
+
 
   end
 
